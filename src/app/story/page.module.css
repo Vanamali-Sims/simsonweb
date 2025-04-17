@@ -1,0 +1,78 @@
+.page {
+  --accent-color: #FF6B6B;
+  --accent-color-rgb: 255, 107, 107;
+  
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  animation: fadeIn 1s ease-out;
+}
+
+.header {
+  margin-bottom: 48px;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: white;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
+.underline {
+  height: 2px;
+  width: 80px;
+  background: linear-gradient(to right, var(--accent-color), transparent);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.intro {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.paragraph {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .intro,
+  .paragraph {
+    font-size: 1rem;
+  }
+} 

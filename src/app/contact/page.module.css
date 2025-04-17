@@ -1,0 +1,233 @@
+.page {
+  --accent-color: #FF6B6B;
+  --accent-color-rgb: 255, 107, 107;
+  
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 32px 24px;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  animation: fadeIn 1s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background-color: rgba(30, 30, 35, 0.7);
+  border-radius: 12px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+.elsewhereCard {
+  padding: 16px;
+}
+
+.title {
+  font-size: 1.75rem;
+  color: white;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.underline {
+  height: 2px;
+  width: 60px;
+  background: linear-gradient(to right, var(--accent-color), transparent);
+  margin-bottom: 24px;
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.text {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+}
+
+.email {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+.email:hover {
+  color: var(--accent-color);
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.email:hover .arrow,
+.link:hover .arrow,
+.submitButton:hover .arrow {
+  transform: translateX(5px);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  text-transform: lowercase;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.link:hover {
+  color: white;
+}
+
+/* Form Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+.input,
+.textarea {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: white;
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.submitButton {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.submitButton:hover {
+  background-color: rgba(var(--accent-color-rgb), 0.8);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.status {
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.success {
+  background-color: rgba(72, 187, 120, 0.1);
+  color: #48bb78;
+}
+
+.error {
+  background-color: rgba(245, 101, 101, 0.1);
+  color: #f56565;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .text,
+  .input,
+  .textarea,
+  .submitButton {
+    font-size: 0.9rem;
+  }
+} 

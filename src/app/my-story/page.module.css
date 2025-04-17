@@ -1,9 +1,18 @@
 .page {
+  --accent-color: #FF6B6B;
+  --accent-color-rgb: 255, 107, 107;
+  
   min-height: 100vh;
-  padding: 120px 24px;
-  font-family: var(--font-geist-sans);
   position: relative;
   overflow-x: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 48px 24px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeIn 1s ease-out;
 }
 
 .background {
@@ -40,56 +49,36 @@
   opacity: 0.3;
 }
 
-.section {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto 80px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s ease-out forwards;
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .card {
   background-color: rgba(30, 30, 35, 0.7);
   border-radius: 12px;
   padding: 32px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  border-color: rgba(255, 255, 255, 0.2);
+  animation: fadeUp 0.8s ease-out forwards;
 }
 
 .title {
   font-size: 2.5rem;
-  font-weight: 300;
   color: white;
-  margin-bottom: 2rem;
+  font-weight: 300;
+  margin-bottom: 32px;
 }
 
 .content {
-  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.intro, .paragraph {
   font-size: 1.1rem;
-  line-height: 1.7;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.content p {
-  margin-bottom: 1.5rem;
-}
-
-.content p:last-child {
-  margin-bottom: 0;
+.intro {
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .cardTitle {
@@ -145,19 +134,44 @@
   min-width: 60px;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 768px) {
   .page {
-    padding: 80px 16px;
+    padding: 24px 16px;
   }
-  
-  .title {
-    font-size: 2rem;
-  }
-  
+
   .card {
     padding: 24px;
   }
-  
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .intro,
+  .paragraph {
+    font-size: 1rem;
+  }
+
   .interestsGrid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   }
