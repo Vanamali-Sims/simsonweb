@@ -5,11 +5,22 @@
 @layer base {
   html {
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    cursor: none; /* Hide default cursor */
   }
   
   body {
     @apply bg-[#0a0a0b] text-gray-300;
     font-family: var(--font-jetbrains);
+  }
+
+  /* Hide cursor on touch devices */
+  @media (hover: none) {
+    html {
+      cursor: auto;
+    }
+    .cursor-effect {
+      display: none;
+    }
   }
 }
 
@@ -20,6 +31,16 @@
   
   .page-transition {
     @apply animate-fade-in;
+  }
+
+  /* Interactive element hover states */
+  a, button {
+    @apply transition-all duration-200;
+  }
+
+  /* Prevent cursor hiding on interactive elements */
+  a *, button * {
+    cursor: none;
   }
 }
 
@@ -42,4 +63,10 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Perspective wrapper for 3D effects */
+.perspective-wrapper {
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
