@@ -108,15 +108,15 @@ export default function MouseEffect() {
 
       {/* Custom cursor */}
       <div className="fixed inset-0 pointer-events-none z-50">
-        {/* Larger cursor circle */}
+        {/* Larger cursor circle with torch effect */}
         <div
           ref={cursorRef}
-          className="w-8 h-8 rounded-full border border-white/20 fixed -ml-4 -mt-4 transition-transform duration-200 ease-out mix-blend-difference will-change-transform"
+          className="w-24 h-24 rounded-full fixed -ml-12 -mt-12 transition-transform duration-200 ease-out will-change-transform cursor-torch"
         />
         {/* Small cursor dot */}
         <div
           ref={cursorDotRef}
-          className="w-1 h-1 bg-white rounded-full fixed transition-opacity duration-200 ease-out mix-blend-difference will-change-transform"
+          className="w-1 h-1 bg-white rounded-full fixed transition-opacity duration-200 ease-out will-change-transform"
         />
       </div>
     </>

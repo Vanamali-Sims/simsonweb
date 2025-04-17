@@ -22,24 +22,27 @@ export default function Projects() {
 
   return (
     <div className="page-transition">
-      <h1 className="text-4xl font-bold mb-8">My Projects</h1>
+      <div className="mb-16">
+        <h1 className="text-4xl font-light text-white">projects</h1>
+        <div className="h-1 w-20 bg-gradient-to-r from-gray-500 to-transparent mt-2"></div>
+      </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+            className="border border-gray-800 rounded-lg overflow-hidden hover:shadow-lg transition-all hover:border-gray-700"
           >
             <div className="p-6">
-              <h2 className="text-xl font-semibold mb-2">{project.title}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
+              <h2 className="text-xl font-semibold mb-3 text-white">{project.title}</h2>
+              <p className="text-gray-400 mb-4">
                 {project.description}
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-800 rounded-full"
+                    className="px-3 py-1 text-sm bg-[#131315] rounded-full text-gray-400"
                   >
                     {tag}
                   </span>
@@ -47,9 +50,10 @@ export default function Projects() {
               </div>
               <a
                 href={project.link}
-                className="text-blue-600 dark:text-blue-400 hover:underline"
+                className="text-gray-400 hover:text-white transition-colors flex items-center"
               >
-                View Project →
+                <span>View Project</span>
+                <span className="ml-1">→</span>
               </a>
             </div>
           </div>

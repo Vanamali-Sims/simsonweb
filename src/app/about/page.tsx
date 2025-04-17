@@ -1,10 +1,13 @@
 export default function About() {
   return (
     <div className="page-transition max-w-2xl mx-auto">
-      <h1 className="text-3xl font-light text-white mb-12">about</h1>
+      <div className="mb-16">
+        <h1 className="text-4xl font-light text-white">about</h1>
+        <div className="h-1 w-20 bg-gradient-to-r from-gray-500 to-transparent mt-2"></div>
+      </div>
       
-      <div className="space-y-12">
-        <section className="space-y-4 text-gray-400">
+      <div className="space-y-16">
+        <section className="space-y-6 text-gray-400">
           <p className="text-lg">
             Hey! I'm a Data Science student at Monash Clayton with a passion for 
             creative coding and music production.
@@ -22,7 +25,9 @@ export default function About() {
         </section>
 
         <section>
-          <h2 className="text-lg text-gray-400 mb-6">interests</h2>
+          <h2 className="text-xl text-gray-400 mb-8 flex items-center">
+            <span className="mr-2">→</span> interests
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
               'Data Science',
@@ -37,7 +42,7 @@ export default function About() {
             ].map((interest) => (
               <div
                 key={interest}
-                className="p-3 bg-[#131315] rounded-lg text-sm text-gray-400"
+                className="p-3 bg-[#131315] rounded-lg text-sm text-gray-400 hover:bg-[#1a1a1d] transition-colors"
               >
                 {interest}
               </div>
@@ -46,8 +51,10 @@ export default function About() {
         </section>
 
         <section>
-          <h2 className="text-lg text-gray-400 mb-6">currently</h2>
-          <div className="space-y-4">
+          <h2 className="text-xl text-gray-400 mb-8 flex items-center">
+            <span className="mr-2">→</span> currently
+          </h2>
+          <div className="space-y-6">
             <div className="flex items-start space-x-4">
               <span className="text-gray-500">→</span>
               <p className="text-gray-400">

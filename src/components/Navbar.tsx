@@ -24,7 +24,7 @@ export default function Navbar() {
             href="/" 
             className="text-lg tracking-wider hover:text-white transition-colors"
           >
-            simon.
+            Vanamali Sims.
           </Link>
           
           <div className="hidden md:flex space-x-8">

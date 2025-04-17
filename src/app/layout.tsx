@@ -11,8 +11,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Simon | Developer & Artist",
-  description: "Data Science student, Developer, and Music Producer",
+  title: "Vanamali Sims | Digital Alchemist & Sonic Wizard",
+  description: "Data Science student, Developer, and Music Producer who turns coffee into code and beats into bops",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-[#0a0a0b] text-gray-300 font-mono">
         <MouseEffect />
         <Navbar />
-        <main className="flex-grow container mx-auto px-4 py-16 relative z-10">
+        <main className="flex-grow container mx-auto px-4 pt-24 pb-16 relative z-10">
           {children}
         </main>
         <Footer />

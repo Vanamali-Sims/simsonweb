@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="text-sm text-gray-500">
-            © {new Date().getFullYear()} simon.
+            © {new Date().getFullYear()} Vanamali Sims.
           </div>
           
           <div className="flex space-x-8">
@@ -14,7 +14,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-sm text-gray-400 hover:text-white transition-colors"
             >
-              github
+              code vault
             </a>
             <a
               href="https://spotify.com"
@@ -22,7 +22,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-sm text-gray-400 hover:text-white transition-colors"
             >
-              spotify
+              sonic waves
             </a>
             <a
               href="https://youtube.com"
@@ -30,7 +30,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-sm text-gray-400 hover:text-white transition-colors"
             >
-              youtube
+              pixel tube
             </a>
           </div>
         </div>

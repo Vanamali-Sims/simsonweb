@@ -42,6 +42,20 @@
   a *, button * {
     cursor: none;
   }
+
+  /* Torch cursor effect */
+  .cursor-torch {
+    background: radial-gradient(
+      circle at center,
+      rgba(200, 200, 200, 0.15) 0%,
+      rgba(180, 180, 180, 0.1) 20%,
+      rgba(160, 160, 160, 0.05) 40%,
+      transparent 70%
+    );
+    mix-blend-mode: screen;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 0 20px rgba(180, 180, 180, 0.1);
+  }
 }
 
 @keyframes fade-in {
