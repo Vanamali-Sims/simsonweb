@@ -1,6 +1,10 @@
+'use client';
+
+import { useRef, useState } from 'react';
 import styles from './page.module.css';
 import { ArrowRight } from 'lucide-react';
 import ScrollIndicator from '@/components/ScrollIndicator';
+import MouseIcon from '@/components/MouseIcon';
 
 function AnimatedText({ text }: { text: string }) {
   return (
@@ -20,7 +24,47 @@ function AnimatedText({ text }: { text: string }) {
   );
 }
 
+function AnimatedName({ text }: { text: string }) {
+  return (
+    <h1 className={styles.name}>
+      {text.split('').map((char, i) => {
+        let className = '';
+        if (char.toLowerCase() === 'v') className = styles.highlight1;
+        if (char.toLowerCase() === 's') className = styles.highlight2;
+        return (
+          <span
+            key={i}
+            className={className}
+            style={{
+              animationDelay: `${i * 0.1}s`,
+            }}
+          >
+            {char}
+          </span>
+        );
+      })}
+    </h1>
+  );
+}
+
 export default function Home() {
+  const [currentSection, setCurrentSection] = useState(0);
+  const sections = useRef<(HTMLDivElement | null)[]>([]);
+
+  const scrollToNextSection = () => {
+    if (currentSection < sections.current.length - 1) {
+      const nextSection = sections.current[currentSection + 1];
+      if (nextSection) {
+        nextSection.scrollIntoView({ behavior: 'smooth' });
+        setCurrentSection(prev => prev + 1);
+      }
+    }
+  };
+
+  const setSectionRef = (index: number) => (el: HTMLDivElement | null) => {
+    sections.current[index] = el;
+  };
+
   return (
     <main className={styles.page}>
       <div className={styles.background}>
@@ -63,41 +107,39 @@ export default function Home() {
         </div>
       </div>
 
-      <section className={styles.section}>
+      <section ref={setSectionRef(0)} className={styles.section}>
         <div className={styles.introBlock}>
           <div className={styles.greeting}>
             Hello <span className={styles.bulb}>💡</span>
           </div>
-          <h1 className={styles.name}>Vanamali Sims here.</h1>
+          <AnimatedName text="Vanamali Sims here." />
           <p className={styles.role}>Full Stack Developer & Music Producer</p>
-          <AnimatedText text="Crafting digital experiences through code and sound" />
-          <ScrollIndicator styles={styles} />
+          <p className={styles.tagline}>Crafting digital experiences through code and sound</p>
         </div>
+        <MouseIcon onClick={scrollToNextSection} />
       </section>
 
-      <section className={styles.section}>
+      <section ref={setSectionRef(1)} className={styles.section}>
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>
             <span>→</span> Currently Exploring
           </h2>
           <div className={styles.nowBlock}>
             <div className={styles.nowItem}>
-              <ArrowRight size={16} />
               <span>Building immersive web experiences</span>
             </div>
             <div className={styles.nowItem}>
-              <ArrowRight size={16} />
               <span>Producing electronic music</span>
             </div>
             <div className={styles.nowItem}>
-              <ArrowRight size={16} />
               <span>Learning about AI and machine learning</span>
             </div>
           </div>
         </div>
+        <MouseIcon onClick={scrollToNextSection} />
       </section>
 
-      <section className={styles.section}>
+      <section ref={setSectionRef(2)} className={styles.section}>
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>
             <span>→</span> Featured Projects
@@ -125,9 +167,10 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <MouseIcon onClick={scrollToNextSection} />
       </section>
 
-      <section className={styles.section}>
+      <section ref={setSectionRef(3)} className={styles.section}>
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>
             <span>→</span> Latest Music
@@ -141,9 +184,10 @@ export default function Home() {
             </p>
           </div>
         </div>
+        <MouseIcon onClick={scrollToNextSection} />
       </section>
 
-      <section className={styles.section}>
+      <section ref={setSectionRef(4)} className={styles.section}>
         <div className={styles.card}>
           <p className={styles.manifesto}>
             "In the intersection of technology and creativity, we find the space
