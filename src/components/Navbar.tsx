@@ -10,9 +10,7 @@ export default function Navbar() {
 
   const navItems = [
     { name: 'home', path: '/' },
-    { name: 'about', path: '/about' },
-    { name: 'projects', path: '/projects' },
-    { name: 'music', path: '/music' },
+    { name: 'my story', path: '/my-story' },
     { name: 'contact', path: '/contact' },
   ]
 
@@ -24,7 +22,7 @@ export default function Navbar() {
             href="/" 
             className="text-lg tracking-wider hover:text-white transition-colors"
           >
-            Vanamali Sims.
+            Simon Van Meervenne
           </Link>
           
           <div className="hidden md:flex space-x-8">
