@@ -1,0 +1,237 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  background: rgba(23, 23, 23, 0.3);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  border-bottom: none;
+  position: relative;
+}
+
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 77, 77, 0.2),
+    rgba(249, 203, 40, 0.2),
+    transparent
+  );
+  filter: blur(1px);
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: radial-gradient(
+    ellipse at bottom,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 80%
+  );
+  pointer-events: none;
+}
+
+.scrolled {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(23, 23, 23, 0.45);
+}
+
+.scrolled::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 77, 77, 0.3),
+    rgba(249, 203, 40, 0.3),
+    transparent
+  );
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5rem;
+}
+
+.logo {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.logoText {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoIcon {
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .logoIcon {
+  transform: scale(1.1);
+}
+
+.underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+  transition: width 0.3s ease;
+}
+
+.logo:hover .underline {
+  width: 100%;
+}
+
+.desktopMenu {
+  display: none;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .desktopMenu {
+    display: flex;
+  }
+}
+
+.navLink {
+  position: relative;
+  color: #9ca3af;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 0.5rem 0;
+}
+
+.navLink:hover,
+.navLink.active {
+  color: #fff;
+}
+
+.linkUnderline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+  transition: width 0.3s ease;
+}
+
+.navLink:hover .linkUnderline,
+.navLink.active .linkUnderline {
+  width: 100%;
+}
+
+.mobileMenuButton {
+  display: block;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .mobileMenuButton {
+    display: none;
+  }
+}
+
+.hamburger {
+  width: 24px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #9ca3af;
+  transition: all 0.3s ease;
+}
+
+.open .hamburger span:first-child {
+  transform: translateY(9px) rotate(45deg);
+  background-color: #fff;
+}
+
+.open .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+
+.open .hamburger span:last-child {
+  transform: translateY(-9px) rotate(-45deg);
+  background-color: #fff;
+}
+
+.mobileMenu {
+  display: none;
+  padding: 1rem 0;
+  background: rgba(10, 10, 11, 0.95);
+  backdrop-filter: blur(8px);
+}
+
+.mobileMenu.show {
+  display: block;
+}
+
+.mobileNavLink {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #9ca3af;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobileNavLink:hover,
+.mobileNavLink.active {
+  color: #fff;
+  background: rgba(255, 77, 77, 0.1);
+}
+
+.mobileNavLink .linkUnderline {
+  bottom: 0;
+  height: 1px;
+}
+
+@media (min-width: 768px) {
+  .mobileMenu {
+    display: none !important;
+  }
+} 

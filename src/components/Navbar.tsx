@@ -2,11 +2,22 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Code2, Database } from 'lucide-react'
+import styles from './Navbar.module.css'
 
 export default function Navbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const navItems = [
     { name: 'home', path: '/' },
@@ -15,72 +26,63 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#0a0a0b]/80 backdrop-blur-sm">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+    <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
+      <div className={styles.container}>
+        <div className={styles.content}>
           <Link 
             href="/" 
-            className="text-lg tracking-wider hover:text-white transition-colors"
+            className={styles.logo}
           >
-            Simon Van Meervenne
+            <span className={styles.logoText}>
+              <Code2 size={20} className={styles.logoIcon} />
+              <Database size={20} className={styles.logoIcon} />
+            </span>
+            <div className={styles.underline}></div>
           </Link>
           
-          <div className="hidden md:flex space-x-8">
+          <div className={styles.desktopMenu}>
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 href={item.path}
-                className={`text-sm tracking-wider hover:text-white transition-all ${
-                  pathname === item.path
-                    ? 'text-white'
-                    : 'text-gray-400'
+                className={`${styles.navLink} ${
+                  pathname === item.path ? styles.active : ''
                 }`}
               >
                 {item.name}
+                <div className={styles.linkUnderline}></div>
               </Link>
             ))}
           </div>
 
-          {/* Mobile menu button */}
           <button 
-            className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
+            className={`${styles.mobileMenuButton} ${isMenuOpen ? styles.open : ''}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+            <div className={styles.hamburger}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </button>
         </div>
 
-        {/* Mobile menu */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 space-y-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                href={item.path}
-                className={`block text-sm tracking-wider hover:text-white transition-all ${
-                  pathname === item.path
-                    ? 'text-white'
-                    : 'text-gray-400'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        )}
+        <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.show : ''}`}>
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              href={item.path}
+              className={`${styles.mobileNavLink} ${
+                pathname === item.path ? styles.active : ''
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.name}
+              <div className={styles.linkUnderline}></div>
+            </Link>
+          ))}
+        </div>
       </div>
     </nav>
   )

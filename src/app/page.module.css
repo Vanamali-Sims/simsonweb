@@ -2,24 +2,21 @@
   --gray-rgb: 0, 0, 0;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
   --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
-  /* Updated color scheme */
-  --accent-color: #FF6B6B;  /* Coral red for 'V' */
-  --accent-color-rgb: 255, 107, 107;
-  --accent-secondary: #4ECDC4; /* Teal for 'S' */
-  --accent-tertiary: #95A5A6; /* Subtle gray for other accents */
+  /* Terra cotta color scheme */
+  --accent-color: #E07A5F;
+  --accent-color-rgb: 224, 122, 95;
 
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
 
   display: flex;
   flex-direction: column;
-  min-height: 100svh;
+  min-height: 100vh;
   padding: 0;
-  gap: 120px;
+  gap: 80px;
   font-family: var(--font-geist-sans);
   position: relative;
   overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -106,17 +103,10 @@
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 24px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 2rem 24px;
   opacity: 0;
   transform: translateY(20px);
   animation: fadeUp 0.8s ease-out forwards;
-  position: relative;
-  gap: 60px; /* Space between card and mouse icon */
 }
 
 .section:nth-child(2) {
@@ -143,18 +133,19 @@
 }
 
 .introBlock {
-  width: 100%;
   min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
+  margin-top: -4rem;
+  padding-bottom: 8rem;
 }
 
 .greeting {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   opacity: 0;
   animation: fadeIn 1s ease-out forwards;
   display: flex;
@@ -192,37 +183,12 @@
 }
 
 .name {
-  font-size: 3.5rem;
+  font-size: 2.8rem;
   font-weight: 300;
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   opacity: 0;
   animation: fadeIn 1s ease-out 0.3s forwards;
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  letter-spacing: -1px;
-}
-
-.name span {
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-.name .highlight1 {
-  color: var(--accent-color);
-}
-
-.name .highlight2 {
-  color: var(--accent-secondary);
-}
-
-.name:hover span {
-  animation: bounce 0.5s ease;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
 }
 
 .role {
@@ -231,21 +197,12 @@
   margin-bottom: 2rem;
   opacity: 0;
   animation: fadeIn 1s ease-out 0.6s forwards;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.tagline {
-  font-size: 1.2rem;
-  color: var(--accent-tertiary);
-  margin-bottom: 3rem;
-  opacity: 0;
-  animation: fadeIn 1s ease-out 0.9s forwards;
 }
 
 .animatedText {
   font-size: 1.2rem;
   color: var(--accent-color);
-  margin-bottom: 3rem;
+  margin-bottom: 6rem;
   display: flex;
   flex-wrap: wrap;
   gap: 2px;
@@ -275,7 +232,7 @@
 
 .scrollIndicator {
   position: absolute;
-  bottom: 40px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -403,7 +360,7 @@
   background-color: rgba(30, 30, 35, 0.7);
   border-radius: 12px;
   padding: 24px;
-  width: 100%;
+  margin-bottom: 24px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
@@ -415,38 +372,23 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.mouseIcon {
-  position: relative;
-  margin: 0;
-  transform: none;
-}
-
 .cardTitle {
   font-size: 1.5rem;
   font-weight: 500;
   color: white;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: 'JetBrains Mono', monospace;
 }
 
 .cardTitle span {
-  color: var(--accent-color);
-  font-size: 1.2em;
-  transition: transform 0.3s ease;
-}
-
-.cardTitle:hover span {
-  transform: translateX(5px);
+  margin-right: 0.5rem;
 }
 
 .nowBlock {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-bottom: 2rem;
 }
 
 .nowItem {
@@ -463,24 +405,9 @@
 }
 
 .projectTitle {
-  color: var(--accent-tertiary);
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
-  font-family: 'JetBrains Mono', monospace;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: color 0.3s ease;
-}
-
-.projectTitle:hover {
   color: var(--accent-color);
-}
-
-.projectTitle::before {
-  content: '//';
-  color: var(--accent-secondary);
-  opacity: 0.7;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
 .projectDescription {
@@ -517,19 +444,20 @@
 
 .musicPlayer {
   width: 100%;
-  height: 80px;
+  border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.musicPlayer:hover {
+  transform: scale(1.01);
 }
 
 .musicCaption {
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.5);
   font-style: italic;
+  text-align: center;
 }
 
 .manifesto {

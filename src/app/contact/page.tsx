@@ -25,7 +25,7 @@ export default function Contact() {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
-          to_name: 'Simon', // Your name
+          to_name: 'Vanamali', // Your name
         },
         'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
       );

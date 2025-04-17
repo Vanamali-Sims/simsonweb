@@ -15,7 +15,7 @@ export default function Story() {
         
         <div className={styles.content}>
           <p className={styles.intro}>
-            Hey! I'm Simon Van Meervenne, a Full Stack Developer and Music Producer
+            Hey! I'm Vanamali Sims, a Full Stack Developer and Music Producer
             with a passion for creating digital experiences that blend technology and
             creativity.
           </p>

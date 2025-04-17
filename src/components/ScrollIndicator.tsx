@@ -10,10 +10,13 @@ export default function ScrollIndicator({ styles }: ScrollIndicatorProps) {
   const handleScroll = () => {
     const sections = document.querySelectorAll(`.${styles.section}`);
     if (sections.length > 1) {
-      const exploringSection = sections[1]; // Target "Currently Exploring" section
-      exploringSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      const exploringSection = sections[1];
+      const navHeight = 80; // Approximate navbar height
+      const targetPosition = exploringSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
       });
     }
   };
