@@ -2,34 +2,40 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 export default function Navbar() {
   const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'home', path: '/' },
+    { name: 'about', path: '/about' },
+    { name: 'projects', path: '/projects' },
+    { name: 'music', path: '/music' },
+    { name: 'contact', path: '/contact' },
   ]
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+    <nav className="fixed top-0 w-full z-50 bg-[#0a0a0b]/80 backdrop-blur-sm">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold">
-            Simon Web
+        <div className="flex items-center justify-between h-20">
+          <Link 
+            href="/" 
+            className="text-lg tracking-wider hover:text-white transition-colors"
+          >
+            simon.
           </Link>
           
-          <div className="hidden md:flex space-x-4">
+          <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 href={item.path}
-                className={`nav-link ${
+                className={`text-sm tracking-wider hover:text-white transition-all ${
                   pathname === item.path
-                    ? 'text-gray-900 dark:text-white font-medium'
-                    : ''
+                    ? 'text-white'
+                    : 'text-gray-400'
                 }`}
               >
                 {item.name}
@@ -38,7 +44,10 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <button className="md:hidden p-2">
+          <button 
+            className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             <svg
               className="w-6 h-6"
               fill="none"
@@ -48,12 +57,32 @@ export default function Navbar() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
+                strokeWidth={1}
                 d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
           </button>
         </div>
+
+        {/* Mobile menu */}
+        {isMenuOpen && (
+          <div className="md:hidden py-4 space-y-4">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                className={`block text-sm tracking-wider hover:text-white transition-all ${
+                  pathname === item.path
+                    ? 'text-white'
+                    : 'text-gray-400'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </nav>
   )

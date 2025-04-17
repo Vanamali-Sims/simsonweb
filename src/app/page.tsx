@@ -3,27 +3,38 @@ import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className="page-transition">
-      <section className="min-h-[80vh] flex flex-col justify-center">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">
-          Hi, I'm Simon
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl">
-          A passionate developer crafting beautiful and functional web experiences.
-          I specialize in building modern web applications with cutting-edge technologies.
-        </p>
-        <div className="flex gap-4">
+    <div className="page-transition max-w-2xl mx-auto">
+      <section className="min-h-[80vh] flex flex-col justify-center space-y-8">
+        <div className="space-y-4">
+          <p className="text-sm text-gray-500">hey, i'm</p>
+          <h1 className="text-4xl md:text-5xl font-light text-white">
+            simon
+          </h1>
+        </div>
+
+        <div className="space-y-6 text-gray-400">
+          <p className="text-lg leading-relaxed">
+            Data Science student at Monash Clayton, crafting digital experiences
+            and making music in my free time.
+          </p>
+          <p className="leading-relaxed">
+            Currently exploring the intersection of bioinformatics, machine learning,
+            and creative coding — while producing lofi beats and watching One Piece.
+          </p>
+        </div>
+
+        <div className="pt-8 flex gap-8">
           <a
             href="/projects"
-            className="px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+            className="text-sm text-gray-400 hover:text-white transition-colors"
           >
-            View My Work
+            view work →
           </a>
           <a
-            href="/contact"
-            className="px-6 py-3 border border-gray-300 dark:border-gray-700 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-colors"
+            href="/music"
+            className="text-sm text-gray-400 hover:text-white transition-colors"
           >
-            Get in Touch
+            listen →
           </a>
         </div>
       </section>
