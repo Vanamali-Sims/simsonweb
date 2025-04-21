@@ -5,11 +5,13 @@ import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { Code2, Database } from 'lucide-react'
 import styles from './Navbar.module.css'
+import Image from 'next/image'
 
 export default function Navbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [imageError, setImageError] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +41,30 @@ export default function Navbar() {
             </span>
             <div className={styles.underline}></div>
           </Link>
+
+          <div className={styles.centerGif}>
+            {!imageError ? (
+              <Image
+                src="https://gifdb.com/images/high/animated-welcome-roses-red-aesthetic-s4453iqcclw7nljj.webp"
+                alt="Welcome animation"
+                width={200}
+                height={40}
+                className={styles.bannerGif}
+                priority
+                onError={() => setImageError(true)}
+              />
+            ) : (
+              <div className={styles.fallbackAnimation}>
+                <span>W</span>
+                <span>E</span>
+                <span>L</span>
+                <span>C</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+              </div>
+            )}
+          </div>
           
           <div className={styles.desktopMenu}>
             {navItems.map((item) => (

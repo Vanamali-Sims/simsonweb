@@ -19,15 +19,15 @@ export default function Contact() {
 
     try {
       await emailjs.send(
-        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
         {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
-          to_name: 'Vanamali', // Your name
+          to_name: 'Sai Vanamali',
         },
-        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+        'YOUR_PUBLIC_KEY'
       );
 
       setStatus('success');
@@ -40,17 +40,17 @@ export default function Contact() {
 
   return (
     <main className={styles.page}>
-      <AnimatedBackground />
+      <AnimatedBackground showCornerDecorations={false} />
       <div className={styles.container}>
-        {/* Contact Form Card */}
         <div className={styles.card}>
           <h1 className={styles.title}>Contact Me</h1>
           <div className={styles.underline}></div>
           
           <section className={styles.section}>
             <p className={styles.text}>
-              I'm always open to new opportunities and collaborations. Whether you have a question
-              or just want to say hi, I'll try my best to get back to you!
+              Based in Melbourne, Australia, I'm always open to new opportunities and collaborations.
+              Whether you have a project in mind, want to discuss AI and technology, or just want to say hi,
+              I'll try my best to get back to you!
             </p>
           </section>
 
@@ -120,14 +120,13 @@ export default function Contact() {
           </form>
         </div>
 
-        {/* Elsewhere Card */}
         <div className={`${styles.card} ${styles.elsewhereCard}`}>
           <h2 className={styles.subtitle}>
             <span className={styles.arrow}>→</span> elsewhere
           </h2>
           <div className={styles.links}>
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/Vanamali-Sims"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.link}
@@ -135,24 +134,24 @@ export default function Contact() {
               GitHub <span className={styles.arrow}>→</span>
             </a>
             <a
-              href="https://linkedin.com/in/yourusername"
+              href="https://www.linkedin.com/in/van-sims"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.link}
             >
               LinkedIn <span className={styles.arrow}>→</span>
             </a>
-            <a
-              href="https://twitter.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.link}
-            >
-              Twitter <span className={styles.arrow}>→</span>
-            </a>
+            <div className={styles.contact}>
+              <span className={styles.contactLabel}>Phone:</span>
+              <span>+61 0489 196 006</span>
+            </div>
+            <div className={styles.contact}>
+              <span className={styles.contactLabel}>Location:</span>
+              <span>Melbourne, Australia</span>
+            </div>
           </div>
         </div>
       </div>
     </main>
-  )
+  );
 } 

@@ -1,6 +1,10 @@
 import styles from './AnimatedBackground.module.css';
 
-export default function AnimatedBackground() {
+interface AnimatedBackgroundProps {
+  showCornerDecorations?: boolean;
+}
+
+export default function AnimatedBackground({ showCornerDecorations = false }: AnimatedBackgroundProps) {
   return (
     <div className={styles.background}>
       <div className={styles.noise} />
@@ -18,28 +22,30 @@ export default function AnimatedBackground() {
           />
         ))}
       </div>
-      <div className={styles.cornerDecorations}>
-        <div className={styles.topLeft}>
-          {[...Array(3)].map((_, i) => (
-            <div key={`tl-${i}`} className={styles.line} style={{ transform: `rotate(${45 + i * 15}deg)` }} />
-          ))}
+      {showCornerDecorations && (
+        <div className={styles.cornerDecorations}>
+          <div className={styles.topLeft}>
+            {[...Array(3)].map((_, i) => (
+              <div key={`tl-${i}`} className={styles.line} style={{ transform: `rotate(${45 + i * 15}deg)` }} />
+            ))}
+          </div>
+          <div className={styles.topRight}>
+            {[...Array(3)].map((_, i) => (
+              <div key={`tr-${i}`} className={styles.line} style={{ transform: `rotate(${-45 - i * 15}deg)` }} />
+            ))}
+          </div>
+          <div className={styles.bottomLeft}>
+            {[...Array(3)].map((_, i) => (
+              <div key={`bl-${i}`} className={styles.line} style={{ transform: `rotate(${-45 + i * 15}deg)` }} />
+            ))}
+          </div>
+          <div className={styles.bottomRight}>
+            {[...Array(3)].map((_, i) => (
+              <div key={`br-${i}`} className={styles.line} style={{ transform: `rotate(${45 - i * 15}deg)` }} />
+            ))}
+          </div>
         </div>
-        <div className={styles.topRight}>
-          {[...Array(3)].map((_, i) => (
-            <div key={`tr-${i}`} className={styles.line} style={{ transform: `rotate(${-45 - i * 15}deg)` }} />
-          ))}
-        </div>
-        <div className={styles.bottomLeft}>
-          {[...Array(3)].map((_, i) => (
-            <div key={`bl-${i}`} className={styles.line} style={{ transform: `rotate(${-45 + i * 15}deg)` }} />
-          ))}
-        </div>
-        <div className={styles.bottomRight}>
-          {[...Array(3)].map((_, i) => (
-            <div key={`br-${i}`} className={styles.line} style={{ transform: `rotate(${45 - i * 15}deg)` }} />
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   );
 } 

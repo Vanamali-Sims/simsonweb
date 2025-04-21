@@ -68,6 +68,7 @@
   align-items: center;
   justify-content: space-between;
   height: 5rem;
+  position: relative;
 }
 
 .logo {
@@ -234,4 +235,79 @@
   .mobileMenu {
     display: none !important;
   }
+}
+
+.centerGif {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bannerGif {
+  object-fit: contain;
+  height: auto;
+  filter: brightness(1.1) contrast(1.1);
+  transition: transform 0.3s ease;
+}
+
+.centerGif:hover .bannerGif {
+  transform: scale(1.05);
+}
+
+.animatedBar {
+  width: 3px;
+  height: 100%;
+  background: var(--accent-color);
+  animation: barAnimation 1.5s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+.animatedBar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.animatedBar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes barAnimation {
+  0%, 100% {
+    height: 20%;
+    opacity: 0.3;
+  }
+  50% {
+    height: 100%;
+    opacity: 1;
+  }
+}
+
+.fallbackAnimation {
+  display: flex;
+  gap: 4px;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.fallbackAnimation span {
+  animation: fadeInOut 2s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+.fallbackAnimation span:nth-child(2) { animation-delay: 0.2s; }
+.fallbackAnimation span:nth-child(3) { animation-delay: 0.4s; }
+.fallbackAnimation span:nth-child(4) { animation-delay: 0.6s; }
+.fallbackAnimation span:nth-child(5) { animation-delay: 0.8s; }
+.fallbackAnimation span:nth-child(6) { animation-delay: 1s; }
+.fallbackAnimation span:nth-child(7) { animation-delay: 1.2s; }
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.7; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
 } 

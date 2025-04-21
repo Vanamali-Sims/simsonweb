@@ -230,4 +230,18 @@
   .submitButton {
     font-size: 0.9rem;
   }
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  padding: 4px 0;
+}
+
+.contactLabel {
+  color: var(--accent-color);
+  font-size: 0.85rem;
 } 
