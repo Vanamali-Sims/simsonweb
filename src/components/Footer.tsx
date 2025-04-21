@@ -9,28 +9,20 @@ export default function Footer() {
           
           <div className="flex space-x-8">
             <a
-              href="https://github.com"
+              href="https://github.com/Vanamali-Sims"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-gray-400 hover:text-white transition-colors"
             >
-              code vault
+              github
             </a>
             <a
-              href="https://spotify.com"
+              href="https://www.linkedin.com/in/van-sims"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-gray-400 hover:text-white transition-colors"
             >
-              sonic waves
-            </a>
-            <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-gray-400 hover:text-white transition-colors"
-            >
-              pixel tube
+              linkedin
             </a>
           </div>
         </div>

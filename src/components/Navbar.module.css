@@ -78,6 +78,7 @@
   font-size: 1.25rem;
   letter-spacing: 0.05em;
   transition: color 0.3s ease;
+  margin-bottom: 5px;
 }
 
 .logoText {
@@ -241,18 +242,18 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  height: 40px;
+  height: 60px;
   display: flex;
   align-items: center;
-  border-radius: 4px;
+  justify-content: center;
   overflow: hidden;
+  z-index: 1;
 }
 
 .bannerGif {
-  object-fit: contain;
-  height: auto;
-  filter: brightness(1.1) contrast(1.1);
-  transition: transform 0.3s ease;
+  object-fit: cover;
+  width: 300px !important;
+  height: 60px !important;
 }
 
 .centerGif:hover .bannerGif {
@@ -310,4 +311,26 @@
 @keyframes fadeInOut {
   0%, 100% { opacity: 0.7; transform: translateY(0); }
   50% { opacity: 1; transform: translateY(-2px); }
+}
+
+.comicalFace {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  animation: bounceAndSpin 3s infinite;
+  z-index: 2;
+}
+
+@keyframes bounceAndSpin {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-50%) translateY(-5px) rotate(15deg);
+  }
+  75% {
+    transform: translateX(-50%) translateY(2px) rotate(-15deg);
+  }
 } 

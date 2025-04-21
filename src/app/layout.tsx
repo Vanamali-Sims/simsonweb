@@ -10,6 +10,13 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains"
 });
 
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
+
 export const metadata: Metadata = {
   title: "Vanamali Sims | Digital Alchemist & Sonic Wizard",
   description: "Data Science student, Developer, and Music Producer who turns coffee into code and beats into bops",

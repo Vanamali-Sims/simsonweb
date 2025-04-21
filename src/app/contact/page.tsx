@@ -125,22 +125,6 @@ export default function Contact() {
             <span className={styles.arrow}>→</span> elsewhere
           </h2>
           <div className={styles.links}>
-            <a
-              href="https://github.com/Vanamali-Sims"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.link}
-            >
-              GitHub <span className={styles.arrow}>→</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/van-sims"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.link}
-            >
-              LinkedIn <span className={styles.arrow}>→</span>
-            </a>
             <div className={styles.contact}>
               <span className={styles.contactLabel}>Phone:</span>
               <span>+61 0489 196 006</span>
