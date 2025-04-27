@@ -28,6 +28,19 @@ export default function ProjectsSection() {
             </div>
           </div>
 
+          <div className={styles.projectCard} onClick={() => openProject('https://github.com/Vanamali-Sims/Rss_Reader')}>
+            <h3 className={styles.projectTitle}>RSS Reader</h3>
+            <p className={styles.projectDescription}>
+              A TypeScript application that parses data from RSS feeds, stores and validates format.
+              Utilizes Axios and xml2js to process feeds and save to local files.
+            </p>
+            <div className={styles.projectTags}>
+              <span className={styles.projectTag}>TypeScript</span>
+              <span className={styles.projectTag}>APIs</span>
+              <span className={styles.projectTag}>RSS</span>
+            </div>
+          </div>
+
           <div className={styles.projectCard} onClick={() => openProject('https://github.com/Vanamali-Sims/excuseMe')}>
             <h3 className={styles.projectTitle}>excuseMe.ai</h3>
             <p className={styles.projectDescription}>
@@ -64,19 +77,6 @@ export default function ProjectsSection() {
               <span className={styles.projectTag}>Python</span>
               <span className={styles.projectTag}>ML</span>
               <span className={styles.projectTag}>Analytics</span>
-            </div>
-          </div>
-
-          <div className={styles.projectCard} onClick={() => openProject('https://github.com/Vanamali-Sims/excuseMe')}>
-            <h3 className={styles.projectTitle}>excuseMe.ai</h3>
-            <p className={styles.projectDescription}>
-              🎭 AI-powered apology generator that crafts witty, heartfelt, or dramatic apologies for any situation.
-              Type your blunder, get an AI-crafted apology, and send it like a pro!
-            </p>
-            <div className={styles.projectTags}>
-              <span className={styles.projectTag}>Python</span>
-              <span className={styles.projectTag}>GPT-2</span>
-              <span className={styles.projectTag}>Streamlit</span>
             </div>
           </div>
 

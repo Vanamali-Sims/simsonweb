@@ -8,6 +8,7 @@
     cursor: none; /* Hide default cursor */
   }
   
+  
   body {
     @apply bg-[#0a0a0b] text-gray-300;
     font-family: var(--font-jetbrains);
