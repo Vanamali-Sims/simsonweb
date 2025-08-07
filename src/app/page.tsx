@@ -4,6 +4,7 @@ import styles from './page.module.css';
 import { ArrowRight, Lightbulb } from 'lucide-react';
 import ScrollIndicator from '@/components/ScrollIndicator';
 import ProjectsSection from '@/components/ProjectsSection';
+import ExperienceSection from '@/components/ExperienceSection';
 
 function AnimatedText({ text }: { text: string }) {
   return (
@@ -101,17 +102,19 @@ export default function Home() {
           <div className={styles.nowBlock}>
             <div className={styles.nowItem}>
               <ArrowRight size={16} />
-              <span>🧠 Currently exploring how just 72 rows of gene expression data can unravel key differences between human and chimp brains — because in bioinformatics, it's not about the row count, it's about the biological depth.</span>
+              <span>🤖 Building Zelo - Making AI accessible through affordable, local AI agents. Specializing in custom automation solutions that bring enterprise-level AI capabilities to everyone.</span>
             </div>
             <div className={styles.nowItem}>
               <ArrowRight size={16} />
-              <span>🔬 Bridging data science and genomics to uncover evolutionary insights through RNA-Seq analysis and clean, reproducible pipelines.</span>
+              <span>🧠 Exploring gene expression patterns in human and chimp brains through bioinformatics and machine learning.</span>
             </div>
           </div>
         </div>
       </section>
 
       <ProjectsSection />
+
+      <ExperienceSection />
 
       <section className={styles.section}>
         <div className={styles.card}>

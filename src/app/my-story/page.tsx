@@ -28,9 +28,32 @@ export default function MyStory() {
 
             <div className={styles.skillsSection}>
               <div className={styles.skillCategory}>
-                <h3 className={styles.skillCategoryTitle}>Data Science & AI</h3>
+                <h3 className={styles.skillCategoryTitle}>AI & Automation</h3>
                 <div className={styles.skillList}>
-                  <span className={styles.skill}>Python</span>
+                  <span className={styles.skill}>LangChain</span>
+                  <span className={styles.skill}>GPT-4</span>
+                  <span className={styles.skill}>Custom AI Agents</span>
+                  <span className={styles.skill}>LLM Integration</span>
+                  <span className={styles.skill}>Task Automation</span>
+                  <span className={styles.skill}>Prompt Engineering</span>
+                </div>
+              </div>
+
+              <div className={styles.skillCategory}>
+                <h3 className={styles.skillCategoryTitle}>Web Scraping & Data Collection</h3>
+                <div className={styles.skillList}>
+                  <span className={styles.skill}>Selenium</span>
+                  <span className={styles.skill}>BeautifulSoup</span>
+                  <span className={styles.skill}>Scrapy</span>
+                  <span className={styles.skill}>Puppeteer</span>
+                  <span className={styles.skill}>Data Extraction</span>
+                  <span className={styles.skill}>API Integration</span>
+                </div>
+              </div>
+
+              <div className={styles.skillCategory}>
+                <h3 className={styles.skillCategoryTitle}>Machine Learning</h3>
+                <div className={styles.skillList}>
                   <span className={styles.skill}>PyTorch</span>
                   <span className={styles.skill}>scikit-learn</span>
                   <span className={styles.skill}>TensorFlow</span>

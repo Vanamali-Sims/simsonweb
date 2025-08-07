@@ -46,7 +46,7 @@ export default function Story() {
               </div>
               <div className={styles.skillCategory}>
                 <h3>Frameworks & Libraries</h3>
-                <p>FastAPI, Scikit-learn, PyTorch, Transformers, Pandas, React, Node.js</p>
+                <p>FastAPI, Scikit-learn, PyTorch, LangChain, Selenium, BeautifulSoup, Scrapy, React, Node.js</p>
               </div>
               <div className={styles.skillCategory}>
                 <h3>Tools & Technologies</h3>

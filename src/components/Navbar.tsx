@@ -21,11 +21,11 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollToProjects = () => {
-    const projectsSection = document.querySelector('#projects-section');
-    if (projectsSection) {
+  const scrollToSection = (sectionId: string) => {
+    const section = document.querySelector(sectionId);
+    if (section) {
       const navHeight = 80; // Approximate navbar height
-      const targetPosition = projectsSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+      const targetPosition = section.getBoundingClientRect().top + window.pageYOffset - navHeight;
       
       window.scrollTo({
         top: targetPosition,
@@ -34,13 +34,23 @@ export default function Navbar() {
     }
   };
 
+  const scrollToProjects = () => scrollToSection('#projects-section');
+  const scrollToLore = () => scrollToSection('#lore-section');
+
   const navItems = [
     { name: 'home', path: '/' },
-    ...(pathname === '/' ? [{ 
-      name: 'projects', 
-      path: '#projects',
-      onClick: scrollToProjects
-    }] : []),
+    ...(pathname === '/' ? [
+      { 
+        name: 'projects', 
+        path: '#projects',
+        onClick: scrollToProjects
+      },
+      {
+        name: 'lore',
+        path: '#lore',
+        onClick: scrollToLore
+      }
+    ] : []),
     { name: 'my story', path: '/my-story' },
     { name: 'contact', path: '/contact' },
   ]
