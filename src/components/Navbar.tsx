@@ -1,172 +1,70 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
-import { Code2, Database } from 'lucide-react'
-import Image from 'next/image'
-import styles from './Navbar.module.css'
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import styles from './Navbar.module.css';
+
+const links = [
+  { name: 'Work', path: '/#work' },
+  { name: 'Lore', path: '/#lore' },
+  { name: 'Story', path: '/my-story' },
+  { name: 'Contact', path: '/contact' },
+];
 
 export default function Navbar() {
-  const pathname = usePathname()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [imageError, setImageError] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const scrollToSection = (sectionId: string) => {
-    const section = document.querySelector(sectionId);
-    if (section) {
-      const navHeight = 80; // Approximate navbar height
-      const targetPosition = section.getBoundingClientRect().top + window.pageYOffset - navHeight;
-      
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  const scrollToProjects = () => scrollToSection('#projects-section');
-  const scrollToLore = () => scrollToSection('#lore-section');
-
-  const navItems = [
-    { name: 'home', path: '/' },
-    ...(pathname === '/' ? [
-      { 
-        name: 'projects', 
-        path: '#projects',
-        onClick: scrollToProjects
-      },
-      {
-        name: 'lore',
-        path: '#lore',
-        onClick: scrollToLore
-      }
-    ] : []),
-    { name: 'my story', path: '/my-story' },
-    { name: 'contact', path: '/contact' },
-  ]
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <Link 
-            href="/" 
-            className={styles.logo}
-          >
-            <span className={styles.logoText}>
-              <Code2 size={20} className={styles.logoIcon} />
-              <Database size={20} className={styles.logoIcon} />
-            </span>
-            <div className={styles.underline}></div>
-          </Link>
+    <header className={styles.bar}>
+      <div className={styles.inner}>
+        <Link href="/" className={styles.brand} onClick={() => setOpen(false)}>
+          <span className={styles.mark}>VS</span>
+          <span className={styles.brandName}>Vanamali Sims</span>
+        </Link>
 
-          <div className={styles.centerGif}>
-            {!imageError ? (
-              <Image
-                src="https://gifdb.com/images/high/red-aesthetic-498-x-278-gif-gquy5q3jqxh8akdn.webp"
-                alt="Aesthetic animation"
-                width={300}
-                height={60}
-                className={styles.bannerGif}
-                priority
-                onError={() => setImageError(true)}
-              />
-            ) : (
-              <div className={styles.fallbackAnimation}>
-                <span>W</span>
-                <span>E</span>
-                <span>L</span>
-                <span>C</span>
-                <span>O</span>
-                <span>M</span>
-                <span>E</span>
-              </div>
-            )}
-          </div>
-          
-          <div className={styles.desktopMenu}>
-            {navItems.map((item) => (
-              item.onClick ? (
-                <button
-                  key={item.path}
-                  onClick={item.onClick}
-                  className={`${styles.navLink} ${
-                    pathname === item.path ? styles.active : ''
-                  }`}
-                >
-                  {item.name}
-                  <div className={styles.linkUnderline}></div>
-                </button>
-              ) : (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className={`${styles.navLink} ${
-                    pathname === item.path ? styles.active : ''
-                  }`}
-                >
-                  {item.name}
-                  <div className={styles.linkUnderline}></div>
-                </Link>
-              )
-            ))}
-          </div>
-
-          <button 
-            className={`${styles.mobileMenuButton} ${isMenuOpen ? styles.open : ''}`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <div className={styles.hamburger}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </button>
-        </div>
-
-        <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.show : ''}`}>
-          {navItems.map((item) => (
-            item.onClick ? (
-              <button
-                key={item.path}
-                onClick={() => {
-                  item.onClick();
-                  setIsMenuOpen(false);
-                }}
-                className={`${styles.mobileNavLink} ${
-                  pathname === item.path ? styles.active : ''
-                }`}
-              >
-                {item.name}
-                <div className={styles.linkUnderline}></div>
-              </button>
-            ) : (
+        <nav className={styles.desktop} aria-label="Primary">
+          {links.map((link) => {
+            const active =
+              link.path === '/my-story' || link.path === '/contact'
+                ? pathname === link.path
+                : false;
+            return (
               <Link
-                key={item.path}
-                href={item.path}
-                className={`${styles.mobileNavLink} ${
-                  pathname === item.path ? styles.active : ''
-                }`}
-                onClick={() => setIsMenuOpen(false)}
+                key={link.path}
+                href={link.path}
+                className={`${styles.link} ${active ? styles.active : ''}`}
               >
-                {item.name}
-                <div className={styles.linkUnderline}></div>
+                {link.name}
               </Link>
-            )
-          ))}
-        </div>
+            );
+          })}
+        </nav>
+
+        <button
+          className={`${styles.burger} ${open ? styles.burgerOpen : ''}`}
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+        >
+          <span />
+          <span />
+        </button>
       </div>
-    </nav>
-  )
-} 
+
+      <div className={`${styles.drawer} ${open ? styles.drawerOpen : ''}`}>
+        {links.map((link) => (
+          <Link
+            key={link.path}
+            href={link.path}
+            className={styles.drawerLink}
+            onClick={() => setOpen(false)}
+          >
+            {link.name}
+          </Link>
+        ))}
+      </div>
+    </header>
+  );
+}

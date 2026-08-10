@@ -5,27 +5,22 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'media',
   theme: {
     extend: {
-      animation: {
-        'fade-in': 'fade-in 0.5s ease-out',
+      colors: {
+        sky: '#1B4E8C',
+        rust: '#9A5233',
+        mustard: '#D9A62E',
+        poppy: '#D6412B',
+        cream: '#E8DFC8',
+        concrete: '#B0ACA2',
+        charcoal: '#242320',
       },
-      keyframes: {
-        'fade-in': {
-          '0%': {
-            opacity: '0',
-            transform: 'translateY(10px)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateY(0)',
-          },
-        },
+      fontFamily: {
+        display: ['var(--font-space-grotesk)', 'sans-serif'],
+        body: ['var(--font-dm-sans)', 'sans-serif'],
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
-} 
+  plugins: [],
+};

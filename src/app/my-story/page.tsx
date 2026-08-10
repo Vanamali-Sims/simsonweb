@@ -1,125 +1,102 @@
-'use client';
-
+import Link from 'next/link';
 import styles from './page.module.css';
-import AnimatedBackground from '@/components/AnimatedBackground';
+
+const stacks = [
+  {
+    title: 'AI & Automation',
+    items: ['LangChain', 'GPT-4', 'Custom Agents', 'Prompt Engineering'],
+  },
+  {
+    title: 'Machine Learning',
+    items: ['PyTorch', 'scikit-learn', 'TensorFlow', 'Pandas', 'R'],
+  },
+  {
+    title: 'Bioinformatics',
+    items: ['RNA-Seq', 'BioPython', 'DESeq2', 'BLAST'],
+  },
+  {
+    title: 'Engineering',
+    items: ['TypeScript', 'React', 'Next.js', 'FastAPI', 'PostgreSQL'],
+  },
+];
 
 export default function MyStory() {
   return (
-    <main className={styles.page}>
-      <AnimatedBackground />
-      <div className={styles.container}>
-        <div className={styles.card}>
-          <h1 className={styles.title}>
-            <span className={styles.titleStatic}>My</span>
-            <span className={styles.titleDynamic}>Story</span>
-          </h1>
-          
-          <div className={styles.content}>
-            <p className={styles.paragraph}>
-              Hey! I'm <span className={styles.name}>Sai Vanamali</span>, a <span className={styles.highlight}>Data Scientist</span> and <span className={styles.highlight}>Full Stack Developer</span> with 
-              a passion for creating intelligent solutions that blend AI and modern technology.
-            </p>
+    <div className={styles.page}>
+      <section className={`${styles.hero} grain`}>
+        <p className={styles.wayfinding}>STORY / 01</p>
+        <h1 className={styles.title}>
+          Built in
+          <br />
+          daylight.
+        </h1>
+        <p className={styles.lede}>
+          I&apos;m Sai Vanamali — data scientist and full-stack developer in
+          Melbourne. I care about work that looks sharp and holds up under
+          pressure: models with meaning, products people actually use.
+        </p>
+      </section>
 
-            <p className={styles.paragraph}>
-              Based in Melbourne, Australia, I'm currently pursuing my Master's in Data Science at Monash University. 
-              My focus lies in leveraging data science and machine learning to uncover meaningful patterns and create 
-              impactful solutions, particularly in bioinformatics and genomic analysis.
-            </p>
-
-            <div className={styles.skillsSection}>
-              <div className={styles.skillCategory}>
-                <h3 className={styles.skillCategoryTitle}>AI & Automation</h3>
-                <div className={styles.skillList}>
-                  <span className={styles.skill}>LangChain</span>
-                  <span className={styles.skill}>GPT-4</span>
-                  <span className={styles.skill}>Custom AI Agents</span>
-                  <span className={styles.skill}>LLM Integration</span>
-                  <span className={styles.skill}>Task Automation</span>
-                  <span className={styles.skill}>Prompt Engineering</span>
-                </div>
-              </div>
-
-              <div className={styles.skillCategory}>
-                <h3 className={styles.skillCategoryTitle}>Web Scraping & Data Collection</h3>
-                <div className={styles.skillList}>
-                  <span className={styles.skill}>Selenium</span>
-                  <span className={styles.skill}>BeautifulSoup</span>
-                  <span className={styles.skill}>Scrapy</span>
-                  <span className={styles.skill}>Puppeteer</span>
-                  <span className={styles.skill}>Data Extraction</span>
-                  <span className={styles.skill}>API Integration</span>
-                </div>
-              </div>
-
-              <div className={styles.skillCategory}>
-                <h3 className={styles.skillCategoryTitle}>Machine Learning</h3>
-                <div className={styles.skillList}>
-                  <span className={styles.skill}>PyTorch</span>
-                  <span className={styles.skill}>scikit-learn</span>
-                  <span className={styles.skill}>TensorFlow</span>
-                  <span className={styles.skill}>Pandas</span>
-                  <span className={styles.skill}>NumPy</span>
-                  <span className={styles.skill}>R</span>
-                </div>
-              </div>
-
-              <div className={styles.skillCategory}>
-                <h3 className={styles.skillCategoryTitle}>Data Analysis & Visualization</h3>
-                <div className={styles.skillList}>
-                  <span className={styles.skill}>PowerBI</span>
-                  <span className={styles.skill}>Excel</span>
-                  <span className={styles.skill}>Tableau</span>
-                  <span className={styles.skill}>Matplotlib</span>
-                  <span className={styles.skill}>Seaborn</span>
-                  <span className={styles.skill}>Plotly</span>
-                </div>
-              </div>
-
-              <div className={styles.skillCategory}>
-                <h3 className={styles.skillCategoryTitle}>Bioinformatics</h3>
-                <div className={styles.skillList}>
-                  <span className={styles.skill}>RNA-Seq Analysis</span>
-                  <span className={styles.skill}>Genomic Data Processing</span>
-                  <span className={styles.skill}>BioPython</span>
-                  <span className={styles.skill}>DESeq2</span>
-                  <span className={styles.skill}>BLAST</span>
-                </div>
-              </div>
-
-              <div className={styles.skillCategory}>
-                <h3 className={styles.skillCategoryTitle}>Web Development</h3>
-                <div className={styles.skillList}>
-                  <span className={styles.skill}>TypeScript</span>
-                  <span className={styles.skill}>React</span>
-                  <span className={styles.skill}>Next.js</span>
-                  <span className={styles.skill}>FastAPI</span>
-                  <span className={styles.skill}>Node.js</span>
-                </div>
-              </div>
-
-              <div className={styles.skillCategory}>
-                <h3 className={styles.skillCategoryTitle}>Cloud & DevOps</h3>
-                <div className={styles.skillList}>
-                  <span className={styles.skill}>AWS</span>
-                  <span className={styles.skill}>Docker</span>
-                  <span className={styles.skill}>Git</span>
-                  <span className={styles.skill}>CI/CD</span>
-                </div>
-              </div>
-
-              <div className={styles.skillCategory}>
-                <h3 className={styles.skillCategoryTitle}>Databases</h3>
-                <div className={styles.skillList}>
-                  <span className={styles.skill}>PostgreSQL</span>
-                  <span className={styles.skill}>MongoDB</span>
-                  <span className={styles.skill}>MySQL</span>
-                  <span className={styles.skill}>Redis</span>
-                </div>
-              </div>
-            </div>
-          </div>
+      <section className={`${styles.body} grain`}>
+        <div className={styles.copyCol}>
+          <p className={styles.wayfindingDark}>BACKGROUND</p>
+          <h2 className={styles.sectionTitle}>The short version</h2>
+          <p>
+            Master&apos;s in Data Science at Monash University. Technology
+            background from JNTU Kakinada. AWS Machine Learning and Cloud
+            Foundations certified. I live at the intersection of analysis and
+            shipping software.
+          </p>
+          <p>
+            Day to day that means local AI agents at Zelo, ML work that
+            survives contact with messy data, and full-stack builds when the
+            interface matters as much as the model.
+          </p>
+          <p>
+            Outside the terminal: music, photography instincts, and a soft spot
+            for architecture that doesn&apos;t apologize for itself.
+          </p>
+          <Link href="/contact" className={styles.cta}>
+            Work with me
+          </Link>
         </div>
-      </div>
-    </main>
+        <aside className={styles.aside}>
+          <div className={styles.stat}>
+            <span className={styles.statNum}>MEL</span>
+            <span className={styles.statLabel}>Based</span>
+          </div>
+          <div className={`${styles.stat} ${styles.statRust}`}>
+            <span className={styles.statNum}>MDS</span>
+            <span className={styles.statLabel}>Monash</span>
+          </div>
+          <div className={`${styles.stat} ${styles.statSky}`}>
+            <span className={styles.statNum}>AI</span>
+            <span className={styles.statLabel}>Focus</span>
+          </div>
+        </aside>
+      </section>
+
+      <section className={`${styles.skills} grain`}>
+        <p className={styles.wayfinding}>TOOLKIT</p>
+        <h2 className={styles.sectionTitleLight}>Materials I work with</h2>
+        <div className={styles.skillGrid}>
+          {stacks.map((stack, i) => (
+            <article
+              key={stack.title}
+              className={`${styles.skillBlock} ${
+                i % 2 === 1 ? styles.skillShift : ''
+              }`}
+            >
+              <h3>{stack.title}</h3>
+              <ul>
+                {stack.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
   );
-} 
+}

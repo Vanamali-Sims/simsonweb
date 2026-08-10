@@ -1,32 +1,35 @@
+import Link from 'next/link';
+import styles from './Footer.module.css';
+
 export default function Footer() {
   return (
-    <footer className="relative z-10 py-12">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <div className="text-sm text-gray-500">
-            © {new Date().getFullYear()} Vanamali Sims.
-          </div>
-          
-          <div className="flex space-x-8">
-            <a
-              href="https://github.com/Vanamali-Sims"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-gray-400 hover:text-white transition-colors"
-            >
-              github
-            </a>
-            <a
-              href="https://www.linkedin.com/in/van-sims"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-gray-400 hover:text-white transition-colors"
-            >
-              linkedin
-            </a>
-          </div>
-        </div>
+    <footer className={styles.footer}>
+      <div className={`${styles.block} ${styles.meta}`}>
+        <p className={styles.sign}>VS / {new Date().getFullYear()}</p>
+        <p className={styles.copy}>Melbourne · Built like a building.</p>
+      </div>
+
+      <div className={`${styles.block} ${styles.links}`}>
+        <a
+          href="https://github.com/Vanamali-Sims"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
+          GitHub
+        </a>
+        <a
+          href="https://www.linkedin.com/in/van-sims"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
+          LinkedIn
+        </a>
+        <Link href="/contact" className={styles.link}>
+          Contact
+        </Link>
       </div>
     </footer>
-  )
-} 
+  );
+}
