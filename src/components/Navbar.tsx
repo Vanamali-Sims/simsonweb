@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import LearningRateBar from './LearningRateBar';
 import styles from './Navbar.module.css';
 
 const links = [
@@ -65,6 +66,8 @@ export default function Navbar() {
           </Link>
         ))}
       </div>
+
+      <LearningRateBar />
     </header>
   );
 }

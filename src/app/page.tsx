@@ -2,6 +2,9 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import ConceptVisual from '@/components/ConceptVisuals';
+import SectionBeatHeader from '@/components/SectionBeat';
+import { heroBeat, sectionBeats } from '@/data/sectionBeats';
 import styles from './page.module.css';
 
 const projects = [
@@ -76,6 +79,23 @@ const roles = [
   },
 ];
 
+const lessons = [
+  {
+    title: 'Shipped ugly, learned faster',
+    text: 'The model that generalized was never the prettiest fit on the training set.',
+  },
+  {
+    title: 'Hold out a real world',
+    text: 'If it only works on the notebook, it doesn\'t work. New points are the point.',
+  },
+  {
+    title: 'Taste is a regularizer',
+    text: 'Constraints — time, clarity, honesty — keep the system from memorizing noise.',
+  },
+];
+
+const byId = Object.fromEntries(sectionBeats.map((b) => [b.id, b]));
+
 export default function Home() {
   const [filter, setFilter] = useState<(typeof filters)[number]['id']>('all');
   const visible =
@@ -83,50 +103,53 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      {/* HERO — sky blue volume */}
-      <section className={`${styles.hero} grain`}>
-        <div className={styles.heroSky}>
-          <p className={styles.wayfinding}>01 / MELBOURNE</p>
-          <h1 className={styles.brand}>
-            Vanamali
-            <br />
-            <span>Sims</span>
+      {/* HERO — loud poppy: Rocky + Occam */}
+      <section className={`${styles.heroBanner} grain`}>
+        <div className={styles.heroMain}>
+          <p className={styles.bannerTag}>Motivation, backed by data</p>
+          <h1 className={styles.bannerQuote}>
+            “{heroBeat.primaryLyric}”
           </h1>
-          <p className={styles.lede}>
-            Data scientist &amp; software developer. I build systems that hold
-            weight — AI products, analysis pipelines, and tools meant to ship.
+          <p className={styles.bannerCredit}>— {heroBeat.primaryCredit}</p>
+        </div>
+        <div className={styles.occamPanel}>
+          <p className={styles.conceptChip}>{heroBeat.concept}</p>
+          <ConceptVisual id="occam" />
+          <p className={styles.occamGloss}>{heroBeat.gloss}</p>
+        </div>
+      </section>
+
+      {/* Soft beat — Skegss, dappled cream */}
+      <section className={`${styles.softBeat} grain`}>
+        <div className={styles.dapple} aria-hidden="true" />
+        <div className={styles.softInner}>
+          <p className={styles.wayfindingDark}>01 / PERSON</p>
+          <blockquote className={styles.softLyric}>
+            <p>“{heroBeat.softLyric}”</p>
+            <cite>— {heroBeat.softCredit}</cite>
+          </blockquote>
+          <h2 className={styles.softName}>
+            Vanamali <span>Sims</span>
+          </h2>
+          <p className={styles.softLede}>
+            Data scientist &amp; software developer in Melbourne. I build
+            systems that hold weight — AI products, analysis pipelines, and
+            tools meant to ship.
           </p>
           <div className={styles.ctaRow}>
             <a href="#work" className={styles.ctaPrimary}>
               See the work
             </a>
-            <Link href="/contact" className={styles.ctaGhost}>
+            <Link href="/contact" className={styles.ctaGhostDark}>
               Get in touch
             </Link>
           </div>
         </div>
-        <div className={styles.heroCantilever}>
-          <div className={styles.cubeMustard}>
-            <span className={styles.bigNum}>DS</span>
-            <span className={styles.cubeLabel}>Science</span>
-          </div>
-          <div className={styles.cubeRust}>
-            <span className={styles.bigNum}>AI</span>
-            <span className={styles.cubeLabel}>Systems</span>
-          </div>
-          <div className={styles.cubeCream}>
-            <span className={styles.bigNum}>FS</span>
-            <span className={styles.cubeLabel}>Build</span>
-          </div>
-        </div>
       </section>
 
-      {/* NOW — mustard tiled volume */}
-      <section className={`${styles.now} grain`}>
-        <div className={styles.nowHead}>
-          <p className={styles.wayfindingDark}>02 / NOW</p>
-          <h2 className={styles.sectionTitle}>Currently in the studio</h2>
-        </div>
+      {/* PROCESS — gradient descent */}
+      <section id="process" className={`${styles.process} grain`}>
+        <SectionBeatHeader beat={byId.process} tone="dark" />
         <div className={styles.nowGrid}>
           <article className={styles.nowBlock}>
             <span className={styles.nowIndex}>A</span>
@@ -145,16 +168,12 @@ export default function Home() {
             </p>
           </article>
         </div>
-        <div className={styles.dapple} aria-hidden="true" />
       </section>
 
-      {/* WORK — cream with poppy reveals */}
+      {/* WORK — signal vs noise */}
       <section id="work" className={`${styles.work} grain`}>
-        <div className={styles.workHead}>
-          <div>
-            <p className={styles.wayfindingDark}>03 / WORK</p>
-            <h2 className={styles.sectionTitle}>Selected volumes</h2>
-          </div>
+        <SectionBeatHeader beat={byId.work} tone="cream" />
+        <div className={styles.workTools}>
           <div className={styles.filters} role="tablist" aria-label="Filter projects">
             {filters.map((f) => (
               <button
@@ -201,12 +220,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* LORE — rust facade */}
-      <section id="lore" className={`${styles.lore} grain`}>
-        <div className={styles.loreHead}>
-          <p className={styles.wayfinding}>04 / LORE</p>
-          <h2 className={styles.sectionTitleLight}>Experience</h2>
+      {/* LESSONS — overfitting */}
+      <section id="lessons" className={`${styles.lessons} grain`}>
+        <SectionBeatHeader beat={byId.lessons} tone="light" />
+        <div className={styles.lessonGrid}>
+          {lessons.map((item, i) => (
+            <article
+              key={item.title}
+              className={`${styles.lesson} ${i === 1 ? styles.lessonShift : ''}`}
+            >
+              <span className={styles.lessonNum}>0{i + 1}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
         </div>
+      </section>
+
+      {/* LORE / BALANCE — bias-variance */}
+      <section id="lore" className={`${styles.lore} grain`}>
+        <SectionBeatHeader beat={byId.balance} tone="light" />
         <div className={styles.loreStack}>
           {roles.map((item, i) => (
             <article
@@ -225,12 +258,10 @@ export default function Home() {
         <div className={styles.stairShadow} aria-hidden="true" />
       </section>
 
-      {/* CONTACT STRIP — concrete */}
+      {/* CONTACT STRIP */}
       <section className={`${styles.strip} grain`}>
-        <p className={styles.wayfindingDark}>05 / NEXT</p>
-        <h2 className={styles.stripTitle}>
-          Got a problem worth solving?
-        </h2>
+        <p className={styles.wayfindingDark}>NEXT / CONVERGENCE</p>
+        <h2 className={styles.stripTitle}>Got a problem worth solving?</h2>
         <Link href="/contact" className={styles.stripCta}>
           Start a conversation
         </Link>
