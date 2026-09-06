@@ -9,45 +9,35 @@ import styles from './page.module.css';
 
 const projects = [
   {
-    title: 'Mira',
-    blurb: 'AI mental wellness — FastAPI + React with personalized journaling and tasks.',
-    tags: ['FastAPI', 'React', 'GPT', 'PostgreSQL'],
-    url: 'https://github.com/Vanamali-Sims/Mira',
+    title: 'Fishing Grounds Recsys',
+    blurb:
+      'Implicit ALS on AIS tracks: vessels × ocean cells, fishing hours as confidence — not ratings. Same factors recommend MPA-legal grounds, flag IUU-like outliers, and forecast seasonal effort. ~20× a popularity baseline.',
+    tags: ['Implicit ALS', 'Geospatial', 'FastAPI', 'React'],
+    url: 'https://github.com/Vanamali-Sims/fishing-grounds-recsys',
+    cat: 'science',
+  },
+  {
+    title: 'Cloud Stability Map',
+    blurb:
+      'Not cloudy-or-sunny — a stability score for where Melbourne light will hold still. Contour bands over the city, live 1/3/6-hour windows, ranked shoot spots.',
+    tags: ['deck.gl', 'MapLibre', 'Open-Meteo', 'React'],
+    url: 'https://github.com/Vanamali-Sims/cloudyorNot',
     cat: 'product',
   },
   {
-    title: 'excuseMe.ai',
-    blurb: 'Apology generator that swings witty, heartfelt, or dramatic on demand.',
-    tags: ['Python', 'Streamlit', 'LLM'],
-    url: 'https://github.com/Vanamali-Sims/excuseMe',
-    cat: 'product',
-  },
-  {
-    title: 'Human × Chimp Brain',
-    blurb: 'RNA-Seq differential expression across human and chimpanzee brain tissue.',
-    tags: ['Bioinformatics', 'Python', 'Jupyter'],
-    url: 'https://github.com/Vanamali-Sims/m-a-b-chimp',
+    title: 'Melbourne Footfall',
+    blurb:
+      'Hourly CBD pedestrian forecasts by precinct — sensors joined to weather, calendar, and land use. Measures how each street recovered after lockdowns, not a citywide average.',
+    tags: ['LightGBM', 'Time series', 'dbt', 'Tableau'],
+    url: 'https://github.com/Vanamali-Sims/howMelbMoves',
     cat: 'science',
   },
   {
-    title: 'Disaster Predictors',
-    blurb: 'ML models for earthquakes and forest fires with real-time data hooks.',
-    tags: ['Python', 'ML'],
-    url: 'https://github.com/Vanamali-Sims/Disaster-predictor-models',
-    cat: 'science',
-  },
-  {
-    title: 'Customer Churn',
-    blurb: 'Predictive churn analysis with full EDA and model evaluation.',
-    tags: ['Python', 'Analytics'],
-    url: 'https://github.com/Vanamali-Sims/Customer-Churn-Analysis',
-    cat: 'science',
-  },
-  {
-    title: 'RSS Reader',
-    blurb: 'TypeScript feed parser — fetch, validate, and persist RSS payloads.',
-    tags: ['TypeScript', 'APIs'],
-    url: 'https://github.com/Vanamali-Sims/Rss_Reader',
+    title: 'Motion Console',
+    blurb:
+      'Webcam swipe launcher. Optical flow watches a gesture band above the keyboard; while armed, a horizontal swipe opens an app. The whole UI is an ON/OFF button.',
+    tags: ['Python', 'OpenCV', 'Computer Vision'],
+    url: 'https://github.com/Vanamali-Sims/mdither_console',
     cat: 'product',
   },
 ];
