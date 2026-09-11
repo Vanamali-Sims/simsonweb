@@ -37,12 +37,6 @@ export const metadata: Metadata = {
     "Zelo",
   ],
   authors: [{ name: "Vanamali Sims" }],
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-  },
 };
 
 export default function RootLayout({
