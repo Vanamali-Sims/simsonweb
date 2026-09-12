@@ -1,9 +1,9 @@
 .frame {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   width: 100%;
   overflow: hidden;
-  background: color-mix(in srgb, var(--ink) 8%, var(--paper));
+  background: color-mix(in srgb, var(--ink) 10%, var(--paper));
   border-bottom: 1px solid var(--hairline);
 }
 
@@ -11,7 +11,8 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center top;
 }
 
 .placeholder {

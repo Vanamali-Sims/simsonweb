@@ -32,6 +32,9 @@ export default function WorkCase({ params }: { params: { slug: string } }) {
   return (
     <article className={styles.page} aria-labelledby="case-title">
       <header className={`${styles.hero} grain`}>
+        <Link href="/#work" className={styles.backTop}>
+          ← All work
+        </Link>
         <p className={styles.wayfinding}>WORK / CASE</p>
         <p className={styles.metric}>
           {project.metric ?? 'TODO — outcome metric'}
@@ -65,19 +68,31 @@ export default function WorkCase({ params }: { params: { slug: string } }) {
           </ul>
         </section>
 
-        <a
-          href={project.repo}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.repo}
-        >
-          View the repository
-          <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
-        </a>
-
-        <Link href="/#work" className={styles.back}>
-          All work
-        </Link>
+        <div className={styles.actions}>
+          {project.live ? (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.live}
+            >
+              Open live site
+              <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
+            </a>
+          ) : null}
+          <a
+            href={project.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={project.live ? styles.back : styles.repo}
+          >
+            View the repository
+            <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
+          </a>
+          <Link href="/#work" className={styles.back}>
+            ← All work
+          </Link>
+        </div>
       </div>
     </article>
   );

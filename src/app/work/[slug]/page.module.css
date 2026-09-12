@@ -17,8 +17,23 @@
 
 .hero {
   position: relative;
-  padding: clamp(3rem, 8vw, 5.5rem) clamp(1.25rem, 4vw, 4rem) 2rem;
+  padding: clamp(2rem, 5vw, 3.25rem) clamp(1.25rem, 4vw, 4rem) 1.5rem;
   overflow: hidden;
+}
+
+.backTop {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin-bottom: 1.1rem;
+  color: var(--ember-deep);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .metric {
@@ -35,11 +50,11 @@
 .title {
   position: relative;
   z-index: 2;
-  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-size: clamp(2rem, 5vw, 3.1rem);
   letter-spacing: -0.05em;
-  line-height: 0.92;
-  max-width: 16ch;
-  margin-bottom: 1.25rem;
+  line-height: 0.95;
+  max-width: 18ch;
+  margin-bottom: 1rem;
 }
 
 .lede {
@@ -103,43 +118,53 @@
   text-transform: uppercase;
 }
 
-.repo {
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.live,
+.repo,
+.back {
   display: inline-block;
-  margin-top: 1rem;
-  padding: 0.95rem 1.35rem;
-  background: var(--ink);
-  color: var(--paper);
+  padding: 0.85rem 1.25rem;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.85rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  box-shadow: 8px 8px 0 0 var(--ember);
   transition:
     transform var(--dur) var(--ease-struct),
     box-shadow var(--dur) var(--ease-struct);
 }
 
+.live,
+.repo {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 8px 8px 0 0 var(--ember);
+}
+
+.live:hover,
 .repo:hover {
   transform: translate(-3px, -3px);
   box-shadow: 12px 12px 0 0 var(--ember);
 }
 
 .back {
-  display: inline-block;
-  margin-top: 2rem;
-  color: var(--ember-deep);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 0 var(--ember);
 }
 
 @media (hover: none) {
-  .repo:hover {
+  .live:hover,
+  .repo:hover,
+  .back:hover {
     transform: none;
   }
 }
@@ -152,7 +177,7 @@
   }
 
   .title {
-    font-size: clamp(2.2rem, 12vw, 3.2rem);
+    font-size: clamp(1.85rem, 9vw, 2.5rem);
   }
 
   .media {
@@ -161,8 +186,14 @@
     box-shadow: 6px 6px 0 0 var(--ink);
   }
 
-  .repo {
-    display: block;
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .live,
+  .repo,
+  .back {
     text-align: center;
   }
 }

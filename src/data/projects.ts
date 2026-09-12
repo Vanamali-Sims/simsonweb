@@ -6,6 +6,7 @@ export type Project = {
   blurb: string;
   tags: string[];
   repo: string;
+  live?: string;
   cat: ProjectCategory;
   image: string;
   imageAlt: string;
@@ -25,6 +26,7 @@ export const projects: Project[] = [
       'Implicit ALS on AIS tracks: vessels × ocean cells, fishing hours as confidence — not ratings.',
     tags: ['Implicit ALS', 'DuckDB', 'FastAPI', 'React'],
     repo: 'https://github.com/Vanamali-Sims/fishing-grounds-recsys',
+    live: 'https://fishing-grounds-recsys.onrender.com/',
     cat: 'science',
     image: '/projects/fishing-grounds.png',
     imageAlt:
@@ -46,6 +48,7 @@ export const projects: Project[] = [
       'A stability score for where Melbourne light will hold still, with live 1/3/6-hour windows and ranked shoot spots.',
     tags: ['TypeScript', 'deck.gl', 'MapLibre', 'React'],
     repo: 'https://github.com/Vanamali-Sims/cloudyorNot',
+    live: 'https://cloudyornot.pages.dev/',
     cat: 'product',
     image: '/projects/cloud-stability.png',
     imageAlt:
@@ -108,6 +111,7 @@ export const projects: Project[] = [
       'Victorian VPP advisor: on-device savings, vendor recommendations, a chatbot, and personalised alerts. Built to WCAG AA.',
     tags: ['React', 'TypeScript', 'FastAPI', 'Terraform'],
     repo: 'https://github.com/Vanamali-Sims/myPowerPlant',
+    live: 'https://d3rvyrwejm3499.cloudfront.net/',
     cat: 'product',
     image: '/projects/my-power-plant.png',
     imageAlt:

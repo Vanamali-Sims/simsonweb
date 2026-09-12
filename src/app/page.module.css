@@ -38,8 +38,8 @@
 
 .sectionTitle,
 .sectionTitleOnInk {
-  font-size: clamp(2.2rem, 6vw, 4rem);
-  max-width: 14ch;
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  max-width: 22ch;
 }
 
 .sectionTitleOnInk {
@@ -51,7 +51,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  min-height: calc(100svh - var(--nav-h));
   background: var(--ink);
   color: var(--paper);
   overflow: hidden;
@@ -61,15 +60,15 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: clamp(1.5rem, 4vh, 3.5rem) clamp(1.25rem, 4vw, 4rem);
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 4rem);
   max-width: 68rem;
 }
 
 .heroName {
-  font-size: clamp(2.6rem, 8vw, 5.2rem);
+  font-size: clamp(2.1rem, 5vw, 3.15rem);
   letter-spacing: -0.05em;
-  line-height: 0.9;
-  margin-bottom: 1rem;
+  line-height: 0.92;
+  margin-bottom: 0.85rem;
 }
 
 .heroName span {
@@ -161,7 +160,7 @@
   position: relative;
   background: var(--paper);
   color: var(--ink);
-  padding: clamp(3.5rem, 9vw, 7rem) clamp(1.25rem, 4vw, 4rem);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 4rem);
 }
 
 .workTools {
@@ -265,16 +264,15 @@
 }
 
 .projectBody {
-  padding: 1.35rem 1.4rem 1.5rem;
+  padding: 1.1rem 1.2rem 1.25rem;
   display: flex;
   flex-direction: column;
-  min-height: 220px;
 }
 
 .projectMetric {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
   letter-spacing: -0.04em;
   line-height: 1.1;
   color: var(--ember);
@@ -282,8 +280,8 @@
 }
 
 .projectBody h3 {
-  font-size: 1.45rem;
-  margin-bottom: 0.6rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.45rem;
 }
 
 .projectBody p:not(.projectMetric) {
@@ -314,7 +312,7 @@
   position: relative;
   background: var(--ink);
   color: var(--paper);
-  padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 4vw, 4rem);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 4rem);
   overflow: hidden;
 }
 
@@ -373,8 +371,8 @@
 }
 
 .role h3 {
-  font-size: 1.55rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  margin-bottom: 0.45rem;
 }
 
 .role p {
@@ -429,7 +427,7 @@
   position: relative;
   background: var(--paper);
   color: var(--ink);
-  padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 4vw, 4rem);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 4rem);
 }
 
 .aboutGrid {
@@ -484,7 +482,7 @@
   position: relative;
   background: var(--paper);
   color: var(--ink);
-  padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 4vw, 4rem);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 4rem);
 }
 
 .contactGrid {
@@ -510,7 +508,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 1.25rem;
-  min-height: 150px;
+  min-height: 120px;
   padding: 1.35rem 1.25rem;
   background: var(--paper);
   border: 1px solid var(--hairline);
@@ -572,7 +570,7 @@ button.contactCard:hover {
   }
 
   .heroName {
-    font-size: clamp(2.4rem, 14vw, 3.4rem);
+    font-size: clamp(1.9rem, 10vw, 2.5rem);
   }
 
   .chips {
