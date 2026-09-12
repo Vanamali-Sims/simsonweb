@@ -1,4 +1,5 @@
 import ProjectImage from '@/components/ProjectImage';
+import VisuallyHidden from '@/components/VisuallyHidden';
 import { getProject, projects } from '@/data/projects';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -29,13 +30,15 @@ export default function WorkCase({ params }: { params: { slug: string } }) {
   ];
 
   return (
-    <article className={styles.page}>
+    <article className={styles.page} aria-labelledby="case-title">
       <header className={`${styles.hero} grain`}>
         <p className={styles.wayfinding}>WORK / CASE</p>
         <p className={styles.metric}>
           {project.metric ?? 'TODO — outcome metric'}
         </p>
-        <h1 className={styles.title}>{project.title}</h1>
+        <h1 id="case-title" className={styles.title}>
+          {project.title}
+        </h1>
         <p className={styles.lede}>{project.blurb}</p>
       </header>
 
@@ -68,11 +71,12 @@ export default function WorkCase({ params }: { params: { slug: string } }) {
           rel="noopener noreferrer"
           className={styles.repo}
         >
-          View the repository →
+          View the repository
+          <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
         </a>
 
         <Link href="/#work" className={styles.back}>
-          ← All work
+          All work
         </Link>
       </div>
     </article>

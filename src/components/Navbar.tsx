@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { CV_PATH } from '@/data/site';
 import styles from './Navbar.module.css';
 
@@ -16,6 +16,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [mobile, setMobile] = useState<boolean | null>(null);
+  const menuId = useId();
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)');
@@ -28,32 +29,46 @@ export default function Navbar() {
     return () => mq.removeEventListener('change', apply);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  const isActive = (path: string) => {
+    if (path === '/about') return pathname === '/about';
+    if (path === '/#work') return pathname === '/' || pathname.startsWith('/work/');
+    return false;
+  };
+
   return (
     <header className={styles.bar}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.brand} onClick={() => setOpen(false)}>
-          <span className={styles.mark}>VS</span>
+        <Link
+          href="/"
+          className={styles.brand}
+          onClick={() => setOpen(false)}
+        >
+          <span className={styles.mark} aria-hidden="true">
+            VS
+          </span>
           <span className={styles.brandName}>Vanamali Sims</span>
         </Link>
 
         <nav className={styles.desktop} aria-label="Primary">
-          {links.map((link) => {
-            const active =
-              link.path === '/about'
-                ? pathname === '/about'
-                : link.path === '/#work'
-                  ? pathname === '/' || pathname.startsWith('/work/')
-                  : false;
-            return (
-              <Link
-                key={link.path}
-                href={link.path}
-                className={`${styles.link} ${active ? styles.active : ''}`}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
+          {links.map((link) => (
+            <Link
+              key={link.path}
+              href={link.path}
+              className={`${styles.link} ${isActive(link.path) ? styles.active : ''}`}
+              aria-current={isActive(link.path) ? 'page' : undefined}
+            >
+              {link.name}
+            </Link>
+          ))}
           <a href={CV_PATH} download className={styles.cv}>
             Download CV
           </a>
@@ -63,36 +78,44 @@ export default function Navbar() {
           <button
             className={`${styles.burger} ${open ? styles.burgerOpen : ''}`}
             onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
+            aria-controls={menuId}
           >
-            <span />
-            <span />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
           </button>
         )}
       </div>
 
       {mobile !== false && (
-      <div className={`${styles.drawer} ${open ? styles.drawerOpen : ''}`}>
-        {links.map((link) => (
-          <Link
-            key={link.path}
-            href={link.path}
-            className={styles.drawerLink}
-            onClick={() => setOpen(false)}
-          >
-            {link.name}
-          </Link>
-        ))}
-        <a
-          href={CV_PATH}
-          download
-          className={styles.drawerCv}
-          onClick={() => setOpen(false)}
+        <div
+          id={menuId}
+          className={`${styles.drawer} ${open ? styles.drawerOpen : ''}`}
+          hidden={!open}
         >
-          Download CV
-        </a>
-      </div>
+          <nav aria-label="Mobile">
+            {links.map((link) => (
+              <Link
+                key={link.path}
+                href={link.path}
+                className={styles.drawerLink}
+                aria-current={isActive(link.path) ? 'page' : undefined}
+                onClick={() => setOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+            <a
+              href={CV_PATH}
+              download
+              className={styles.drawerCv}
+              onClick={() => setOpen(false)}
+            >
+              Download CV
+            </a>
+          </nav>
+        </div>
       )}
     </header>
   );

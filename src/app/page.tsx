@@ -2,6 +2,7 @@
 
 import EmailLink, { EmailAddress } from '@/components/EmailLink';
 import ProjectImage from '@/components/ProjectImage';
+import VisuallyHidden from '@/components/VisuallyHidden';
 import { projects } from '@/data/projects';
 import {
   aboutShort,
@@ -29,14 +30,14 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <section className={`${styles.hero} grain`}>
+      <section className={`${styles.hero} grain`} aria-labelledby="hero-name">
         <div className={styles.heroInner}>
           <p className={styles.wayfindingOnInk}>01 / PERSON</p>
-          <h1 className={styles.heroName}>
+          <h1 id="hero-name" className={styles.heroName}>
             Vanamali <span>Sims</span>
           </h1>
           <p className={styles.heroLede}>{positioning}</p>
-          <ul className={styles.chips}>
+          <ul className={styles.chips} aria-label="Highlights">
             {proofChips.map((chip) => (
               <li key={chip}>{chip}</li>
             ))}
@@ -52,19 +53,26 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="work" className={`${styles.work} grain`}>
+      <section
+        id="work"
+        className={`${styles.work} grain`}
+        aria-labelledby="work-heading"
+        tabIndex={-1}
+      >
         <header className={styles.sectionHead}>
           <p className={styles.eyebrow}>Signal vs. noise</p>
           <p className={styles.wayfinding}>02 / WORK</p>
-          <h2 className={styles.sectionTitle}>Selected work</h2>
+          <h2 id="work-heading" className={styles.sectionTitle}>
+            Selected work
+          </h2>
         </header>
         <div className={styles.workTools}>
-          <div className={styles.filters} role="tablist" aria-label="Filter projects">
+          <div className={styles.filters} role="group" aria-label="Filter projects">
             {filters.map((f) => (
               <button
                 key={f.id}
-                role="tab"
-                aria-selected={filter === f.id}
+                type="button"
+                aria-pressed={filter === f.id}
                 className={`${styles.filter} ${
                   filter === f.id ? styles.filterActive : ''
                 }`}
@@ -76,6 +84,10 @@ export default function Home() {
           </div>
         </div>
 
+        <p className="sr-only" aria-live="polite">
+          Showing {visible.length} {visible.length === 1 ? 'project' : 'projects'}
+        </p>
+
         <div className={styles.projectGrid}>
           {visible.map((project, i) => (
             <Link
@@ -85,14 +97,18 @@ export default function Home() {
                 i % 3 === 1 ? styles.projectShift : ''
               } ${i % 3 === 2 ? styles.projectHang : ''}`}
             >
-              <ProjectImage src={project.image} alt={project.imageAlt} />
+              <ProjectImage
+                src={project.image}
+                alt={project.imageAlt}
+                decorative
+              />
               <div className={styles.projectBody}>
                 <p className={styles.projectMetric}>
                   {project.metric ?? 'TODO — outcome metric'}
                 </p>
                 <h3>{project.title}</h3>
                 <p>{project.blurb}</p>
-                <div className={styles.tags}>
+                <div className={styles.tags} aria-label="Technologies">
                   {project.tags.map((t) => (
                     <span key={t}>{t}</span>
                   ))}
@@ -103,11 +119,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="experience" className={`${styles.experience} grain`}>
+      <section
+        id="experience"
+        className={`${styles.experience} grain`}
+        aria-labelledby="experience-heading"
+        tabIndex={-1}
+      >
         <header className={styles.sectionHead}>
           <p className={styles.eyebrowOnInk}>Bias–variance tradeoff</p>
           <p className={styles.wayfindingOnInk}>03 / EXPERIENCE</p>
-          <h2 className={styles.sectionTitleOnInk}>Experience</h2>
+          <h2 id="experience-heading" className={styles.sectionTitleOnInk}>
+            Experience
+          </h2>
         </header>
         <div className={styles.loreStack}>
           {roles.map((item, i) => (
@@ -126,7 +149,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="stack" className={styles.stack} aria-label="Stack">
+      <section id="stack" className={styles.stack} aria-labelledby="stack-heading">
+        <h2 id="stack-heading" className="sr-only">
+          Stack
+        </h2>
         <p className={styles.eyebrow}>Gradient descent</p>
         <div className={styles.stackStrip}>
           {stacks.map((group) => (
@@ -138,11 +164,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about" className={`${styles.about} grain`}>
+      <section
+        id="about"
+        className={`${styles.about} grain`}
+        aria-labelledby="about-heading"
+        tabIndex={-1}
+      >
         <header className={styles.sectionHead}>
           <p className={styles.eyebrow}>Overfitting vs. generalization</p>
           <p className={styles.wayfinding}>04 / ABOUT</p>
-          <h2 className={styles.sectionTitle}>The short version</h2>
+          <h2 id="about-heading" className={styles.sectionTitle}>
+            The short version
+          </h2>
         </header>
         <div className={styles.aboutGrid}>
           <div className={styles.aboutCopy}>
@@ -150,7 +183,7 @@ export default function Home() {
               <p key={sentence}>{sentence}</p>
             ))}
             <Link href="/about" className={styles.textLink}>
-              Full story →
+              Full story
             </Link>
           </div>
           <div
@@ -161,10 +194,17 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className={`${styles.contact} grain`}>
+      <section
+        id="contact"
+        className={`${styles.contact} grain`}
+        aria-labelledby="contact-heading"
+        tabIndex={-1}
+      >
         <header className={styles.sectionHead}>
           <p className={styles.wayfinding}>CONTACT / 05</p>
-          <h2 className={styles.sectionTitle}>Got a problem worth solving?</h2>
+          <h2 id="contact-heading" className={styles.sectionTitle}>
+            Got a problem worth solving?
+          </h2>
         </header>
         <div className={styles.contactGrid}>
           <EmailLink className={styles.contactCard}>
@@ -183,6 +223,7 @@ export default function Home() {
           >
             <span className={styles.contactLabel}>LinkedIn</span>
             <span className={styles.contactValue}>van-sims</span>
+            <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
           </a>
           <a
             href={social.github}
@@ -192,6 +233,7 @@ export default function Home() {
           >
             <span className={styles.contactLabel}>GitHub</span>
             <span className={styles.contactValue}>Vanamali-Sims</span>
+            <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
           </a>
           <a href={CV_PATH} download className={styles.contactCard}>
             <span className={styles.contactLabel}>CV</span>

@@ -84,7 +84,7 @@
   box-shadow: 6px 6px 0 0 var(--ember);
   margin: 10px 12px;
   padding: 0 1rem;
-  min-height: 40px;
+  min-height: 44px;
 }
 
 .cv:hover {
@@ -126,12 +126,18 @@
   max-height: 0;
   overflow: hidden;
   background: var(--ink);
+  visibility: hidden;
   transition: max-height var(--dur) var(--ease-struct);
 }
 
 .drawerOpen {
   max-height: 360px;
+  visibility: visible;
   border-bottom: 2px solid var(--hairline-on-ink);
+}
+
+.drawer[hidden] {
+  display: none;
 }
 
 .drawerLink,

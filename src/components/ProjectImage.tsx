@@ -6,9 +6,11 @@ import styles from './ProjectImage.module.css';
 type Props = {
   src: string;
   alt: string;
+  /** Set when the image sits inside a control that already names the project. */
+  decorative?: boolean;
 };
 
-export default function ProjectImage({ src, alt }: Props) {
+export default function ProjectImage({ src, alt, decorative = false }: Props) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -30,9 +32,18 @@ export default function ProjectImage({ src, alt }: Props) {
   return (
     <div className={styles.frame}>
       {loaded ? (
-        <img src={src} alt={alt} className={styles.img} />
+        <img
+          src={src}
+          alt={decorative ? '' : alt}
+          className={styles.img}
+        />
       ) : (
-        <div className={styles.placeholder} role="img" aria-label={alt} />
+        <div
+          className={styles.placeholder}
+          aria-hidden={decorative || undefined}
+          role={decorative ? undefined : 'img'}
+          aria-label={decorative ? undefined : alt}
+        />
       )}
     </div>
   );

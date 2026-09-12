@@ -6,12 +6,12 @@
   --paper: #f2eee5;
   --ink: #14243d;
   --ember: #c24a18;
-  /* Ember darkened with ink so small labels hit 4.5:1 on --paper (~6.2:1) */
-  --ember-deep: color-mix(in srgb, var(--ember) 70%, var(--ink));
-  /* ~70% ink mixed toward paper — 5.5:1 on --paper */
-  --muted: color-mix(in srgb, var(--ink) 70%, var(--paper));
-  /* Secondary type on ink — ≥4.5:1 on --ink */
-  --muted-on-ink: color-mix(in srgb, var(--paper) 72%, var(--ink));
+  /* Solid mix of ember + ink; 6.2:1 on --paper — use for small ember text */
+  --ember-deep: #8e3f23;
+  /* 70% ink / 30% paper; 5.5:1 on --paper */
+  --muted: #57616f;
+  /* Warm paper-tint; ≥7:1 on --ink */
+  --muted-on-ink: #c4bfb4;
   --hairline: color-mix(in srgb, var(--ink) 18%, transparent);
   --hairline-on-ink: color-mix(in srgb, var(--paper) 18%, transparent);
 
@@ -34,6 +34,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-h) + 12px);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -76,13 +77,15 @@
     cursor: pointer;
   }
 
+  /* Dual-tone ring: visible on both --paper and --ink (1.4.11, 2.4.7) */
   :focus-visible {
-    outline: 2px solid var(--ember);
+    outline: 3px solid var(--ink);
     outline-offset: 3px;
+    box-shadow: 0 0 0 6px var(--paper);
   }
 
   ::selection {
-    background: var(--ember);
+    background: var(--ember-deep);
     color: var(--paper);
   }
 
@@ -97,17 +100,75 @@
   ::-webkit-scrollbar-thumb {
     background: var(--ink);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 @layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 100;
+    padding: 0.75rem 1.1rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    box-shadow: 6px 6px 0 0 var(--ember);
+    transform: translateY(-180%);
+  }
+
+  .skip-link:focus,
+  .skip-link:focus-visible {
+    transform: none;
+  }
+
+  .grain {
+    isolation: isolate;
+  }
+
   .grain::after {
     content: "";
     position: absolute;
     inset: 0;
     background-image: var(--grain);
-    opacity: 0.12;
+    opacity: 0.08;
     mix-blend-mode: multiply;
     pointer-events: none;
+    z-index: 0;
+  }
+
+  .grain > * {
+    position: relative;
     z-index: 1;
   }
 

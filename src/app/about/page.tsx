@@ -36,9 +36,9 @@ export const metadata = {
 export default function About() {
   return (
     <div className={styles.page}>
-      <section className={`${styles.hero} grain`}>
+      <section className={`${styles.hero} grain`} aria-labelledby="about-title">
         <p className={styles.wayfindingOnInk}>ABOUT / 01</p>
-        <h1 className={styles.title}>
+        <h1 id="about-title" className={styles.title}>
           Built in
           <br />
           daylight.
@@ -50,9 +50,11 @@ export default function About() {
         </div>
       </section>
 
-      <section className={`${styles.materials} grain`}>
+      <section className={`${styles.materials} grain`} aria-labelledby="materials-heading">
         <p className={styles.wayfinding}>TOOLKIT</p>
-        <h2 className={styles.sectionTitle}>Materials I work with</h2>
+        <h2 id="materials-heading" className={styles.sectionTitle}>
+          Materials I work with
+        </h2>
         <div className={styles.skillGrid}>
           {stacks.map((stack, i) => (
             <article
@@ -72,9 +74,11 @@ export default function About() {
         </div>
       </section>
 
-      <section className={`${styles.lyrics} grain`}>
+      <section className={`${styles.lyrics} grain`} aria-labelledby="notes-heading">
         <p className={styles.wayfinding}>NOTES</p>
-        <h2 className={styles.sectionTitle}>How the metaphors land</h2>
+        <h2 id="notes-heading" className={styles.sectionTitle}>
+          How the metaphors land
+        </h2>
         <p className={styles.notesLede}>
           The homepage keeps the labels. This is where the songs live.
         </p>
@@ -82,7 +86,7 @@ export default function About() {
           {lyricBlocks.map((block) => (
             <article key={block.concept} className={styles.lyricCard}>
               <div className={styles.lyricCopy}>
-                <p className={styles.concept}>{block.concept}</p>
+                <h3 className={styles.concept}>{block.concept}</h3>
                 <blockquote>
                   <p>“{block.lyric}”</p>
                   <cite>— {block.credit}</cite>
