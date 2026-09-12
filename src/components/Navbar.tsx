@@ -2,20 +2,31 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import LearningRateBar from './LearningRateBar';
+import { useEffect, useState } from 'react';
+import { CV_PATH } from '@/data/site';
 import styles from './Navbar.module.css';
 
 const links = [
   { name: 'Work', path: '/#work' },
-  { name: 'Lore', path: '/#lore' },
-  { name: 'Story', path: '/my-story' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'About', path: '/about' },
+  { name: 'Contact', path: '/#contact' },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [mobile, setMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const apply = () => {
+      setMobile(mq.matches);
+      if (!mq.matches) setOpen(false);
+    };
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
 
   return (
     <header className={styles.bar}>
@@ -28,9 +39,11 @@ export default function Navbar() {
         <nav className={styles.desktop} aria-label="Primary">
           {links.map((link) => {
             const active =
-              link.path === '/my-story' || link.path === '/contact'
-                ? pathname === link.path
-                : false;
+              link.path === '/about'
+                ? pathname === '/about'
+                : link.path === '/#work'
+                  ? pathname === '/' || pathname.startsWith('/work/')
+                  : false;
             return (
               <Link
                 key={link.path}
@@ -41,19 +54,25 @@ export default function Navbar() {
               </Link>
             );
           })}
+          <a href={CV_PATH} download className={styles.cv}>
+            Download CV
+          </a>
         </nav>
 
-        <button
-          className={`${styles.burger} ${open ? styles.burgerOpen : ''}`}
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          <span />
-          <span />
-        </button>
+        {mobile !== false && (
+          <button
+            className={`${styles.burger} ${open ? styles.burgerOpen : ''}`}
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            <span />
+            <span />
+          </button>
+        )}
       </div>
 
+      {mobile !== false && (
       <div className={`${styles.drawer} ${open ? styles.drawerOpen : ''}`}>
         {links.map((link) => (
           <Link
@@ -65,9 +84,16 @@ export default function Navbar() {
             {link.name}
           </Link>
         ))}
+        <a
+          href={CV_PATH}
+          download
+          className={styles.drawerCv}
+          onClick={() => setOpen(false)}
+        >
+          Download CV
+        </a>
       </div>
-
-      <LearningRateBar />
+      )}
     </header>
   );
 }

@@ -3,18 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --sky: #1b4e8c;
-  --rust: #9a5233;
-  --mustard: #d9a62e;
-  --poppy: #d6412b;
-  --cream: #e8dfc8;
-  --concrete: #b0aca2;
-  --charcoal: #242320;
+  --paper: #f2eee5;
+  --ink: #14243d;
+  --ember: #c24a18;
+  /* Ember darkened with ink so small labels hit 4.5:1 on --paper (~6.2:1) */
+  --ember-deep: color-mix(in srgb, var(--ember) 70%, var(--ink));
+  /* ~70% ink mixed toward paper — 5.5:1 on --paper */
+  --muted: color-mix(in srgb, var(--ink) 70%, var(--paper));
+  /* Secondary type on ink — ≥4.5:1 on --ink */
+  --muted-on-ink: color-mix(in srgb, var(--paper) 72%, var(--ink));
+  --hairline: color-mix(in srgb, var(--ink) 18%, transparent);
+  --hairline-on-ink: color-mix(in srgb, var(--paper) 18%, transparent);
 
-  --ink-on-light: #242320;
-  --ink-on-dark: #e8dfc8;
-  --ink-muted: rgba(36, 35, 32, 0.72);
-
+  --nav-h: 64px;
   --ease-struct: cubic-bezier(0.2, 0.8, 0.2, 1);
   --dur: 180ms;
 
@@ -39,8 +40,8 @@
 
   body {
     margin: 0;
-    background: var(--cream);
-    color: var(--charcoal);
+    background: var(--paper);
+    color: var(--ink);
     font-family: var(--font-body);
     font-size: 1.05rem;
     line-height: 1.55;
@@ -75,9 +76,14 @@
     cursor: pointer;
   }
 
+  :focus-visible {
+    outline: 2px solid var(--ember);
+    outline-offset: 3px;
+  }
+
   ::selection {
-    background: var(--poppy);
-    color: var(--cream);
+    background: var(--ember);
+    color: var(--paper);
   }
 
   ::-webkit-scrollbar {
@@ -85,11 +91,11 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--cream);
+    background: var(--paper);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--charcoal);
+    background: var(--ink);
   }
 }
 
@@ -106,10 +112,10 @@
   }
 
   .hard-shadow {
-    box-shadow: 12px 12px 0 0 var(--charcoal);
+    box-shadow: 12px 12px 0 0 var(--ink);
   }
 
   .hard-shadow-sm {
-    box-shadow: 6px 6px 0 0 var(--charcoal);
+    box-shadow: 6px 6px 0 0 var(--ink);
   }
 }

@@ -2,16 +2,16 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--charcoal);
-  color: var(--cream);
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .inner {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  min-height: 64px;
-  border-bottom: 2px solid rgba(232, 223, 200, 0.18);
+  min-height: var(--nav-h);
+  border-bottom: 2px solid var(--hairline-on-ink);
 }
 
 .brand {
@@ -23,8 +23,7 @@
 }
 
 .brand:hover {
-  background: var(--poppy);
-  color: var(--cream);
+  background: color-mix(in srgb, var(--paper) 8%, var(--ink));
 }
 
 .mark {
@@ -36,8 +35,8 @@
   height: 2.25rem;
   display: grid;
   place-items: center;
-  background: var(--cream);
-  color: var(--charcoal);
+  background: var(--paper);
+  color: var(--ink);
 }
 
 .brandName {
@@ -52,17 +51,8 @@
   align-items: stretch;
 }
 
-@media (min-width: 768px) {
-  .desktop {
-    display: flex;
-  }
-
-  .burger {
-    display: none;
-  }
-}
-
-.link {
+.link,
+.cv {
   display: grid;
   place-items: center;
   padding: 0 1.35rem;
@@ -71,7 +61,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  border-left: 2px solid rgba(232, 223, 200, 0.18);
+  border-left: 2px solid var(--hairline-on-ink);
   transition:
     background var(--dur) var(--ease-struct),
     color var(--dur) var(--ease-struct),
@@ -80,9 +70,26 @@
 
 .link:hover,
 .active {
-  background: var(--mustard);
-  color: var(--charcoal);
-  box-shadow: inset 0 -4px 0 var(--poppy);
+  color: var(--paper);
+  box-shadow: inset 0 -4px 0 var(--ember);
+}
+
+.link:hover {
+  background: color-mix(in srgb, var(--paper) 8%, var(--ink));
+}
+
+.cv {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 6px 6px 0 0 var(--ember);
+  margin: 10px 12px;
+  padding: 0 1rem;
+  min-height: 40px;
+}
+
+.cv:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 0 var(--ember);
 }
 
 .burger {
@@ -90,7 +97,7 @@
   display: grid;
   place-content: center;
   gap: 8px;
-  border-left: 2px solid rgba(232, 223, 200, 0.18);
+  border-left: 2px solid var(--hairline-on-ink);
   transition: background var(--dur) var(--ease-struct);
 }
 
@@ -98,12 +105,12 @@
   display: block;
   width: 22px;
   height: 2px;
-  background: var(--cream);
+  background: var(--paper);
   transition: transform var(--dur) var(--ease-struct);
 }
 
 .burgerOpen {
-  background: var(--poppy);
+  background: var(--ember);
 }
 
 .burgerOpen span:first-child {
@@ -118,31 +125,48 @@
   display: grid;
   max-height: 0;
   overflow: hidden;
-  background: var(--charcoal);
+  background: var(--ink);
   transition: max-height var(--dur) var(--ease-struct);
 }
 
 .drawerOpen {
-  max-height: 320px;
-  border-bottom: 2px solid rgba(232, 223, 200, 0.18);
+  max-height: 360px;
+  border-bottom: 2px solid var(--hairline-on-ink);
 }
 
-.drawerLink {
+.drawerLink,
+.drawerCv {
   padding: 1.1rem 1.25rem;
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  border-top: 2px solid rgba(232, 223, 200, 0.12);
-  transition: background var(--dur) var(--ease-struct), padding-left var(--dur) var(--ease-struct);
+  border-top: 2px solid var(--hairline-on-ink);
+  transition:
+    background var(--dur) var(--ease-struct),
+    padding-left var(--dur) var(--ease-struct);
 }
 
 .drawerLink:hover {
-  background: var(--sky);
+  background: color-mix(in srgb, var(--paper) 8%, var(--ink));
   padding-left: 1.75rem;
 }
 
+.drawerCv {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.drawerCv:hover {
+  box-shadow: inset 0 -4px 0 var(--ember);
+}
+
 @media (min-width: 768px) {
+  .desktop {
+    display: flex;
+  }
+
+  .burger,
   .drawer {
     display: none;
   }

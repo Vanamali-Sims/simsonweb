@@ -1,0 +1,214 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.wayfinding,
+.wayfindingOnInk {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 1.25rem;
+}
+
+.sectionTitle {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  max-width: 14ch;
+  margin-bottom: 1.5rem;
+}
+
+.hero {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(3.5rem, 9vw, 7rem) clamp(1.25rem, 4vw, 4rem);
+  overflow: hidden;
+}
+
+.title {
+  font-size: clamp(3.5rem, 12vw, 8rem);
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+.lede {
+  position: relative;
+  z-index: 2;
+  max-width: 38rem;
+}
+
+.lede p {
+  color: var(--muted-on-ink);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  margin-bottom: 0.9rem;
+}
+
+.materials,
+.lyrics {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 4vw, 4rem);
+  overflow: hidden;
+}
+
+.skillGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 700px) {
+  .skillGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.skillBlock {
+  position: relative;
+  z-index: 2;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 1.5rem;
+  border: 1px solid var(--hairline);
+  box-shadow: 10px 10px 0 0 var(--ink);
+  transition:
+    transform var(--dur) var(--ease-struct),
+    box-shadow var(--dur) var(--ease-struct);
+}
+
+.skillShift {
+  margin-top: 0;
+}
+
+@media (min-width: 700px) {
+  .skillShift {
+    margin-top: 2rem;
+  }
+}
+
+.skillBlock:hover {
+  transform: translate(-4px, -6px);
+  box-shadow: 16px 16px 0 0 var(--ink);
+}
+
+.skillBlock h3 {
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+.skillBlock ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.skillBlock li {
+  font-size: 0.95rem;
+  color: var(--muted);
+  padding-left: 0.85rem;
+  border-left: 3px solid var(--ember);
+}
+
+.notesLede {
+  color: var(--muted);
+  max-width: 42ch;
+  margin-bottom: 2rem;
+}
+
+.lyricList {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.lyricCard {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  box-shadow: 10px 10px 0 0 var(--ink);
+}
+
+@media (min-width: 860px) {
+  .lyricCard {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: end;
+  }
+}
+
+.concept {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ember-deep);
+  margin-bottom: 0.75rem;
+}
+
+.lyricCopy blockquote {
+  margin: 0 0 0.85rem;
+  padding: 0;
+  border: none;
+}
+
+.lyricCopy blockquote p {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 3.2vw, 2.15rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  margin-bottom: 0.45rem;
+}
+
+.lyricCopy cite {
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.gloss {
+  color: var(--muted);
+  max-width: 38ch;
+}
+
+.visual {
+  min-height: 140px;
+}
+
+.cta {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin-top: 2.25rem;
+  padding: 0.95rem 1.35rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 8px 8px 0 0 var(--ember);
+  transition:
+    transform var(--dur) var(--ease-struct),
+    box-shadow var(--dur) var(--ease-struct);
+}
+
+.cta:hover {
+  transform: translate(-3px, -3px) rotate(-0.8deg);
+  box-shadow: 12px 12px 0 0 var(--ember);
+}

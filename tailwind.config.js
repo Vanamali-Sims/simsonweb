@@ -8,13 +8,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        sky: '#1B4E8C',
-        rust: '#9A5233',
-        mustard: '#D9A62E',
-        poppy: '#D6412B',
-        cream: '#E8DFC8',
-        concrete: '#B0ACA2',
-        charcoal: '#242320',
+        paper: 'var(--paper)',
+        ink: 'var(--ink)',
+        ember: 'var(--ember)',
+        muted: 'var(--muted)',
       },
       fontFamily: {
         display: ['var(--font-space-grotesk)', 'sans-serif'],

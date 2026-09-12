@@ -1,0 +1,141 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.wayfinding {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 1rem;
+}
+
+.hero {
+  position: relative;
+  padding: clamp(3rem, 8vw, 5.5rem) clamp(1.25rem, 4vw, 4rem) 2rem;
+  overflow: hidden;
+}
+
+.metric {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+  letter-spacing: -0.04em;
+  color: var(--ember);
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  letter-spacing: -0.05em;
+  line-height: 0.92;
+  max-width: 16ch;
+  margin-bottom: 1.25rem;
+}
+
+.lede {
+  position: relative;
+  z-index: 2;
+  max-width: 40rem;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+}
+
+.media {
+  margin: 0 clamp(1.25rem, 4vw, 4rem) 2.5rem;
+  border: 1px solid var(--hairline);
+  box-shadow: 10px 10px 0 0 var(--ink);
+}
+
+.body {
+  padding: 0 clamp(1.25rem, 4vw, 4rem) clamp(4rem, 8vw, 6rem);
+  max-width: 46rem;
+}
+
+.block {
+  margin-bottom: 2.25rem;
+}
+
+.block h2 {
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.7rem;
+}
+
+.block p {
+  color: var(--muted);
+}
+
+.todo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: var(--ember);
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stack li {
+  padding: 0.3rem 0.55rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.repo {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.95rem 1.35rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 8px 8px 0 0 var(--ember);
+  transition:
+    transform var(--dur) var(--ease-struct),
+    box-shadow var(--dur) var(--ease-struct);
+}
+
+.repo:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 12px 12px 0 0 var(--ember);
+}
+
+.back {
+  display: block;
+  margin-top: 2rem;
+  color: var(--ember-deep);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.back:hover {
+  text-decoration: underline;
+}

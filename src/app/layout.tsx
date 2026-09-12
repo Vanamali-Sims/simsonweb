@@ -21,7 +21,7 @@ const dmSans = DM_Sans({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1B4E8C",
+  themeColor: "#14243D",
 };
 
 export const metadata: Metadata = {
@@ -51,7 +51,7 @@ export default function RootLayout({
     >
       <body>
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

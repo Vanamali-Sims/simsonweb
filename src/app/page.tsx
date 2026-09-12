@@ -1,90 +1,26 @@
 'use client';
 
+import EmailLink, { EmailAddress } from '@/components/EmailLink';
+import ProjectImage from '@/components/ProjectImage';
+import { projects } from '@/data/projects';
+import {
+  aboutShort,
+  CV_PATH,
+  positioning,
+  proofChips,
+  roles,
+  social,
+  stacks,
+} from '@/data/site';
 import Link from 'next/link';
 import { useState } from 'react';
-import ConceptVisual from '@/components/ConceptVisuals';
-import SectionBeatHeader from '@/components/SectionBeat';
-import { heroBeat, sectionBeats } from '@/data/sectionBeats';
 import styles from './page.module.css';
-
-const projects = [
-  {
-    title: 'Fishing Grounds Recsys',
-    blurb:
-      'Implicit ALS on AIS tracks: vessels × ocean cells, fishing hours as confidence — not ratings. Same factors recommend MPA-legal grounds, flag IUU-like outliers, and forecast seasonal effort. ~20× a popularity baseline.',
-    tags: ['Implicit ALS', 'Geospatial', 'FastAPI', 'React'],
-    url: 'https://github.com/Vanamali-Sims/fishing-grounds-recsys',
-    cat: 'science',
-  },
-  {
-    title: 'Cloud Stability Map',
-    blurb:
-      'Not cloudy-or-sunny — a stability score for where Melbourne light will hold still. Contour bands over the city, live 1/3/6-hour windows, ranked shoot spots.',
-    tags: ['deck.gl', 'MapLibre', 'Open-Meteo', 'React'],
-    url: 'https://github.com/Vanamali-Sims/cloudyorNot',
-    cat: 'product',
-  },
-  {
-    title: 'Melbourne Footfall',
-    blurb:
-      'Hourly CBD pedestrian forecasts by precinct — sensors joined to weather, calendar, and land use. Measures how each street recovered after lockdowns, not a citywide average.',
-    tags: ['LightGBM', 'Time series', 'dbt', 'Tableau'],
-    url: 'https://github.com/Vanamali-Sims/howMelbMoves',
-    cat: 'science',
-  },
-  {
-    title: 'Motion Console',
-    blurb:
-      'Webcam swipe launcher. Optical flow watches a gesture band above the keyboard; while armed, a horizontal swipe opens an app. The whole UI is an ON/OFF button.',
-    tags: ['Python', 'OpenCV', 'Computer Vision'],
-    url: 'https://github.com/Vanamali-Sims/mdither_console',
-    cat: 'product',
-  },
-];
 
 const filters = [
   { id: 'all', label: 'All' },
   { id: 'product', label: 'Product' },
   { id: 'science', label: 'Science' },
 ] as const;
-
-const roles = [
-  {
-    role: 'Co-Founder & AI Lead',
-    org: 'Zelo',
-    when: '2025 — Now',
-    text: 'Affordable local AI agents. Custom automation, scraping, and intelligent workflows for people who refuse enterprise price tags.',
-  },
-  {
-    role: 'Meta Expert',
-    org: 'Meta',
-    when: '2025 — Now',
-    text: 'Retail + technical consultation on Meta platforms — turning product questions into clear next steps.',
-  },
-  {
-    role: 'Machine Learning Intern',
-    org: 'Silveroakapps',
-    when: '2025',
-    text: 'Shipped ML solutions for real datasets — processing pipelines, predictive models, and evaluation loops.',
-  },
-];
-
-const lessons = [
-  {
-    title: 'Shipped ugly, learned faster',
-    text: 'The model that generalized was never the prettiest fit on the training set.',
-  },
-  {
-    title: 'Hold out a real world',
-    text: 'If it only works on the notebook, it doesn\'t work. New points are the point.',
-  },
-  {
-    title: 'Taste is a regularizer',
-    text: 'Constraints — time, clarity, honesty — keep the system from memorizing noise.',
-  },
-];
-
-const byId = Object.fromEntries(sectionBeats.map((b) => [b.id, b]));
 
 export default function Home() {
   const [filter, setFilter] = useState<(typeof filters)[number]['id']>('all');
@@ -93,76 +29,35 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      {/* HERO — loud poppy: Rocky + Occam */}
-      <section className={`${styles.heroBanner} grain`}>
-        <div className={styles.heroMain}>
-          <p className={styles.bannerTag}>Motivation, backed by data</p>
-          <h1 className={styles.bannerQuote}>
-            “{heroBeat.primaryLyric}”
-          </h1>
-          <p className={styles.bannerCredit}>— {heroBeat.primaryCredit}</p>
-        </div>
-        <div className={styles.occamPanel}>
-          <p className={styles.conceptChip}>{heroBeat.concept}</p>
-          <ConceptVisual id="occam" />
-          <p className={styles.occamGloss}>{heroBeat.gloss}</p>
-        </div>
-      </section>
-
-      {/* Soft beat — Skegss, dappled cream */}
-      <section className={`${styles.softBeat} grain`}>
-        <div className={styles.dapple} aria-hidden="true" />
-        <div className={styles.softInner}>
-          <p className={styles.wayfindingDark}>01 / PERSON</p>
-          <blockquote className={styles.softLyric}>
-            <p>“{heroBeat.softLyric}”</p>
-            <cite>— {heroBeat.softCredit}</cite>
-          </blockquote>
-          <h2 className={styles.softName}>
+      <section className={`${styles.hero} grain`}>
+        <div className={styles.heroInner}>
+          <p className={styles.wayfindingOnInk}>01 / PERSON</p>
+          <h1 className={styles.heroName}>
             Vanamali <span>Sims</span>
-          </h2>
-          <p className={styles.softLede}>
-            Data scientist &amp; software developer in Melbourne. I build
-            systems that hold weight — AI products, analysis pipelines, and
-            tools meant to ship.
-          </p>
+          </h1>
+          <p className={styles.heroLede}>{positioning}</p>
+          <ul className={styles.chips}>
+            {proofChips.map((chip) => (
+              <li key={chip}>{chip}</li>
+            ))}
+          </ul>
           <div className={styles.ctaRow}>
             <a href="#work" className={styles.ctaPrimary}>
               See the work
             </a>
-            <Link href="/contact" className={styles.ctaGhostDark}>
-              Get in touch
-            </Link>
+            <a href={CV_PATH} download className={styles.ctaGhost}>
+              Download CV
+            </a>
           </div>
         </div>
       </section>
 
-      {/* PROCESS — gradient descent */}
-      <section id="process" className={`${styles.process} grain`}>
-        <SectionBeatHeader beat={byId.process} tone="dark" />
-        <div className={styles.nowGrid}>
-          <article className={styles.nowBlock}>
-            <span className={styles.nowIndex}>A</span>
-            <h3>Zelo</h3>
-            <p>
-              Making AI usable without the enterprise tax — local agents,
-              custom automation, practical deployments.
-            </p>
-          </article>
-          <article className={`${styles.nowBlock} ${styles.nowOffset}`}>
-            <span className={styles.nowIndex}>B</span>
-            <h3>Gene expression</h3>
-            <p>
-              Digging into human vs chimp brain RNA-Seq — patterns that make
-              biology legible through ML.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      {/* WORK — signal vs noise */}
       <section id="work" className={`${styles.work} grain`}>
-        <SectionBeatHeader beat={byId.work} tone="cream" />
+        <header className={styles.sectionHead}>
+          <p className={styles.eyebrow}>Signal vs. noise</p>
+          <p className={styles.wayfinding}>02 / WORK</p>
+          <h2 className={styles.sectionTitle}>Selected work</h2>
+        </header>
         <div className={styles.workTools}>
           <div className={styles.filters} role="tablist" aria-label="Filter projects">
             {filters.map((f) => (
@@ -183,19 +78,18 @@ export default function Home() {
 
         <div className={styles.projectGrid}>
           {visible.map((project, i) => (
-            <a
-              key={project.title}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              key={project.slug}
+              href={`/work/${project.slug}`}
               className={`${styles.project} ${
                 i % 3 === 1 ? styles.projectShift : ''
               } ${i % 3 === 2 ? styles.projectHang : ''}`}
             >
-              <div className={styles.projectFace}>
-                <span className={styles.projectNum}>
-                  {String(i + 1).padStart(2, '0')}
-                </span>
+              <ProjectImage src={project.image} alt={project.imageAlt} />
+              <div className={styles.projectBody}>
+                <p className={styles.projectMetric}>
+                  {project.metric ?? 'TODO — outcome metric'}
+                </p>
                 <h3>{project.title}</h3>
                 <p>{project.blurb}</p>
                 <div className={styles.tags}>
@@ -204,36 +98,21 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-              <div className={styles.projectReveal} aria-hidden="true" />
-            </a>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* LESSONS — overfitting */}
-      <section id="lessons" className={`${styles.lessons} grain`}>
-        <SectionBeatHeader beat={byId.lessons} tone="light" />
-        <div className={styles.lessonGrid}>
-          {lessons.map((item, i) => (
-            <article
-              key={item.title}
-              className={`${styles.lesson} ${i === 1 ? styles.lessonShift : ''}`}
-            >
-              <span className={styles.lessonNum}>0{i + 1}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* LORE / BALANCE — bias-variance */}
-      <section id="lore" className={`${styles.lore} grain`}>
-        <SectionBeatHeader beat={byId.balance} tone="light" />
+      <section id="experience" className={`${styles.experience} grain`}>
+        <header className={styles.sectionHead}>
+          <p className={styles.eyebrowOnInk}>Bias–variance tradeoff</p>
+          <p className={styles.wayfindingOnInk}>03 / EXPERIENCE</p>
+          <h2 className={styles.sectionTitleOnInk}>Experience</h2>
+        </header>
         <div className={styles.loreStack}>
           {roles.map((item, i) => (
             <article
-              key={item.role}
+              key={`${item.org}-${item.role}`}
               className={`${styles.role} ${i === 1 ? styles.roleCantilever : ''}`}
             >
               <div className={styles.roleMeta}>
@@ -245,16 +124,80 @@ export default function Home() {
             </article>
           ))}
         </div>
-        <div className={styles.stairShadow} aria-hidden="true" />
       </section>
 
-      {/* CONTACT STRIP */}
-      <section className={`${styles.strip} grain`}>
-        <p className={styles.wayfindingDark}>NEXT / CONVERGENCE</p>
-        <h2 className={styles.stripTitle}>Got a problem worth solving?</h2>
-        <Link href="/contact" className={styles.stripCta}>
-          Start a conversation
-        </Link>
+      <section id="stack" className={styles.stack} aria-label="Stack">
+        <p className={styles.eyebrow}>Gradient descent</p>
+        <div className={styles.stackStrip}>
+          {stacks.map((group) => (
+            <div key={group.title} className={styles.stackGroup}>
+              <span className={styles.stackLabel}>{group.title}</span>
+              <span className={styles.stackItems}>{group.items.join(' · ')}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="about" className={`${styles.about} grain`}>
+        <header className={styles.sectionHead}>
+          <p className={styles.eyebrow}>Overfitting vs. generalization</p>
+          <p className={styles.wayfinding}>04 / ABOUT</p>
+          <h2 className={styles.sectionTitle}>The short version</h2>
+        </header>
+        <div className={styles.aboutGrid}>
+          <div className={styles.aboutCopy}>
+            {aboutShort.map((sentence) => (
+              <p key={sentence}>{sentence}</p>
+            ))}
+            <Link href="/about" className={styles.textLink}>
+              Full story →
+            </Link>
+          </div>
+          <div
+            className={styles.photoSlot}
+            role="img"
+            aria-label="Portrait placeholder — photo to be supplied"
+          />
+        </div>
+      </section>
+
+      <section id="contact" className={`${styles.contact} grain`}>
+        <header className={styles.sectionHead}>
+          <p className={styles.wayfinding}>CONTACT / 05</p>
+          <h2 className={styles.sectionTitle}>Got a problem worth solving?</h2>
+        </header>
+        <div className={styles.contactGrid}>
+          <EmailLink className={styles.contactCard}>
+            <span className={styles.contactLabel}>Email</span>
+            <EmailAddress className={styles.contactValue} />
+          </EmailLink>
+          <div className={styles.contactCard}>
+            <span className={styles.contactLabel}>Location</span>
+            <span className={styles.contactValue}>{social.location}</span>
+          </div>
+          <a
+            href={social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.contactCard}
+          >
+            <span className={styles.contactLabel}>LinkedIn</span>
+            <span className={styles.contactValue}>van-sims</span>
+          </a>
+          <a
+            href={social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.contactCard}
+          >
+            <span className={styles.contactLabel}>GitHub</span>
+            <span className={styles.contactValue}>Vanamali-Sims</span>
+          </a>
+          <a href={CV_PATH} download className={styles.contactCard}>
+            <span className={styles.contactLabel}>CV</span>
+            <span className={styles.contactValue}>Download</span>
+          </a>
+        </div>
       </section>
     </div>
   );

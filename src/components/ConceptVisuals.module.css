@@ -9,24 +9,22 @@
   width: 100%;
   height: auto;
   display: block;
-  color: var(--charcoal);
+  color: var(--ink);
 }
 
-.occam {
-  color: var(--cream);
-}
-
+.occam,
 .signal .svg,
 .overfit {
-  color: var(--cream);
+  color: var(--ink);
 }
 
 .signalScene {
   position: relative;
   height: 160px;
-  background: var(--concrete);
+  background: var(--paper);
   overflow: hidden;
-  box-shadow: 8px 8px 0 0 var(--charcoal);
+  border: 1px solid var(--hairline);
+  box-shadow: 8px 8px 0 0 var(--ink);
 }
 
 .noiseField {
@@ -37,20 +35,16 @@
       12deg,
       transparent,
       transparent 3px,
-      rgba(36, 35, 32, 0.12) 3px,
-      rgba(36, 35, 32, 0.12) 5px
+      color-mix(in srgb, var(--ink) 12%, transparent) 3px,
+      color-mix(in srgb, var(--ink) 12%, transparent) 5px
     ),
     repeating-linear-gradient(
       -28deg,
       transparent,
       transparent 4px,
-      rgba(36, 35, 32, 0.08) 4px,
-      rgba(36, 35, 32, 0.08) 7px
-    ),
-    radial-gradient(circle at 20% 30%, rgba(36, 35, 32, 0.15) 0 2px, transparent 3px),
-    radial-gradient(circle at 70% 60%, rgba(36, 35, 32, 0.12) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 40% 80%, rgba(36, 35, 32, 0.1) 0 2px, transparent 3px);
-  background-size: auto, auto, 28px 28px, 22px 22px, 34px 34px;
+      color-mix(in srgb, var(--ink) 8%, transparent) 4px,
+      color-mix(in srgb, var(--ink) 8%, transparent) 7px
+    );
 }
 
 .signalShape {
@@ -59,9 +53,9 @@
   top: 22%;
   width: 38%;
   height: 56%;
-  background: var(--poppy);
+  background: var(--ember);
   clip-path: polygon(12% 0, 100% 18%, 88% 100%, 0 78%);
-  box-shadow: 6px 6px 0 0 var(--charcoal);
+  box-shadow: 6px 6px 0 0 var(--ink);
 }
 
 .crackPath {
@@ -80,15 +74,15 @@
 
 .step {
   height: 28px;
-  background: var(--concrete);
-  border: 2px solid var(--charcoal);
+  background: var(--paper);
+  border: 2px solid var(--ink);
   border-bottom: none;
   margin-left: auto;
-  box-shadow: 6px 0 0 0 rgba(36, 35, 32, 0.25);
+  box-shadow: 6px 0 0 0 color-mix(in srgb, var(--ink) 25%, transparent);
 }
 
 .step:last-of-type {
-  border-bottom: 2px solid var(--charcoal);
+  border-bottom: 2px solid var(--ink);
 }
 
 .ball {
@@ -98,9 +92,9 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--poppy);
-  border: 2px solid var(--charcoal);
-  box-shadow: 5px 5px 0 0 var(--charcoal);
+  background: var(--ember);
+  border: 2px solid var(--ink);
+  box-shadow: 5px 5px 0 0 var(--ink);
 }
 
 .biasScene {
@@ -118,7 +112,7 @@
 .shadowSharp {
   left: 8%;
   top: 15%;
-  background: var(--charcoal);
+  background: var(--ink);
   clip-path: polygon(0 20%, 100% 0, 85% 100%, 10% 90%);
   opacity: 0.9;
 }
@@ -126,9 +120,7 @@
 .shadowSoft {
   right: 6%;
   top: 22%;
-  background: var(--sky);
-  filter: blur(0px);
+  background: var(--muted);
   opacity: 0.55;
   clip-path: ellipse(50% 45% at 50% 50%);
-  box-shadow: 0 0 40px 20px rgba(27, 78, 140, 0.25);
 }

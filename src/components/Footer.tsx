@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { social } from '@/data/site';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -11,7 +12,7 @@ export default function Footer() {
 
       <div className={`${styles.block} ${styles.links}`}>
         <a
-          href="https://github.com/Vanamali-Sims"
+          href={social.github}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.link}
@@ -19,14 +20,14 @@ export default function Footer() {
           GitHub
         </a>
         <a
-          href="https://www.linkedin.com/in/van-sims"
+          href={social.linkedin}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.link}
         >
           LinkedIn
         </a>
-        <Link href="/contact" className={styles.link}>
+        <Link href="/#contact" className={styles.link}>
           Contact
         </Link>
       </div>
