@@ -88,3 +88,25 @@
   transform: translate(-3px, -3px) rotate(-1deg);
   box-shadow: 10px 10px 0 0 var(--ember);
 }
+
+@media (hover: none) {
+  .link:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 699px) {
+  .block {
+    padding: 1.75rem max(1rem, env(safe-area-inset-left)) 1.75rem
+      max(1rem, env(safe-area-inset-right));
+  }
+
+  .links {
+    padding-bottom: max(1.75rem, env(safe-area-inset-bottom));
+  }
+
+  .link {
+    flex: 1 1 40%;
+    text-align: center;
+  }
+}

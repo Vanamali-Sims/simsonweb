@@ -548,3 +548,102 @@ button.contactCard:hover {
   line-height: 1.15;
   color: var(--ink);
 }
+
+@media (hover: none) {
+  .project:hover,
+  .role:hover,
+  a.contactCard:hover,
+  button.contactCard:hover,
+  .ctaPrimary:hover,
+  .ctaGhost:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 699px) {
+  .hero {
+    min-height: unset;
+    align-items: flex-end;
+  }
+
+  .heroInner {
+    padding: 2rem max(1rem, env(safe-area-inset-left)) 2.25rem
+      max(1rem, env(safe-area-inset-right));
+  }
+
+  .heroName {
+    font-size: clamp(2.4rem, 14vw, 3.4rem);
+  }
+
+  .chips {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+  }
+
+  .chips li {
+    border-left: none;
+    padding: 0 0 0.45rem;
+    border-bottom: 1px solid var(--hairline-on-ink);
+  }
+
+  .ctaRow {
+    flex-direction: column;
+  }
+
+  .ctaPrimary,
+  .ctaGhost {
+    width: 100%;
+    text-align: center;
+  }
+
+  .work,
+  .experience,
+  .about,
+  .contact,
+  .stack {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1.35rem, env(safe-area-inset-right));
+  }
+
+  .filters {
+    display: flex;
+    width: 100%;
+  }
+
+  .filter {
+    flex: 1;
+    padding: 0.75rem 0.4rem;
+    font-size: 0.72rem;
+  }
+
+  .project,
+  .role,
+  .contactCard,
+  .photoSlot {
+    box-shadow: 6px 6px 0 0 var(--ink);
+  }
+
+  .projectBody {
+    min-height: unset;
+    padding: 1.15rem 1.1rem 1.25rem;
+  }
+
+  .projectMetric {
+    font-size: 1.25rem;
+  }
+
+  .roleMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .photoSlot {
+    display: none;
+  }
+
+  .contactCard {
+    min-height: 120px;
+  }
+}

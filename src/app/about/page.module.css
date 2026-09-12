@@ -212,3 +212,34 @@
   transform: translate(-3px, -3px) rotate(-0.8deg);
   box-shadow: 12px 12px 0 0 var(--ember);
 }
+
+@media (hover: none) {
+  .skillBlock:hover,
+  .cta:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 699px) {
+  .hero,
+  .materials,
+  .lyrics {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1.35rem, env(safe-area-inset-right));
+  }
+
+  .title {
+    font-size: clamp(2.6rem, 16vw, 4rem);
+  }
+
+  .skillBlock,
+  .lyricCard {
+    box-shadow: 6px 6px 0 0 var(--ink);
+    padding: 1.15rem;
+  }
+
+  .cta {
+    display: block;
+    text-align: center;
+  }
+}

@@ -137,3 +137,32 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
+
+@media (hover: none) {
+  .repo:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 699px) {
+  .hero,
+  .body {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+
+  .title {
+    font-size: clamp(2.2rem, 12vw, 3.2rem);
+  }
+
+  .media {
+    margin: 0 max(1rem, env(safe-area-inset-left)) 1.75rem
+      max(1rem, env(safe-area-inset-right));
+    box-shadow: 6px 6px 0 0 var(--ink);
+  }
+
+  .repo {
+    display: block;
+    text-align: center;
+  }
+}
