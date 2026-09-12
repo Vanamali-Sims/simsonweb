@@ -8,8 +8,8 @@ type Props = {
 };
 
 function address() {
-  const local = ['va', 'n'].join('');
-  const host = ['simsdoesdata', 'me'].join('.');
+  const local = ['sims', 'vanamali'].join('');
+  const host = ['gmail', 'com'].join('.');
   return `${local}@${host}`;
 }
 

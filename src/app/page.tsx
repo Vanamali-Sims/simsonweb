@@ -90,18 +90,25 @@ export default function Home() {
 
         <div className={styles.projectGrid}>
           {visible.map((project, i) => (
-            <Link
+            <article
               key={project.slug}
-              href={`/work/${project.slug}`}
               className={`${styles.project} ${
                 i % 3 === 1 ? styles.projectShift : ''
               } ${i % 3 === 2 ? styles.projectHang : ''}`}
             >
-              <ProjectImage
-                src={project.image}
-                alt={project.imageAlt}
-                decorative
-              />
+              <Link
+                href={`/work/${project.slug}`}
+                className={styles.projectMedia}
+                tabIndex={-1}
+                aria-hidden="true"
+              >
+                <ProjectImage
+                  src={project.image}
+                  alt={project.imageAlt}
+                  decorative
+                  compact
+                />
+              </Link>
               <div className={styles.projectBody}>
                 <p className={styles.projectMetric}>
                   {project.metric ?? 'TODO — outcome metric'}
@@ -113,8 +120,29 @@ export default function Home() {
                     <span key={t}>{t}</span>
                   ))}
                 </div>
+                <div className={styles.projectActions}>
+                  {project.live ? (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.projectLive}
+                    >
+                      Live site
+                      <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
+                    </a>
+                  ) : null}
+                  <Link
+                    href={`/work/${project.slug}`}
+                    className={
+                      project.live ? styles.projectMore : styles.projectLive
+                    }
+                  >
+                    Learn more
+                  </Link>
+                </div>
               </div>
-            </Link>
+            </article>
           ))}
         </div>
       </section>
@@ -153,7 +181,6 @@ export default function Home() {
         <h2 id="stack-heading" className="sr-only">
           Stack
         </h2>
-        <p className={styles.eyebrow}>Gradient descent</p>
         <div className={styles.stackStrip}>
           {stacks.map((group) => (
             <div key={group.title} className={styles.stackGroup}>

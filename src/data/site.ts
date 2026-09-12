@@ -6,7 +6,7 @@ export const positioning =
 export const proofChips = [
   'MSc Data Science, Monash',
   'Co-founder, Zelo',
-  '96.7% faster routing, SilverOak',
+  'Question routing 6s → 0.2s at SilverOak — 96.7% faster',
 ] as const;
 
 export const roles = [

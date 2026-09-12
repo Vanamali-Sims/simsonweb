@@ -8,9 +8,16 @@ type Props = {
   alt: string;
   /** Set when the image sits inside a control that already names the project. */
   decorative?: boolean;
+  /** Shorter frame for homepage cards. */
+  compact?: boolean;
 };
 
-export default function ProjectImage({ src, alt, decorative = false }: Props) {
+export default function ProjectImage({
+  src,
+  alt,
+  decorative = false,
+  compact = false,
+}: Props) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -30,7 +37,7 @@ export default function ProjectImage({ src, alt, decorative = false }: Props) {
   }, [src]);
 
   return (
-    <div className={styles.frame}>
+    <div className={`${styles.frame} ${compact ? styles.frameCompact : ''}`}>
       {loaded ? (
         <img
           src={src}

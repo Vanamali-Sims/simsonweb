@@ -223,6 +223,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
+  max-width: 68rem;
 }
 
 @media (min-width: 700px) {
@@ -234,13 +235,18 @@
 
 .project {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
   background: var(--paper);
   border: 1px solid var(--hairline);
   box-shadow: 10px 10px 0 0 var(--ink);
   transition:
     transform var(--dur) var(--ease-struct),
     box-shadow var(--dur) var(--ease-struct);
+}
+
+.projectMedia {
+  display: block;
 }
 
 .project:hover {
@@ -305,6 +311,51 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.projectActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.projectLive,
+.projectMore {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.55rem 0.95rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    transform var(--dur) var(--ease-struct),
+    box-shadow var(--dur) var(--ease-struct),
+    background var(--dur) var(--ease-struct),
+    color var(--dur) var(--ease-struct);
+}
+
+.projectLive {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 6px 6px 0 0 var(--ember);
+}
+
+.projectMore {
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 0 var(--ember);
+}
+
+.projectLive:hover,
+.projectMore:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 9px 9px 0 0 var(--ember);
 }
 
 /* ——— EXPERIENCE ——— */
@@ -388,10 +439,6 @@
   padding: 1.25rem clamp(1.25rem, 4vw, 4rem);
   border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
-}
-
-.stack .eyebrow {
-  margin-bottom: 0.65rem;
 }
 
 .stackStrip {
@@ -553,7 +600,9 @@ button.contactCard:hover {
   a.contactCard:hover,
   button.contactCard:hover,
   .ctaPrimary:hover,
-  .ctaGhost:hover {
+  .ctaGhost:hover,
+  .projectLive:hover,
+  .projectMore:hover {
     transform: none;
   }
 }
@@ -625,6 +674,17 @@ button.contactCard:hover {
   .projectBody {
     min-height: unset;
     padding: 1.15rem 1.1rem 1.25rem;
+  }
+
+  .projectActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .projectLive,
+  .projectMore {
+    width: 100%;
+    text-align: center;
   }
 
   .projectMetric {
