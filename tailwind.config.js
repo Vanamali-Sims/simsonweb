@@ -15,8 +15,8 @@ module.exports = {
         grid: 'var(--grid)',
       },
       fontFamily: {
-        display: ['var(--font-space-grotesk)', 'sans-serif'],
-        body: ['var(--font-space-grotesk)', 'sans-serif'],
+        display: ['var(--font-schibsted)', 'sans-serif'],
+        body: ['var(--font-schibsted)', 'sans-serif'],
         mono: ['var(--font-mono)'],
       },
     },

@@ -7,13 +7,16 @@
   --ink: #0a0a0a;
   --data: #3d4bff;
   --frontend: #e8541a;
-  --muted: #5c5c5c;
+  --secondary: #4a4a4a;
+  --muted: #5e5e5e;
+  --rule: #d4d4d4;
   --grid: #e5e5e5;
 
   --nav-h: 56px;
-  --font-display: var(--font-space-grotesk), "Helvetica Neue", Arial, sans-serif;
-  --font-body: var(--font-space-grotesk), "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+  --font-display: var(--font-schibsted), "Helvetica Neue", Arial, sans-serif;
+  --font-body: var(--font-schibsted), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-ibm-mono), ui-monospace, "Cascadia Code", "Segoe UI Mono",
+    monospace;
 }
 
 @layer base {

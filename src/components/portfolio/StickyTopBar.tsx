@@ -5,8 +5,6 @@ import VisuallyHidden from '@/components/VisuallyHidden';
 import { useEffect, useState } from 'react';
 
 const sections = [
-  { id: 'proof', label: 'Proof' },
-  { id: 'skills', label: 'Skills' },
   { id: 'case-studies', label: 'Work' },
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },

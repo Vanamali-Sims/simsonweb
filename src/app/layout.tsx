@@ -1,12 +1,19 @@
 import type { Metadata, Viewport } from 'next';
-import { Space_Grotesk } from 'next/font/google';
+import { IBM_Plex_Mono, Schibsted_Grotesk } from 'next/font/google';
 import './globals.css';
 import { site } from '@content/portfolio';
 
-const spaceGrotesk = Space_Grotesk({
+const schibstedGrotesk = Schibsted_Grotesk({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  variable: '--font-schibsted',
   weight: ['400', '500', '600', '700'],
+  display: 'swap',
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  variable: '--font-ibm-mono',
+  weight: ['400', '500'],
   display: 'swap',
 });
 
@@ -58,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={spaceGrotesk.variable}>
+    <html lang="en" className={`${schibstedGrotesk.variable} ${ibmPlexMono.variable}`}>
       <body>
         <a href="#hero" className="skip-link">
           Skip to main content
