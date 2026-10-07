@@ -68,9 +68,8 @@ export function buildGraphNodes(width: number, height: number): {
     })),
   ];
 
-  const nodeById = new Map(nodes.map((n) => [n.id, n]));
-
-  const simLinks = edges.map((e) => ({
+  type SimLink = { source: string | GraphNode; target: string | GraphNode };
+  const simLinks: SimLink[] = edges.map((e) => ({
     source: `work:${e.workId}`,
     target: `skill:${e.skillId}`,
   }));
@@ -106,10 +105,11 @@ export function buildGraphNodes(width: number, height: number): {
 
   for (let i = 0; i < 400; i++) simulation.tick();
 
+  // forceLink replaces string ids with node references in place
   const links = simLinks.map((l) => ({
-    source: nodeById.get(l.source as string)!,
-    target: nodeById.get(l.target as string)!,
-  }));
+    source: l.source as GraphNode,
+    target: l.target as GraphNode,
+  })).filter((l) => l.source?.id && l.target?.id);
 
   return { nodes, links };
 }
