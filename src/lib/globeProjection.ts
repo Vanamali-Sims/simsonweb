@@ -15,7 +15,10 @@ export function projectPoint(
 }
 
 export function fibonacciPoint(i: number, n: number): Vec3 {
-  const yy = 1 - ((i + 0.5) / n) * 2;
+  let yy = 1 - ((i + 0.5) / n) * 2;
+  if (n <= 12) {
+    yy *= 0.62;
+  }
   const rr = Math.sqrt(1 - yy * yy);
   const th = i * 2.399963;
   return {

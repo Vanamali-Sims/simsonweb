@@ -1,10 +1,10 @@
 import IntroOverlay from '@/components/portfolio/IntroOverlay';
 import KeywordPlanetsHero from '@/components/portfolio/keywordPlanets/KeywordPlanetsHero';
+import DockedGlobe from '@/components/portfolio/belowGlobe/DockedGlobe';
+import ProjectsSection from '@/components/portfolio/belowGlobe/ProjectsSection';
+import FlightPathSection from '@/components/portfolio/belowGlobe/FlightPathSection';
+import ClosingSection from '@/components/portfolio/belowGlobe/ClosingSection';
 import StickyTopBar from '@/components/portfolio/StickyTopBar';
-import CaseStudies from '@/components/portfolio/CaseStudies';
-import OtherProjects from '@/components/portfolio/OtherProjects';
-import ExperienceGantt from '@/components/portfolio/ExperienceGantt';
-import ContactSection from '@/components/portfolio/ContactSection';
 import JsonLd from '@/components/portfolio/JsonLd';
 
 export default function Home() {
@@ -14,10 +14,10 @@ export default function Home() {
       <IntroOverlay />
       <StickyTopBar />
       <KeywordPlanetsHero />
-      <CaseStudies />
-      <OtherProjects />
-      <ExperienceGantt />
-      <ContactSection />
+      <DockedGlobe />
+      <ProjectsSection />
+      <FlightPathSection />
+      <ClosingSection />
     </>
   );
 }

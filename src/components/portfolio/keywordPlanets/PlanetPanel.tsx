@@ -24,6 +24,7 @@ import {
   projectPoint,
   type Vec3,
 } from '@/lib/globeProjection';
+import { suppressedLabelIds, type LabelBox } from '@/lib/labelCollision';
 import LabelHoverCard, { hoverCardElementId } from './LabelHoverCard';
 import PlanetaryPopup, { type PopupTarget } from './PlanetaryPopup';
 import styles from './KeywordPlanets.module.css';
@@ -258,6 +259,14 @@ export default function PlanetPanel() {
       if (frontPathRef.current) frontPathRef.current.setAttribute('d', paths.front);
       if (backPathRef.current) backPathRef.current.setAttribute('d', paths.back);
 
+      const collisionBoxes: LabelBox[] = [];
+      const labelState: {
+        id: string;
+        el: HTMLElement;
+        z: number;
+        opacity: number;
+      }[] = [];
+
       for (const meta of labelMeta) {
         const el = labelElsRef.current.get(meta.id);
         if (!el) continue;
@@ -276,19 +285,43 @@ export default function PlanetPanel() {
         if (z < -0.15) opacity = 0.16 + 0.3 * depth;
         else opacity = 0.55 + 0.45 * depth;
 
-        el.style.left = `${globeSize / 2 + x * RL}px`;
-        el.style.top = `${globeSize / 2 + y * RL}px`;
+        const left = globeSize / 2 + x * RL;
+        const top = globeSize / 2 + y * RL;
+        el.style.left = `${left}px`;
+        el.style.top = `${top}px`;
         el.style.fontSize = `${fontSize}px`;
-        el.style.opacity = String(opacity);
-        el.style.zIndex = String(Math.round(depth * 100));
         el.style.fontWeight = weight;
-        el.style.pointerEvents = z < -0.2 ? 'none' : 'auto';
-        el.classList.toggle(styles.labelBtnActive, z >= -0.2);
+        el.style.zIndex = String(Math.round(depth * 100));
 
         const metricEl = el.querySelector('[data-metric]') as HTMLElement | null;
         if (metricEl) {
           metricEl.style.fontSize = `${Math.max(10, fontSize * 0.5)}px`;
         }
+
+        labelState.push({ id: meta.id, el, z, opacity });
+        if (z > 0) {
+          collisionBoxes.push({
+            id: meta.id,
+            z,
+            left,
+            top,
+            width: el.offsetWidth || fontSize * meta.name.length * 0.55,
+            height: el.offsetHeight || fontSize * 1.4,
+          });
+        }
+      }
+
+      const suppressed = suppressedLabelIds(collisionBoxes);
+      for (const { id, el, z, opacity } of labelState) {
+        let o = opacity;
+        let pe = z < -0.2 ? 'none' : 'auto';
+        if (suppressed.has(id)) {
+          o = 0.25;
+          pe = 'none';
+        }
+        el.style.opacity = String(o);
+        el.style.pointerEvents = pe;
+        el.classList.toggle(styles.labelBtnActive, z >= -0.2 && !suppressed.has(id));
       }
 
       if (

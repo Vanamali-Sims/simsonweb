@@ -12,6 +12,8 @@ export type WorkChart = {
   colour: 'blue' | 'orange';
 };
 
+export type MissionAccent = 'blue' | 'orange';
+
 export type WorkItem = {
   id: string;
   kind: WorkKind;
@@ -29,6 +31,20 @@ export type WorkItem = {
   end?: string | null;
   live?: string;
   github?: string;
+  /** Mission scrollytelling (1–3) */
+  flagship?: number;
+  missionTitle?: string;
+  missionKicker?: string;
+  problem?: string;
+  pipeline?: string[];
+  media?: string | null;
+  mediaAlt?: string;
+  resultBig?: string;
+  writeup?: string;
+  missionAccent?: MissionAccent;
+  missionFacts?: string[];
+  /** Timeline: education row styling */
+  isEducation?: boolean;
 };
 
 export type SkillDef = {
@@ -47,6 +63,7 @@ export type PlanetDef = {
 };
 
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/van-sims';
+export const GITHUB_URL = 'https://github.com/Vanamali-Sims';
 export const CV_PDF_PATH = '/Vanamali_Resume.pdf';
 export const EMAIL = 'simsvanamali@gmail.com';
 
@@ -101,6 +118,16 @@ const workItems: WorkItem[] = [
     ],
     start: '2025-03',
     end: '2025-12',
+    flagship: 1,
+    missionTitle: 'SilverOak semantic router',
+    missionKicker:
+      'MISSION 01 · SILVEROAK APPS · ML INTERN · MAR – DEC 2025',
+    problem:
+      'Every user question triggered a full LLM classification call: about six seconds of latency on every request.',
+    pipeline: ['User question', 'Embedding', 'Semantic router', 'Handler'],
+    media: null,
+    resultBig: '96.7% faster',
+    missionAccent: 'blue',
   },
   {
     id: 'zelo',
@@ -164,6 +191,7 @@ const workItems: WorkItem[] = [
     lines: ['Postgraduate data science, studied alongside the work on this page.'],
     start: '2025-03',
     end: '2026-11',
+    isEducation: true,
   },
   {
     id: 'sea',
@@ -190,6 +218,16 @@ const workItems: WorkItem[] = [
     ],
     live: 'https://fishing-grounds-recsys.onrender.com/',
     github: 'https://github.com/Vanamali-Sims/fishing-grounds-recsys',
+    flagship: 2,
+    missionTitle: 'Sea Anchor',
+    missionKicker: 'MISSION 02 · SEA ANCHOR · FISHING-GROUND RECOMMENDER',
+    problem:
+      'Fishing activity has no ratings, only sparse implicit hours per ocean cell. Does collaborative filtering still work?',
+    pipeline: ['AIS tracks', 'DuckDB', 'Implicit ALS', 'FastAPI', 'deck.gl map'],
+    media: '/projects/fishing-grounds.png',
+    mediaAlt: 'Map of recommended fishing grounds from AIS vessel tracks',
+    resultBig: '20×',
+    missionAccent: 'blue',
   },
   {
     id: 'mpp',
@@ -207,6 +245,26 @@ const workItems: WorkItem[] = [
     ],
     live: 'https://d3rvyrwejm3499.cloudfront.net/',
     github: 'https://github.com/Vanamali-Sims/myPowerPlant',
+    flagship: 3,
+    missionTitle: 'MyPowerPlant',
+    missionKicker: 'MISSION 03 · MYPOWERPLANT · VIRTUAL POWER PLANT ADVISOR',
+    problem:
+      'Should a Victorian household join a Virtual Power Plant? Answering it means handling their energy data.',
+    pipeline: [
+      'Household inputs',
+      'In-browser model',
+      'Savings + vendors',
+      'Alerts',
+    ],
+    media: '/projects/my-power-plant.png',
+    mediaAlt: 'MyPowerPlant virtual power plant advisor',
+    resultBig: 'On-device',
+    missionAccent: 'orange',
+    missionFacts: [
+      'Savings computed in the browser',
+      'Keyless OIDC deploys · SHA rollback',
+      'WCAG AA',
+    ],
   },
   {
     id: 'cloud',
@@ -223,6 +281,8 @@ const workItems: WorkItem[] = [
     ],
     live: 'https://cloudyornot.pages.dev/',
     github: 'https://github.com/Vanamali-Sims/cloudyorNot',
+    media: '/projects/cloud-stability.png',
+    mediaAlt: 'Melbourne cloud stability map with contour bands',
   },
   {
     id: 'footfall',
@@ -238,6 +298,8 @@ const workItems: WorkItem[] = [
       'dbt-duckdb models over pedestrian sensor counts; LightGBM forecasts; told in Tableau.',
     ],
     github: 'https://github.com/Vanamali-Sims/howMelbMoves',
+    media: '/projects/melbourne-footfall.png',
+    mediaAlt: 'Melbourne CBD pedestrian footfall by precinct',
   },
   {
     id: 'motion',
@@ -251,6 +313,8 @@ const workItems: WorkItem[] = [
       'Webcam gesture console: swipes above the keyboard trigger commands you program.',
     lines: ['Optical flow in a gesture band above the keyboard.'],
     github: 'https://github.com/Vanamali-Sims/mdither_console',
+    media: '/projects/motion-console.png',
+    mediaAlt: 'Motion Console webcam gesture interface',
   },
 ];
 
@@ -340,6 +404,52 @@ export function projectTouchButtonLabel(work: WorkItem): string {
   if (work.live) return 'Open live site ↗';
   if (work.github) return 'Open GitHub ↗';
   return 'Details';
+}
+
+export function missionAccentHex(accent: MissionAccent): string {
+  return accent === 'orange' ? '#E8541A' : '#3D4BFF';
+}
+
+export function getMissions(): WorkItem[] {
+  return workItems
+    .filter((w) => w.flagship != null)
+    .sort((a, b) => (a.flagship ?? 0) - (b.flagship ?? 0));
+}
+
+export function getMoonProjects(): WorkItem[] {
+  return workItems.filter((w) => w.kind === 'proj' && !w.flagship);
+}
+
+export function getExperienceRows(): WorkItem[] {
+  return workItems
+    .filter((w) => w.kind === 'exp' && w.start)
+    .sort((a, b) => (a.start ?? '').localeCompare(b.start ?? ''));
+}
+
+export function countSkillCategories(skillIds: string[]) {
+  let data = 0;
+  let front = 0;
+  let infra = 0;
+  for (const id of skillIds) {
+    const s = getSkill(id);
+    if (!s) continue;
+    if (s.category === 'data') data++;
+    else if (s.category === 'front') front++;
+    else infra++;
+  }
+  return { data, front, infra };
+}
+
+export function experienceBarFill(work: WorkItem): string {
+  if (work.isEducation) return 'transparent';
+  if (work.skillIds.length === 0) return '#9A9A9A';
+  const { data, front } = countSkillCategories(work.skillIds);
+  if (front > data) return '#E8541A';
+  return '#3D4BFF';
+}
+
+export function projectCardHref(work: WorkItem): string | undefined {
+  return work.live ?? work.github;
 }
 
 export { skillDefs, workItems };
