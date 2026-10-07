@@ -3,26 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --paper: #f2eee5;
-  --ink: #14243d;
-  --ember: #c24a18;
-  /* Solid mix of ember + ink; 6.2:1 on --paper — use for small ember text */
-  --ember-deep: #8e3f23;
-  /* 70% ink / 30% paper; 5.5:1 on --paper */
-  --muted: #57616f;
-  /* Warm paper-tint; ≥7:1 on --ink */
-  --muted-on-ink: #c4bfb4;
-  --hairline: color-mix(in srgb, var(--ink) 18%, transparent);
-  --hairline-on-ink: color-mix(in srgb, var(--paper) 18%, transparent);
+  --paper: #ffffff;
+  --ink: #0a0a0a;
+  --data: #3d4bff;
+  --frontend: #e8541a;
+  --muted: #5c5c5c;
+  --grid: #e5e5e5;
 
-  --nav-h: 64px;
-  --ease-struct: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --dur: 180ms;
-
+  --nav-h: 56px;
   --font-display: var(--font-space-grotesk), "Helvetica Neue", Arial, sans-serif;
-  --font-body: var(--font-dm-sans), "Helvetica Neue", Arial, sans-serif;
-
-  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --font-body: var(--font-space-grotesk), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
 }
 
 @layer base {
@@ -34,9 +25,8 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: calc(var(--nav-h) + 12px);
+    scroll-padding-top: calc(var(--nav-h) + 48px);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
@@ -44,7 +34,7 @@
     background: var(--paper);
     color: var(--ink);
     font-family: var(--font-body);
-    font-size: 1.05rem;
+    font-size: 1.0625rem;
     line-height: 1.55;
     overflow-x: hidden;
   }
@@ -55,8 +45,8 @@
   h4 {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
     margin: 0;
   }
 
@@ -77,28 +67,9 @@
     cursor: pointer;
   }
 
-  /* Dual-tone ring: visible on both --paper and --ink (1.4.11, 2.4.7) */
   :focus-visible {
     outline: 3px solid var(--ink);
     outline-offset: 3px;
-    box-shadow: 0 0 0 6px var(--paper);
-  }
-
-  ::selection {
-    background: var(--ember-deep);
-    color: var(--paper);
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--paper);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--ink);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -118,6 +89,10 @@
 }
 
 @layer utilities {
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
   .sr-only {
     position: absolute;
     width: 1px;
@@ -135,15 +110,10 @@
     left: 12px;
     top: 12px;
     z-index: 100;
-    padding: 0.75rem 1.1rem;
+    padding: 0.75rem 1rem;
     background: var(--paper);
     color: var(--ink);
-    font-family: var(--font-display);
     font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    box-shadow: 6px 6px 0 0 var(--ember);
     transform: translateY(-180%);
   }
 
@@ -152,31 +122,63 @@
     transform: none;
   }
 
-  .grain {
-    isolation: isolate;
+  .case-study-zoom {
+    transform: scale(1.01);
   }
 
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain);
-    opacity: 0.08;
-    mix-blend-mode: multiply;
-    pointer-events: none;
-    z-index: 0;
+  .bg-data {
+    background-color: var(--data);
   }
 
-  .grain > * {
-    position: relative;
-    z-index: 1;
+  .bg-frontend {
+    background-color: var(--frontend);
   }
 
-  .hard-shadow {
-    box-shadow: 12px 12px 0 0 var(--ink);
+  .bg-ink {
+    background-color: var(--ink);
   }
 
-  .hard-shadow-sm {
-    box-shadow: 6px 6px 0 0 var(--ink);
+  .bg-paper {
+    background-color: var(--paper);
+  }
+
+  .bg-grid {
+    background-color: var(--grid);
+  }
+
+  .border-grid {
+    border-color: var(--grid);
+  }
+
+  .text-muted {
+    color: var(--muted);
+  }
+
+  .text-paper {
+    color: var(--paper);
+  }
+
+  .text-ink {
+    color: var(--ink);
+  }
+
+  .border-data {
+    border-color: var(--data);
+  }
+
+  .border-frontend {
+    border-color: var(--frontend);
+  }
+
+  .border-ink {
+    border-color: var(--ink);
+  }
+
+  .fill-ink {
+    fill: var(--ink);
+  }
+
+  .fill-paper {
+    fill: var(--paper);
   }
 }
