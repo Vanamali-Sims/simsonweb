@@ -1,43 +1,55 @@
-import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, DM_Sans } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import type { Metadata, Viewport } from 'next';
+import { Space_Grotesk } from 'next/font/google';
+import './globals.css';
+import { site } from '@content/portfolio';
 
 const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-  weight: ["400", "500", "600"],
-  display: "swap",
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
 });
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
-  viewportFit: "cover",
-  themeColor: "#14243D",
+  themeColor: '#ffffff',
 };
 
 export const metadata: Metadata = {
-  title: "Vanamali Sims",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://simsdoesdata.me'
+  ),
+  title: 'Sai Vanamali — Data Scientist & Front-end Developer, Melbourne',
   description:
-    "Data scientist and software developer in Melbourne — building AI systems, products, and tools that actually ship.",
+    'Data scientist and front-end developer in Melbourne — SQL, dbt, Python, machine learning, React, and TypeScript. Ships ML systems and the interfaces around them.',
   keywords: [
-    "Vanamali Sims",
-    "Data Science",
-    "Software Developer",
-    "AI",
-    "Melbourne",
-    "Zelo",
+    'Sai Vanamali',
+    'Data Scientist',
+    'ML Engineer',
+    'Analytics Engineer',
+    'Front-end Developer',
+    'SQL',
+    'dbt',
+    'Python',
+    'machine learning',
+    'React',
+    'TypeScript',
+    'Melbourne',
   ],
-  authors: [{ name: "Vanamali Sims" }],
+  authors: [{ name: site.name }],
+  openGraph: {
+    title: 'Sai Vanamali — Data Scientist & Front-end Developer',
+    description: site.positioning,
+    type: 'website',
+    locale: 'en_AU',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sai Vanamali — Data Scientist & Front-end Developer',
+    description:
+      '96.7% faster routing · 18× traffic · 20× recommender baseline. Data + front-end in Melbourne.',
+  },
 };
 
 export default function RootLayout({
@@ -46,19 +58,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${spaceGrotesk.variable} ${dmSans.variable}`}
-    >
+    <html lang="en" className={spaceGrotesk.variable}>
       <body>
-        <a href="#main-content" className="skip-link">
+        <a href="#hero" className="skip-link">
           Skip to main content
         </a>
-        <Navbar />
         <main id="main-content" tabIndex={-1}>
           {children}
         </main>
-        <Footer />
       </body>
     </html>
   );

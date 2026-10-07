@@ -1,273 +1,42 @@
-'use client';
+import dynamic from 'next/dynamic';
+import Hero from '@/components/portfolio/Hero';
+import IntroOverlay from '@/components/portfolio/IntroOverlay';
+import ProofNumbers from '@/components/portfolio/ProofNumbers';
+import StickyTopBar from '@/components/portfolio/StickyTopBar';
+import CaseStudies from '@/components/portfolio/CaseStudies';
+import OtherProjects from '@/components/portfolio/OtherProjects';
+import ExperienceGantt from '@/components/portfolio/ExperienceGantt';
+import ContactSection from '@/components/portfolio/ContactSection';
+import JsonLd from '@/components/portfolio/JsonLd';
 
-import EmailLink, { EmailAddress } from '@/components/EmailLink';
-import ProjectImage from '@/components/ProjectImage';
-import VisuallyHidden from '@/components/VisuallyHidden';
-import { projects } from '@/data/projects';
-import {
-  aboutShort,
-  CV_PATH,
-  positioning,
-  proofChips,
-  roles,
-  social,
-  stacks,
-} from '@/data/site';
-import Link from 'next/link';
-import { useState } from 'react';
-import styles from './page.module.css';
-
-const filters = [
-  { id: 'all', label: 'All' },
-  { id: 'product', label: 'Product' },
-  { id: 'science', label: 'Science' },
-] as const;
+const SkillsNetwork = dynamic(() => import('@/components/portfolio/SkillsNetwork'), {
+  loading: () => (
+    <section
+      id="skills"
+      className="border-b border-grid px-5 py-16 md:px-8"
+      aria-label="Skills network loading"
+    >
+      <div className="mx-auto grid max-w-[1360px] min-h-[280px] grid-cols-2 gap-4 font-mono text-sm text-muted">
+        <p>Data &amp; ML</p>
+        <p className="text-right">Front-end</p>
+      </div>
+    </section>
+  ),
+});
 
 export default function Home() {
-  const [filter, setFilter] = useState<(typeof filters)[number]['id']>('all');
-  const visible =
-    filter === 'all' ? projects : projects.filter((p) => p.cat === filter);
-
   return (
-    <div className={styles.page}>
-      <section className={`${styles.hero} grain`} aria-labelledby="hero-name">
-        <div className={styles.heroInner}>
-          <p className={styles.wayfindingOnInk}>01 / PERSON</p>
-          <h1 id="hero-name" className={styles.heroName}>
-            Vanamali <span>Sims</span>
-          </h1>
-          <p className={styles.heroLede}>{positioning}</p>
-          <ul className={styles.chips} aria-label="Highlights">
-            {proofChips.map((chip) => (
-              <li key={chip}>{chip}</li>
-            ))}
-          </ul>
-          <div className={styles.ctaRow}>
-            <a href="#work" className={styles.ctaPrimary}>
-              See the work
-            </a>
-            <a href={CV_PATH} download className={styles.ctaGhost}>
-              Download CV
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section
-        id="work"
-        className={`${styles.work} grain`}
-        aria-labelledby="work-heading"
-        tabIndex={-1}
-      >
-        <header className={styles.sectionHead}>
-          <p className={styles.eyebrow}>Signal vs. noise</p>
-          <p className={styles.wayfinding}>02 / WORK</p>
-          <h2 id="work-heading" className={styles.sectionTitle}>
-            Selected work
-          </h2>
-        </header>
-        <div className={styles.workTools}>
-          <div className={styles.filters} role="group" aria-label="Filter projects">
-            {filters.map((f) => (
-              <button
-                key={f.id}
-                type="button"
-                aria-pressed={filter === f.id}
-                className={`${styles.filter} ${
-                  filter === f.id ? styles.filterActive : ''
-                }`}
-                onClick={() => setFilter(f.id)}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <p className="sr-only" aria-live="polite">
-          Showing {visible.length} {visible.length === 1 ? 'project' : 'projects'}
-        </p>
-
-        <div className={styles.projectGrid}>
-          {visible.map((project, i) => (
-            <article
-              key={project.slug}
-              className={`${styles.project} ${
-                i % 3 === 1 ? styles.projectShift : ''
-              } ${i % 3 === 2 ? styles.projectHang : ''}`}
-            >
-              <Link
-                href={`/work/${project.slug}`}
-                className={styles.projectMedia}
-                tabIndex={-1}
-                aria-hidden="true"
-              >
-                <ProjectImage
-                  src={project.image}
-                  alt={project.imageAlt}
-                  decorative
-                  compact
-                />
-              </Link>
-              <div className={styles.projectBody}>
-                <p className={styles.projectMetric}>
-                  {project.metric ?? 'TODO — outcome metric'}
-                </p>
-                <h3>{project.title}</h3>
-                <p>{project.blurb}</p>
-                <div className={styles.tags} aria-label="Technologies">
-                  {project.tags.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </div>
-                <div className={styles.projectActions}>
-                  {project.live ? (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.projectLive}
-                    >
-                      Live site
-                      <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
-                    </a>
-                  ) : null}
-                  <Link
-                    href={`/work/${project.slug}`}
-                    className={
-                      project.live ? styles.projectMore : styles.projectLive
-                    }
-                  >
-                    Learn more
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="experience"
-        className={`${styles.experience} grain`}
-        aria-labelledby="experience-heading"
-        tabIndex={-1}
-      >
-        <header className={styles.sectionHead}>
-          <p className={styles.eyebrowOnInk}>Bias–variance tradeoff</p>
-          <p className={styles.wayfindingOnInk}>03 / EXPERIENCE</p>
-          <h2 id="experience-heading" className={styles.sectionTitleOnInk}>
-            Experience
-          </h2>
-        </header>
-        <div className={styles.loreStack}>
-          {roles.map((item, i) => (
-            <article
-              key={`${item.org}-${item.role}`}
-              className={`${styles.role} ${i === 1 ? styles.roleCantilever : ''}`}
-            >
-              <div className={styles.roleMeta}>
-                <span className={styles.roleWhen}>{item.when}</span>
-                <span className={styles.roleOrg}>{item.org}</span>
-              </div>
-              <h3>{item.role}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="stack" className={styles.stack} aria-labelledby="stack-heading">
-        <h2 id="stack-heading" className="sr-only">
-          Stack
-        </h2>
-        <div className={styles.stackStrip}>
-          {stacks.map((group) => (
-            <div key={group.title} className={styles.stackGroup}>
-              <span className={styles.stackLabel}>{group.title}</span>
-              <span className={styles.stackItems}>{group.items.join(' · ')}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="about"
-        className={`${styles.about} grain`}
-        aria-labelledby="about-heading"
-        tabIndex={-1}
-      >
-        <header className={styles.sectionHead}>
-          <p className={styles.eyebrow}>Overfitting vs. generalization</p>
-          <p className={styles.wayfinding}>04 / ABOUT</p>
-          <h2 id="about-heading" className={styles.sectionTitle}>
-            The short version
-          </h2>
-        </header>
-        <div className={styles.aboutGrid}>
-          <div className={styles.aboutCopy}>
-            {aboutShort.map((sentence) => (
-              <p key={sentence}>{sentence}</p>
-            ))}
-            <Link href="/about" className={styles.textLink}>
-              Full story
-            </Link>
-          </div>
-          <div
-            className={styles.photoSlot}
-            role="img"
-            aria-label="Portrait placeholder — photo to be supplied"
-          />
-        </div>
-      </section>
-
-      <section
-        id="contact"
-        className={`${styles.contact} grain`}
-        aria-labelledby="contact-heading"
-        tabIndex={-1}
-      >
-        <header className={styles.sectionHead}>
-          <p className={styles.wayfinding}>CONTACT / 05</p>
-          <h2 id="contact-heading" className={styles.sectionTitle}>
-            Got a problem worth solving?
-          </h2>
-        </header>
-        <div className={styles.contactGrid}>
-          <EmailLink className={styles.contactCard}>
-            <span className={styles.contactLabel}>Email</span>
-            <EmailAddress className={styles.contactValue} />
-          </EmailLink>
-          <div className={styles.contactCard}>
-            <span className={styles.contactLabel}>Location</span>
-            <span className={styles.contactValue}>{social.location}</span>
-          </div>
-          <a
-            href={social.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.contactCard}
-          >
-            <span className={styles.contactLabel}>LinkedIn</span>
-            <span className={styles.contactValue}>van-sims</span>
-            <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
-          </a>
-          <a
-            href={social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.contactCard}
-          >
-            <span className={styles.contactLabel}>GitHub</span>
-            <span className={styles.contactValue}>Vanamali-Sims</span>
-            <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
-          </a>
-          <a href={CV_PATH} download className={styles.contactCard}>
-            <span className={styles.contactLabel}>CV</span>
-            <span className={styles.contactValue}>Download</span>
-          </a>
-        </div>
-      </section>
-    </div>
+    <>
+      <JsonLd />
+      <IntroOverlay />
+      <StickyTopBar />
+      <Hero />
+      <ProofNumbers />
+      <SkillsNetwork />
+      <CaseStudies />
+      <OtherProjects />
+      <ExperienceGantt />
+      <ContactSection />
+    </>
   );
 }
