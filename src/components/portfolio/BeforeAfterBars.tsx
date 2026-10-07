@@ -12,15 +12,26 @@ type Props = {
   className?: string;
 };
 
-const colorClass = {
-  data: 'bg-data',
-  frontend: 'bg-frontend',
+const afterFill = {
+  data: 'var(--data)',
+  frontend: 'var(--frontend)',
 } as const;
+
+const BEFORE_FILL = '#9a9a9a';
+const BAR_HEIGHT = 10;
+const MIN_BAR_PX = 3;
 
 function defaultFormat(n: number) {
   if (n < 1 && n > 0) return n.toString();
-  if (n >= 1000) return `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k`.replace('.0k', 'k');
+  if (n >= 1000)
+    return `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k`.replace('.0k', 'k');
   return n % 1 === 0 ? String(n) : n.toFixed(1);
+}
+
+function barWidth(animate: boolean, value: number, max: number) {
+  if (!animate) return '0px';
+  const pct = (value / max) * 100;
+  return `max(${MIN_BAR_PX}px, ${pct}%)`;
 }
 
 export default function BeforeAfterBars({
@@ -63,32 +74,40 @@ export default function BeforeAfterBars({
     return () => obs.disconnect();
   }, []);
 
-  const beforePct = (beforeValue / max) * 100;
-  const afterPct = (afterValue / max) * 100;
-
   return (
-    <div ref={ref} className={`space-y-3 ${className}`} role="img" aria-label={`${beforeLabel} ${formatValue(beforeValue)} versus ${afterLabel} ${formatValue(afterValue)}`}>
-      <div className="space-y-1">
-        <div className="flex justify-between font-mono text-xs text-muted">
+    <div
+      ref={ref}
+      className={`space-y-3 ${className}`}
+      role="img"
+      aria-label={`${beforeLabel} ${formatValue(beforeValue)} versus ${afterLabel} ${formatValue(afterValue)}`}
+    >
+      <div className="space-y-1.5">
+        <div className="flex justify-between font-mono text-xs text-ink">
           <span>{beforeLabel}</span>
           <span>{formatValue(beforeValue)}</span>
         </div>
-        <div className="h-2 w-full bg-grid">
+        <div className="w-full" style={{ height: BAR_HEIGHT }}>
           <div
-            className="h-full bg-muted/40 transition-[width] duration-700 ease-out motion-reduce:transition-none"
-            style={{ width: animate ? `${beforePct}%` : '0%' }}
+            className="h-full transition-[width] duration-700 ease-out motion-reduce:transition-none"
+            style={{
+              width: barWidth(animate, beforeValue, max),
+              backgroundColor: BEFORE_FILL,
+            }}
           />
         </div>
       </div>
-      <div className="space-y-1">
-        <div className="flex justify-between font-mono text-xs text-muted">
+      <div className="space-y-1.5">
+        <div className="flex justify-between font-mono text-xs text-ink">
           <span>{afterLabel}</span>
           <span>{formatValue(afterValue)}</span>
         </div>
-        <div className="h-2 w-full bg-grid">
+        <div className="w-full" style={{ height: BAR_HEIGHT }}>
           <div
-            className={`h-full ${colorClass[color]} transition-[width] duration-700 ease-out motion-reduce:transition-none`}
-            style={{ width: animate ? `${afterPct}%` : '0%' }}
+            className="h-full transition-[width] duration-700 ease-out motion-reduce:transition-none"
+            style={{
+              width: barWidth(animate, afterValue, max),
+              backgroundColor: afterFill[color],
+            }}
           />
         </div>
       </div>

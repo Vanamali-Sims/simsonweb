@@ -1,19 +1,30 @@
 'use client';
 
 import { edges, skills, work, getWork } from '@content/portfolio';
-import { buildGraphNodes, type GraphNode } from '@/lib/graphLayout';
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import {
+  computePortfolioGraphLayout,
+  GRAPH_CENTER_X,
+  GRAPH_CENTER_Y,
+  GRAPH_HEIGHT,
+  GRAPH_WIDTH,
+  type LayoutNode,
+} from '@/lib/graphLayout';
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useState,
+  type CSSProperties,
+} from 'react';
 import SkillsNetworkMobile from './SkillsNetworkMobile';
-
-const WIDTH = 960;
-const HEIGHT = 520;
 
 type FocusState =
   | { type: 'none' }
   | { type: 'skill'; skillId: string }
   | { type: 'work'; workId: string };
 
-function nodeFill(node: GraphNode) {
+function nodeFill(node: LayoutNode) {
   if (node.kind === 'work') {
     if (node.category === 'bridge') return 'var(--ink)';
     if (node.category === 'frontend') return 'var(--frontend)';
@@ -24,21 +35,37 @@ function nodeFill(node: GraphNode) {
   return 'var(--data)';
 }
 
-function nodeStroke(node: GraphNode) {
+function nodeStroke(node: LayoutNode) {
   if (node.kind === 'skill' && node.category === 'infra') return 'var(--ink)';
   return 'transparent';
 }
 
+function nodeMotionStyle(
+  node: LayoutNode,
+  entered: boolean,
+  reducedMotion: boolean
+): CSSProperties {
+  const x = entered || reducedMotion ? node.x : GRAPH_CENTER_X;
+  const y = entered || reducedMotion ? node.y : GRAPH_CENTER_Y;
+  return {
+    transform: `translate(${x}px, ${y}px)`,
+    transition: reducedMotion ? undefined : 'transform 800ms ease-out',
+  };
+}
+
 export default function SkillsNetwork() {
   const [mobile, setMobile] = useState<boolean | null>(null);
-  const [layout, setLayout] = useState<ReturnType<typeof buildGraphNodes> | null>(
-    null
-  );
   const [focus, setFocus] = useState<FocusState>({ type: 'none' });
-  const [progress, setProgress] = useState(0);
   const [tooltip, setTooltip] = useState<string | null>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
+  const [entered, setEntered] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const descId = useId();
+
+  const layout = useMemo(() => computePortfolioGraphLayout(), []);
+  const nodeById = useMemo(
+    () => new Map(layout.nodes.map((n) => [n.id, n])),
+    [layout.nodes]
+  );
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)');
@@ -49,30 +76,15 @@ export default function SkillsNetwork() {
   }, []);
 
   useEffect(() => {
-    if (mobile) return;
-    import('@/lib/graphLayout').then(() => {
-      setLayout(buildGraphNodes(WIDTH, HEIGHT));
-    });
-  }, [mobile]);
-
-  useEffect(() => {
-    if (!layout) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) {
-      setProgress(1);
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReducedMotion(mq.matches);
+    if (mq.matches) {
+      setEntered(true);
       return;
     }
-    const start = performance.now();
-    const duration = 800;
-    let frame: number;
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / duration);
-      setProgress(t);
-      if (t < 1) frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
+    const frame = requestAnimationFrame(() => setEntered(true));
     return () => cancelAnimationFrame(frame);
-  }, [layout]);
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -83,20 +95,24 @@ export default function SkillsNetwork() {
   }, []);
 
   const isHighlighted = useCallback(
-    (node: GraphNode) => {
+    (node: LayoutNode) => {
       if (focus.type === 'none') return true;
       if (focus.type === 'skill') {
         const sid = focus.skillId;
         if (node.kind === 'skill' && node.id === `skill:${sid}`) return true;
         if (node.kind === 'work') {
-          return edges.some((e) => e.skillId === sid && e.workId === node.id.slice(5));
+          return edges.some(
+            (e) => e.skillId === sid && e.workId === node.id.slice(5)
+          );
         }
         return false;
       }
       const wid = focus.workId;
       if (node.kind === 'work' && node.id === `work:${wid}`) return true;
       if (node.kind === 'skill') {
-        return edges.some((e) => e.workId === wid && e.skillId === node.id.slice(6));
+        return edges.some(
+          (e) => e.workId === wid && e.skillId === node.id.slice(6)
+        );
       }
       return false;
     },
@@ -117,8 +133,10 @@ export default function SkillsNetwork() {
     const target = w?.flagship ? `case-${workId}` : `project-${workId}`;
     const el = document.getElementById(target);
     if (!el) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    el.scrollIntoView({
+      behavior: reducedMotion ? 'auto' : 'smooth',
+      block: 'start',
+    });
     if (w?.flagship) {
       el.classList.add('case-study-zoom');
       window.setTimeout(() => el.classList.remove('case-study-zoom'), 500);
@@ -138,11 +156,6 @@ export default function SkillsNetwork() {
 
   if (mobile) return <SkillsNetworkMobile />;
 
-  if (!layout) return null;
-
-  const cx = WIDTH / 2;
-  const cy = HEIGHT / 2;
-
   return (
     <section
       id="skills"
@@ -152,16 +165,18 @@ export default function SkillsNetwork() {
       <div className="mx-auto max-w-[1360px]">
         <h2 id="skills-heading" className="sr-only">Skills and work</h2>
         <div className="relative">
-          <p className="pointer-events-none absolute left-0 top-0 font-mono text-xs uppercase tracking-widest text-muted">
+          <p className="pointer-events-none font-mono text-xs uppercase tracking-widest text-muted">
             Data &amp; ML
           </p>
           <p className="pointer-events-none absolute right-0 top-0 font-mono text-xs uppercase tracking-widest text-muted">
             Front-end
           </p>
           <svg
-            ref={svgRef}
-            viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-            className="mt-6 w-full max-h-[70vh]"
+            viewBox={`0 0 ${GRAPH_WIDTH} ${GRAPH_HEIGHT}`}
+            width="100%"
+            height="auto"
+            preserveAspectRatio="xMidYMid meet"
+            className="mt-6 block"
             role="img"
             aria-describedby={descId}
           >
@@ -169,17 +184,18 @@ export default function SkillsNetwork() {
               Network of skills connected to projects and roles. Node size reflects how often a skill was used.
             </desc>
             {layout.links.map((link, i) => {
-              const workId = (link.source as GraphNode).id.slice(5);
-              const skillId = (link.target as GraphNode).id.slice(6);
-              const hi = linkHighlighted(workId, skillId);
+              const source = nodeById.get(`work:${link.workId}`);
+              const target = nodeById.get(`skill:${link.skillId}`);
+              if (!source || !target) return null;
+              const hi = linkHighlighted(link.workId, link.skillId);
               const opacity = focus.type === 'none' ? 0.35 : hi ? 0.6 : 0.08;
-              const sx = cx + ((link.source as GraphNode).x! - cx) * progress;
-              const sy = cy + ((link.source as GraphNode).y! - cy) * progress;
-              const tx = cx + ((link.target as GraphNode).x! - cx) * progress;
-              const ty = cy + ((link.target as GraphNode).y! - cy) * progress;
+              const sx = entered || reducedMotion ? source.x : GRAPH_CENTER_X;
+              const sy = entered || reducedMotion ? source.y : GRAPH_CENTER_Y;
+              const tx = entered || reducedMotion ? target.x : GRAPH_CENTER_X;
+              const ty = entered || reducedMotion ? target.y : GRAPH_CENTER_Y;
               return (
                 <line
-                  key={i}
+                  key={`${link.workId}-${link.skillId}-${i}`}
                   x1={sx}
                   y1={sy}
                   x2={tx}
@@ -193,8 +209,6 @@ export default function SkillsNetwork() {
             {layout.nodes.map((node) => {
               const hi = isHighlighted(node);
               const opacity = focus.type === 'none' ? 1 : hi ? 1 : 0.15;
-              const x = cx + (node.x! - cx) * progress;
-              const y = cy + (node.y! - cy) * progress;
               const isSkill = node.kind === 'skill';
               const skillId = isSkill ? node.id.slice(6) : '';
               const workId = !isSkill ? node.id.slice(5) : '';
@@ -217,26 +231,31 @@ export default function SkillsNetwork() {
 
               if (isSkill) {
                 return (
-                  <g key={node.id} opacity={opacity} className="transition-opacity duration-200">
+                  <g
+                    key={node.id}
+                    opacity={opacity}
+                    className="transition-opacity duration-200"
+                    style={nodeMotionStyle(node, entered, reducedMotion)}
+                  >
                     <circle
-                      cx={x}
-                      cy={y}
+                      cx={0}
+                      cy={0}
                       r={node.radius}
                       fill={nodeFill(node)}
                       stroke={nodeStroke(node)}
                       strokeWidth={node.category === 'infra' ? 1.5 : 0}
                     />
                     <text
-                      x={x + node.radius + 6}
-                      y={y + 4}
+                      x={node.radius + 6}
+                      y={4}
                       className="fill-ink text-[11px] font-medium"
                       style={{ fontFamily: 'var(--font-body)' }}
                     >
                       {node.label}
                     </text>
                     <circle
-                      cx={x}
-                      cy={y}
+                      cx={0}
+                      cy={0}
                       r={node.radius + 8}
                       fill="transparent"
                       tabIndex={0}
@@ -260,18 +279,23 @@ export default function SkillsNetwork() {
               const w = 56;
               const h = 28;
               return (
-                <g key={node.id} opacity={opacity} className="transition-opacity duration-200">
+                <g
+                  key={node.id}
+                  opacity={opacity}
+                  className="transition-opacity duration-200"
+                  style={nodeMotionStyle(node, entered, reducedMotion)}
+                >
                   <rect
-                    x={x - w / 2}
-                    y={y - h / 2}
+                    x={-w / 2}
+                    y={-h / 2}
                     width={w}
                     height={h}
                     rx={4}
                     fill={nodeFill(node)}
                   />
                   <text
-                    x={x}
-                    y={y + 4}
+                    x={0}
+                    y={4}
                     textAnchor="middle"
                     className="fill-paper text-[9px] font-bold"
                     style={{ fontFamily: 'var(--font-display)' }}
@@ -279,8 +303,8 @@ export default function SkillsNetwork() {
                     {node.label.length > 12 ? `${node.label.slice(0, 11)}…` : node.label}
                   </text>
                   <rect
-                    x={x - w / 2}
-                    y={y - h / 2}
+                    x={-w / 2}
+                    y={-h / 2}
                     width={w}
                     height={h}
                     fill="transparent"

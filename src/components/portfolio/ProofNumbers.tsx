@@ -13,10 +13,13 @@ export default function ProofNumbers() {
         <ul className="grid gap-10 md:grid-cols-3 md:gap-8">
           {proofTiles.map((tile) => (
             <li key={tile.id} className="flex flex-col gap-4">
-              <p className="font-display text-4xl font-bold tracking-tight md:text-5xl">
+              <p
+                className="font-display font-bold tracking-tight"
+                style={{ fontSize: 'clamp(36px, 3.6vw, 56px)' }}
+              >
                 {tile.headline}
               </p>
-              <p className="text-base text-muted">{tile.caption}</p>
+              <p className="text-[15px] leading-snug text-muted">{tile.caption}</p>
               <BeforeAfterBars
                 beforeLabel={tile.beforeLabel}
                 afterLabel={tile.afterLabel}
