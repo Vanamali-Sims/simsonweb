@@ -1,10 +1,10 @@
 export const CV_PATH = '/Vanamali_Resume.pdf';
 
 export const positioning =
-  'Data scientist and software developer in Melbourne. I build analysis pipelines, AI products, and front-end tools meant to ship.';
+  'Software engineer in Melbourne. I build and ship full products end to end: TypeScript front ends, serverless back ends, and the data underneath. Lately, systems that have to work when nobody’s watching.';
 
 export const proofChips = [
-  'MSc Data Science, Monash',
+  'Sub-50ms Go API in production · 6s → 0.2s at SilverOak',
   'Co-founder, Zelo',
   'Question routing 6s → 0.2s at SilverOak — 96.7% faster',
 ] as const;

@@ -213,11 +213,13 @@ export default function Home() {
               Full story
             </Link>
           </div>
-          <div
-            className={styles.photoSlot}
-            role="img"
-            aria-label="Portrait placeholder — photo to be supplied"
-          />
+          <div className={styles.photoSlot}>
+            <img
+              src="/portrait.jpg"
+              alt="Vanamali Sims"
+              className={styles.photo}
+            />
+          </div>
         </div>
       </section>
 
