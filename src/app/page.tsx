@@ -59,6 +59,14 @@ export default function Home() {
         aria-labelledby="work-heading"
         tabIndex={-1}
       >
+        <div className={styles.ambient} aria-hidden="true">
+          <span className={`${styles.shape} ${styles.shapeSquare}`} />
+          <span className={`${styles.shape} ${styles.shapeRing}`} />
+          <span className={`${styles.shape} ${styles.shapeBlock}`} />
+          <span className={`${styles.shape} ${styles.shapeDisc}`} />
+          <span className={`${styles.shape} ${styles.shapeSlash}`} />
+          <span className={`${styles.shape} ${styles.shapeFrame}`} />
+        </div>
         <header className={styles.sectionHead}>
           <p className={styles.eyebrow}>Signal vs. noise</p>
           <p className={styles.wayfinding}>02 / WORK</p>

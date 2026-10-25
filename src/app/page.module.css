@@ -163,6 +163,137 @@
   padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 4rem);
 }
 
+/* Quiet geometry in the empty column to the right of the project grid. */
+.work .ambient {
+  display: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: calc(clamp(1.25rem, 4vw, 4rem) + 68rem + 1.25rem);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  display: block;
+}
+
+.shapeSquare {
+  width: min(46%, 168px);
+  aspect-ratio: 1;
+  top: 9%;
+  left: 6%;
+  border: 1.5px solid var(--ink);
+  opacity: 0.14;
+  transform: rotate(16deg);
+  animation: drift-square 38s ease-in-out infinite alternate;
+}
+
+.shapeRing {
+  width: min(28%, 108px);
+  aspect-ratio: 1;
+  top: 28%;
+  right: 10%;
+  border: 1.5px solid var(--ember);
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: drift-ring 46s ease-in-out infinite alternate;
+}
+
+.shapeBlock {
+  width: min(34%, 92px);
+  height: 14px;
+  top: 47%;
+  left: 18%;
+  background: var(--ember);
+  opacity: 0.12;
+  transform: rotate(-26deg);
+  animation: drift-block 32s ease-in-out infinite alternate;
+}
+
+.shapeDisc {
+  width: min(18%, 64px);
+  aspect-ratio: 1;
+  top: 61%;
+  right: 22%;
+  background: var(--ink);
+  border-radius: 50%;
+  opacity: 0.08;
+  animation: drift-disc 52s ease-in-out infinite alternate;
+}
+
+.shapeSlash {
+  width: 2px;
+  height: min(22%, 150px);
+  top: 18%;
+  left: 58%;
+  background: var(--ink);
+  opacity: 0.16;
+  transform: rotate(22deg);
+  animation: drift-slash 44s ease-in-out infinite alternate;
+}
+
+.shapeFrame {
+  width: min(24%, 86px);
+  aspect-ratio: 1;
+  bottom: 12%;
+  left: 14%;
+  border: 1.5px solid var(--ink);
+  opacity: 0.12;
+  transform: rotate(-12deg);
+  animation: drift-frame 40s ease-in-out infinite alternate;
+}
+
+@keyframes drift-square {
+  from { transform: translate3d(0, 0, 0) rotate(16deg); }
+  to { transform: translate3d(22px, 36px, 0) rotate(26deg); }
+}
+
+@keyframes drift-ring {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-18px, 42px, 0); }
+}
+
+@keyframes drift-block {
+  from { transform: translate3d(0, 0, 0) rotate(-26deg); }
+  to { transform: translate3d(26px, -20px, 0) rotate(-18deg); }
+}
+
+@keyframes drift-disc {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-14px, -32px, 0); }
+}
+
+@keyframes drift-slash {
+  from { transform: translate3d(0, 0, 0) rotate(22deg); }
+  to { transform: translate3d(10px, 48px, 0) rotate(30deg); }
+}
+
+@keyframes drift-frame {
+  from { transform: translate3d(0, 0, 0) rotate(-12deg); }
+  to { transform: translate3d(20px, -28px, 0) rotate(-4deg); }
+}
+
+@media (min-width: 1360px) {
+  .work .ambient {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shapeSquare,
+  .shapeRing,
+  .shapeBlock,
+  .shapeDisc,
+  .shapeSlash,
+  .shapeFrame {
+    animation: none;
+  }
+}
+
 .workTools {
   margin-bottom: 1.75rem;
 }

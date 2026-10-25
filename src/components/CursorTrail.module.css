@@ -1,0 +1,38 @@
+.trail {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 240ms linear;
+}
+
+.trail[data-active='true'] {
+  opacity: 1;
+}
+
+.dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(13px - var(--i) * 0.85px);
+  height: calc(13px - var(--i) * 0.85px);
+  background: var(--ember);
+  opacity: calc(0.82 - var(--i) * 0.08);
+  border-radius: 1px;
+}
+
+.dot:nth-child(odd) {
+  background: var(--ink);
+}
+
+.dot:nth-child(3n) {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--ember);
+}
+
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
+  .trail {
+    display: none;
+  }
+}

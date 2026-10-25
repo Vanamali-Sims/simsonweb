@@ -3,6 +3,7 @@ import { Space_Grotesk, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CursorTrail from "@/components/CursorTrail";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -59,6 +60,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <CursorTrail />
       </body>
     </html>
   );
