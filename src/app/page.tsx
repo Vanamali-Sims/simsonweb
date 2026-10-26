@@ -14,7 +14,7 @@ import {
   stacks,
 } from '@/data/site';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef, useState, type PointerEvent } from 'react';
 import styles from './page.module.css';
 
 const filters = [
@@ -22,6 +22,59 @@ const filters = [
   { id: 'product', label: 'Product' },
   { id: 'science', label: 'Science' },
 ] as const;
+
+function DodgingPortrait() {
+  const sideRef = useRef(0);
+  const [shift, setShift] = useState(0);
+
+  const flee = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== 'mouse') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const mid = rect.width / 2;
+    const margin = rect.width * 0.14;
+    const side = x < mid ? 1 : -1;
+
+    if (Math.abs(x - mid) < margin && sideRef.current !== 0) return;
+    if (side === sideRef.current) return;
+    sideRef.current = side;
+
+    const want = rect.width * 0.86;
+    const roomRight = window.innerWidth - rect.right - 16;
+    const roomLeft = rect.left - 16;
+    let dir = side;
+    if ((dir === 1 ? roomRight : roomLeft) < want * 0.45) dir *= -1;
+    const room = dir === 1 ? roomRight : roomLeft;
+    setShift(dir * Math.max(72, Math.min(want, room)));
+  };
+
+  const reset = () => {
+    sideRef.current = 0;
+    setShift(0);
+  };
+
+  return (
+    <div
+      className={styles.photoDodge}
+      onPointerEnter={flee}
+      onPointerMove={flee}
+      onPointerLeave={reset}
+    >
+      <div
+        className={styles.photoSlot}
+        style={{ transform: `translateX(${shift}px)` }}
+      >
+        <img
+          src="/portrait.jpg"
+          alt="Vanamali Sims"
+          className={styles.photo}
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const [filter, setFilter] = useState<(typeof filters)[number]['id']>('all');
@@ -60,6 +113,7 @@ export default function Home() {
         tabIndex={-1}
       >
         <div className={styles.ambient} aria-hidden="true">
+          <span className={`${styles.shape} ${styles.shapeWash}`} />
           <span className={`${styles.shape} ${styles.shapeSquare}`} />
           <span className={`${styles.shape} ${styles.shapeRing}`} />
           <span className={`${styles.shape} ${styles.shapeBlock}`} />
@@ -221,13 +275,7 @@ export default function Home() {
               Full story
             </Link>
           </div>
-          <div className={styles.photoSlot}>
-            <img
-              src="/portrait.jpg"
-              alt="Vanamali Sims"
-              className={styles.photo}
-            />
-          </div>
+          <DodgingPortrait />
         </div>
       </section>
 

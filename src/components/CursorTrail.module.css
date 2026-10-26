@@ -15,10 +15,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(13px - var(--i) * 0.85px);
-  height: calc(13px - var(--i) * 0.85px);
+  width: calc(16px - var(--i) * 0.85px);
+  height: calc(16px - var(--i) * 0.85px);
   background: var(--ember);
-  opacity: calc(0.82 - var(--i) * 0.08);
+  opacity: calc(0.9 - var(--i) * 0.06);
   border-radius: 1px;
 }
 

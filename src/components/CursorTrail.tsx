@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import styles from './CursorTrail.module.css';
 
-const COUNT = 8;
+const COUNT = 12;
 
 export default function CursorTrail() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -31,7 +31,7 @@ export default function CursorTrail() {
 
       for (let i = 0; i < dots.length; i++) {
         const p = pts[i];
-        const ease = 0.36 - i * 0.03;
+        const ease = Math.max(0.16, 0.48 - i * 0.025);
         const dx = x - p.x;
         const dy = y - p.y;
         if (Math.abs(dx) > 0.3 || Math.abs(dy) > 0.3) moving = true;
