@@ -1,275 +1,76 @@
-'use client';
-
-import EmailLink, { EmailAddress } from '@/components/EmailLink';
-import ProjectImage from '@/components/ProjectImage';
-import VisuallyHidden from '@/components/VisuallyHidden';
+import Image from 'next/image';
+import CopyEmail, { MailtoLink } from '@/components/CopyEmail';
+import Experience from '@/components/Experience';
+import Hero from '@/components/Hero';
+import { LensProvider } from '@/components/LensContext';
+import Magnetic from '@/components/Magnetic';
+import ProjectArt from '@/components/ProjectArt';
+import Projects from '@/components/Projects';
+import Stack from '@/components/Stack';
 import { projects } from '@/data/projects';
-import {
-  aboutShort,
-  CV_PATH,
-  positioning,
-  proofChips,
-  roles,
-  social,
-  stacks,
-} from '@/data/site';
-import Link from 'next/link';
-import { useState } from 'react';
-import styles from './page.module.css';
-
-const filters = [
-  { id: 'all', label: 'All' },
-  { id: 'product', label: 'Product' },
-  { id: 'science', label: 'Science' },
-] as const;
+import { about, CV_PATH, social } from '@/data/site';
+import styles from '@/components/Sections.module.css';
 
 export default function Home() {
-  const [filter, setFilter] = useState<(typeof filters)[number]['id']>('all');
-  const visible =
-    filter === 'all' ? projects : projects.filter((p) => p.cat === filter);
+  // Cover art is drawn here on the server and handed to the client grid.
+  const art = Object.fromEntries(projects.map((p) => [p.slug, <ProjectArt key={p.slug} slug={p.slug} />]));
 
   return (
-    <div className={styles.page}>
-      <section className={`${styles.hero} grain`} aria-labelledby="hero-name">
-        <div className={styles.heroInner}>
-          <p className={styles.wayfindingOnInk}>01 / PERSON</p>
-          <h1 id="hero-name" className={styles.heroName}>
-            Vanamali <span>Sims</span>
-          </h1>
-          <p className={styles.heroLede}>{positioning}</p>
-          <ul className={styles.chips} aria-label="Highlights">
-            {proofChips.map((chip) => (
-              <li key={chip}>{chip}</li>
-            ))}
-          </ul>
-          <div className={styles.ctaRow}>
-            <a href="#work" className={styles.ctaPrimary}>
-              See the work
-            </a>
-            <a href={CV_PATH} download className={styles.ctaGhost}>
-              Download CV
-            </a>
-          </div>
-        </div>
-      </section>
+    <LensProvider>
+      <Hero />
+      <Experience />
+      <Projects art={art} />
+      <Stack />
 
-      <section
-        id="work"
-        className={`${styles.work} grain`}
-        aria-labelledby="work-heading"
-        tabIndex={-1}
-      >
-        <header className={styles.sectionHead}>
-          <p className={styles.eyebrow}>Signal vs. noise</p>
-          <p className={styles.wayfinding}>02 / WORK</p>
-          <h2 id="work-heading" className={styles.sectionTitle}>
-            Selected work
-          </h2>
-        </header>
-        <div className={styles.workTools}>
-          <div className={styles.filters} role="group" aria-label="Filter projects">
-            {filters.map((f) => (
-              <button
-                key={f.id}
-                type="button"
-                aria-pressed={filter === f.id}
-                className={`${styles.filter} ${
-                  filter === f.id ? styles.filterActive : ''
-                }`}
-                onClick={() => setFilter(f.id)}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <p className="sr-only" aria-live="polite">
-          Showing {visible.length} {visible.length === 1 ? 'project' : 'projects'}
-        </p>
-
-        <div className={styles.projectGrid}>
-          {visible.map((project, i) => (
-            <article
-              key={project.slug}
-              className={`${styles.project} ${
-                i % 3 === 1 ? styles.projectShift : ''
-              } ${i % 3 === 2 ? styles.projectHang : ''}`}
-            >
-              <Link
-                href={`/work/${project.slug}`}
-                className={styles.projectMedia}
-                tabIndex={-1}
-                aria-hidden="true"
-              >
-                <ProjectImage
-                  src={project.image}
-                  alt={project.imageAlt}
-                  decorative
-                  compact
-                />
-              </Link>
-              <div className={styles.projectBody}>
-                <p className={styles.projectMetric}>
-                  {project.metric ?? 'TODO — outcome metric'}
-                </p>
-                <h3>{project.title}</h3>
-                <p>{project.blurb}</p>
-                <div className={styles.tags} aria-label="Technologies">
-                  {project.tags.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </div>
-                <div className={styles.projectActions}>
-                  {project.live ? (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.projectLive}
-                    >
-                      Live site
-                      <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
-                    </a>
-                  ) : null}
-                  <Link
-                    href={`/work/${project.slug}`}
-                    className={
-                      project.live ? styles.projectMore : styles.projectLive
-                    }
-                  >
-                    Learn more
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="experience"
-        className={`${styles.experience} grain`}
-        aria-labelledby="experience-heading"
-        tabIndex={-1}
-      >
-        <header className={styles.sectionHead}>
-          <p className={styles.eyebrowOnInk}>Bias–variance tradeoff</p>
-          <p className={styles.wayfindingOnInk}>03 / EXPERIENCE</p>
-          <h2 id="experience-heading" className={styles.sectionTitleOnInk}>
-            Experience
-          </h2>
-        </header>
-        <div className={styles.loreStack}>
-          {roles.map((item, i) => (
-            <article
-              key={`${item.org}-${item.role}`}
-              className={`${styles.role} ${i === 1 ? styles.roleCantilever : ''}`}
-            >
-              <div className={styles.roleMeta}>
-                <span className={styles.roleWhen}>{item.when}</span>
-                <span className={styles.roleOrg}>{item.org}</span>
-              </div>
-              <h3>{item.role}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="stack" className={styles.stack} aria-labelledby="stack-heading">
-        <h2 id="stack-heading" className="sr-only">
-          Stack
-        </h2>
-        <div className={styles.stackStrip}>
-          {stacks.map((group) => (
-            <div key={group.title} className={styles.stackGroup}>
-              <span className={styles.stackLabel}>{group.title}</span>
-              <span className={styles.stackItems}>{group.items.join(' · ')}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="about"
-        className={`${styles.about} grain`}
-        aria-labelledby="about-heading"
-        tabIndex={-1}
-      >
-        <header className={styles.sectionHead}>
-          <p className={styles.eyebrow}>Overfitting vs. generalization</p>
-          <p className={styles.wayfinding}>04 / ABOUT</p>
-          <h2 id="about-heading" className={styles.sectionTitle}>
+      <section id="about" className={`container ${styles.section}`} aria-labelledby="about-title" tabIndex={-1}>
+        <header className={styles.head}>
+          <span className="label">About</span>
+          <h2 id="about-title" className={styles.title}>
             The short version
           </h2>
         </header>
-        <div className={styles.aboutGrid}>
+        <div className={styles.about}>
           <div className={styles.aboutCopy}>
-            {aboutShort.map((sentence) => (
-              <p key={sentence}>{sentence}</p>
+            {about.map((p) => (
+              <p key={p}>{p}</p>
             ))}
-            <Link href="/about" className={styles.textLink}>
-              Full story
-            </Link>
           </div>
-          <div className={styles.photoSlot}>
-            <img
-              src="/portrait.jpg"
-              alt="Vanamali Sims"
-              className={styles.photo}
-            />
-          </div>
+          <Image
+            src="/portrait.jpg"
+            alt="Vanamali Sims"
+            width={800}
+            height={600}
+            sizes="(max-width: 760px) 100vw, 40vw"
+            className={styles.photo}
+          />
         </div>
       </section>
 
-      <section
-        id="contact"
-        className={`${styles.contact} grain`}
-        aria-labelledby="contact-heading"
-        tabIndex={-1}
-      >
-        <header className={styles.sectionHead}>
-          <p className={styles.wayfinding}>CONTACT / 05</p>
-          <h2 id="contact-heading" className={styles.sectionTitle}>
-            Got a problem worth solving?
+      <section id="contact" className={`container ${styles.contact}`} aria-labelledby="contact-title" tabIndex={-1}>
+        <div className={styles.contactInner}>
+          <span className="label">03 / Contact</span>
+          <h2 id="contact-title" className={styles.bigTitle}>
+            Let’s build
+            <br />
+            something<span className={styles.period}>.</span>
           </h2>
-        </header>
-        <div className={styles.contactGrid}>
-          <EmailLink className={styles.contactCard}>
-            <span className={styles.contactLabel}>Email</span>
-            <EmailAddress className={styles.contactValue} />
-          </EmailLink>
-          <div className={styles.contactCard}>
-            <span className={styles.contactLabel}>Location</span>
-            <span className={styles.contactValue}>{social.location}</span>
+          <div className={styles.ctaRow}>
+            <Magnetic>
+              <MailtoLink className={styles.primary}>Get in touch →</MailtoLink>
+            </Magnetic>
+            <CopyEmail className={styles.secondary} showAddress />
+            <a href={CV_PATH} download className={styles.textLink}>
+              CV ↓
+            </a>
+            <a href={social.github} target="_blank" rel="noopener noreferrer" className={styles.textLink}>
+              GitHub ↗<span className="sr-only"> (opens in a new tab)</span>
+            </a>
+            <a href={social.linkedin} target="_blank" rel="noopener noreferrer" className={styles.textLink}>
+              LinkedIn ↗<span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </div>
-          <a
-            href={social.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.contactCard}
-          >
-            <span className={styles.contactLabel}>LinkedIn</span>
-            <span className={styles.contactValue}>van-sims</span>
-            <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
-          </a>
-          <a
-            href={social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.contactCard}
-          >
-            <span className={styles.contactLabel}>GitHub</span>
-            <span className={styles.contactValue}>Vanamali-Sims</span>
-            <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
-          </a>
-          <a href={CV_PATH} download className={styles.contactCard}>
-            <span className={styles.contactLabel}>CV</span>
-            <span className={styles.contactValue}>Download</span>
-          </a>
         </div>
       </section>
-    </div>
+    </LensProvider>
   );
 }
