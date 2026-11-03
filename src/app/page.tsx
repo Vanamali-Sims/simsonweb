@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import CopyEmail, { MailtoLink } from '@/components/CopyEmail';
+import DodgingPortrait from '@/components/DodgingPortrait';
 import Experience from '@/components/Experience';
 import Hero from '@/components/Hero';
 import { LensProvider } from '@/components/LensContext';
@@ -35,14 +35,7 @@ export default function Home() {
               <p key={p}>{p}</p>
             ))}
           </div>
-          <Image
-            src="/portrait.jpg"
-            alt="Vanamali Sims"
-            width={800}
-            height={600}
-            sizes="(max-width: 760px) 100vw, 40vw"
-            className={styles.photo}
-          />
+          <DodgingPortrait />
         </div>
       </section>
 

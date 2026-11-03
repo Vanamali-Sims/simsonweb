@@ -16,7 +16,17 @@ export default function Projects({ art }: { art: Record<string, ReactNode> }) {
   const list = projectsForLens(lens.id);
 
   return (
-    <section id="projects" className={`container ${styles.section}`} aria-labelledby="projects-title" tabIndex={-1}>
+    <section id="projects" className={`container ${styles.section} ${styles.projectsSection}`} aria-labelledby="projects-title" tabIndex={-1}>
+      {/* Slow-drifting background shapes, wide screens only */}
+      <div className={styles.ambient} aria-hidden="true">
+        <span className={`${styles.shape} ${styles.shapeWash}`} />
+        <span className={`${styles.shape} ${styles.shapeSquare}`} />
+        <span className={`${styles.shape} ${styles.shapeRing}`} />
+        <span className={`${styles.shape} ${styles.shapeBlock}`} />
+        <span className={`${styles.shape} ${styles.shapeDisc}`} />
+        <span className={`${styles.shape} ${styles.shapeSlash}`} />
+        <span className={`${styles.shape} ${styles.shapeFrame}`} />
+      </div>
       <header className={styles.head}>
         <span className="label">02 / Projects</span>
         <h2 id="projects-title" className={styles.title}>

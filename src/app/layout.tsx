@@ -6,6 +6,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CommandPalette from '@/components/CommandPalette';
+import CursorTrail from '@/components/CursorTrail';
 
 // Display face for the name and section titles only, self-hosted (latin,
 // variable weight, ~40KB) so the build never depends on Google Fonts.
@@ -83,6 +84,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <CommandPalette />
+        <CursorTrail />
       </body>
     </html>
   );
