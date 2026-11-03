@@ -112,7 +112,7 @@
   height: 44px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 55% 30%;
+  object-position: 50% 35%;
   border: 1px solid var(--line-strong);
 }
 
