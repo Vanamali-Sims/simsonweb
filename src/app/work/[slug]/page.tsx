@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ProjectArt from '@/components/ProjectArt';
+import { caseStudies } from '@/data/cases';
 import { getProject, projects } from '@/data/projects';
 import styles from './page.module.css';
 
@@ -16,17 +17,18 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 
 export default function CaseStudy({ params }: { params: { slug: string } }) {
   const project = getProject(params.slug);
-  if (!project) notFound();
+  const study = project ? caseStudies[project.slug] : undefined;
+  if (!project || !study) notFound();
 
   const index = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(index + 1) % projects.length];
   const pad = (n: number) => String(n).padStart(2, '0');
 
   const blocks = [
-    { label: 'Problem', text: project.problem },
-    { label: 'Approach', text: project.approach },
-    { label: 'Result', text: project.result },
-    { label: 'What didn’t work', text: project.didNotWork },
+    { label: 'Problem', text: study.problem },
+    { label: 'Approach', text: study.approach },
+    { label: 'Result', text: study.result },
+    { label: 'What didn’t work', text: study.didNotWork },
   ];
 
   return (
@@ -44,7 +46,7 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
         </h1>
         {project.metric ? <p className={styles.metric}>{project.metric}</p> : null}
         <p className={styles.lede}>{project.blurb}</p>
-        {project.team ? <p className={styles.team}>{project.team}</p> : null}
+        {study.team ? <p className={styles.team}>{study.team}</p> : null}
         <div className={styles.actions}>
           {project.live ? (
             <a href={project.live} target="_blank" rel="noopener noreferrer" className={styles.primary}>
