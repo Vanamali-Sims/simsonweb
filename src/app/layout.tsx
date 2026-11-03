@@ -5,6 +5,7 @@ import { GeistMono } from 'geist/font/mono';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import CommandPalette from '@/components/CommandPalette';
 
 // Display face for the name and section titles only, self-hosted (latin,
 // variable weight, ~40KB) so the build never depends on Google Fonts.
@@ -81,6 +82,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <CommandPalette />
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { CV_PATH } from '@/data/site';
+import CommandButton from './CommandButton';
 import styles from './Navbar.module.css';
 
 const links = [
@@ -11,7 +12,7 @@ const links = [
 
 /**
  * Top bar. Plain links on desktop; on phones the section links collapse
- * and only Contact + CV stay visible so the bar never wraps.
+ * into the command palette ("Menu") and only Contact + CV stay visible.
  */
 export default function Navbar() {
   return (
@@ -31,6 +32,7 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
+          <CommandButton />
           <a href={CV_PATH} download className={styles.cv}>
             CV ↓
           </a>
