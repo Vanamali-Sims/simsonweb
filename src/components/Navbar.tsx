@@ -23,7 +23,11 @@ export default function Navbar() {
 
         <nav className={styles.nav} aria-label="Primary">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className={styles.link}>
+            <Link
+              key={link.href}
+              href={link.href}
+              className={link.name === 'Contact' ? `${styles.link} ${styles.keep}` : styles.link}
+            >
               {link.name}
             </Link>
           ))}
