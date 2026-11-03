@@ -1,4 +1,4 @@
-import ProjectImage from '@/components/ProjectImage';
+import ProjectArt from '@/components/ProjectArt';
 import VisuallyHidden from '@/components/VisuallyHidden';
 import { getProject, projects } from '@/data/projects';
 import Link from 'next/link';
@@ -46,7 +46,7 @@ export default function WorkCase({ params }: { params: { slug: string } }) {
       </header>
 
       <div className={styles.media}>
-        <ProjectImage src={project.image} alt={project.imageAlt} />
+        <ProjectArt slug={project.slug} />
       </div>
 
       <div className={styles.body}>

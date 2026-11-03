@@ -80,7 +80,7 @@
 
 /* Phones: keep only Contact and CV */
 @media (max-width: 760px) {
-  .link:not(:last-of-type) {
+  .link:not(.keep) {
     display: none;
   }
 }
