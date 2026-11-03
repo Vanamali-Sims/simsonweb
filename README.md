@@ -39,7 +39,7 @@ for text and labels. Tokens live at the top of `src/app/globals.css`.
 | Name, lenses, proof numbers, experience, stack, about | `src/data/site.ts` |
 | Projects and case studies | `src/data/projects.ts` |
 | Project cover art | `src/components/ProjectArt.tsx` |
-| CV | `public/Vanamali_Sims_Resume.pdf` |
+| CV | `public/Vanamali_Sims_Resume.pdf`, built from `cv/Vanamali_Sims_Resume.tex` with `pdflatex` |
 
 Only use numbers that are evidenced in a repo, the CV or a client report.
 If a project has no number, leave `metric: null`.

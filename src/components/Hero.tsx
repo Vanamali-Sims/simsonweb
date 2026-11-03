@@ -60,7 +60,7 @@ export default function Hero() {
           </div>
           <span className={styles.status}>
             <span className={styles.dot} aria-hidden="true" />
-            Open to work
+            Available now · full work rights
           </span>
         </div>
 
