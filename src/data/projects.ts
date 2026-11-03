@@ -42,7 +42,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'fishing-grounds',
-    title: 'Fishing Grounds Recsys',
+    title: 'Sea Anchor',
     blurb:
       'Implicit ALS on two years of AIS tracks: vessels × ocean cells, fishing hours as confidence, not ratings.',
     tags: ['Implicit ALS', 'DuckDB', 'Parquet', 'FastAPI', 'React', 'deck.gl'],

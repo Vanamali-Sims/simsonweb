@@ -47,7 +47,7 @@ const proof = {
   recsys: {
     value: '20×',
     label: 'a popularity baseline, P@10 0.081 vs 0.004',
-    source: 'Fishing Grounds',
+    source: 'Sea Anchor',
   },
   incidents: {
     value: '4,335 → 0',
@@ -72,7 +72,7 @@ const proof = {
   parquet: {
     value: '2 yrs AIS',
     label: 'streamed into DuckDB over partitioned Parquet',
-    source: 'Fishing Grounds',
+    source: 'Sea Anchor',
   },
   daily: {
     value: 'Daily',
@@ -176,7 +176,7 @@ export const roles: Role[] = [
     when: 'Dec 2025 — now',
     current: true,
     points: [
-      'Built, deployed and maintain the site for a surgical oncologist with a 300,000+ social following; zero downtime since launch.',
+      'Sole developer and client contact for the patient-facing site of a surgical oncologist (two hospitals, 200,000+ Instagram audience); zero downtime since launch.',
       'Next.js 15 and React 19, schema.org structured data for search, validated enquiry forms, branch-based Vercel releases.',
     ],
     stack: ['Next.js', 'React', 'TypeScript', 'Vercel'],

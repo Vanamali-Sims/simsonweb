@@ -130,7 +130,7 @@ function UnattendedArt() {
   );
 }
 
-/* ---------- Fishing Grounds: ocean cells, a track, the top-10 picks ---------- */
+/* ---------- Sea Anchor (fishing grounds): ocean cells, a track, the top-10 picks ---------- */
 
 function FishingArt() {
   const rand = rng(7);
