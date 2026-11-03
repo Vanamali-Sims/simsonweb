@@ -134,7 +134,8 @@ function UnattendedArt() {
 
 function FishingArt() {
   const rand = rng(7);
-  const cell = 20;
+  // 32px cells keep the SVG to a few hundred nodes; it is inlined in the HTML.
+  const cell = 32;
   const cols = W / cell;
   const rows = H / cell;
   const blobs = [
@@ -153,24 +154,26 @@ function FishingArt() {
       let v = 0;
       for (const b of blobs) v += Math.exp(-((x - b.x) ** 2 + (y - b.y) ** 2) / (2 * b.s * b.s));
       v = v * 0.9 + rand() * 0.12;
-      if (v < 0.12) continue;
+      if (v < 0.18) continue;
       cells.push(
-        <rect key={`${c}-${r}`} x={c * cell + 2} y={r * cell + 2} width={cell - 4} height={cell - 4} rx="3" className={styles.inkFill} opacity={r1(Math.min(0.55, v * 0.5))} />,
+        <rect key={`${c}-${r}`} x={c * cell + 5} y={r * cell + 5} width={cell - 10} height={cell - 10} rx="5" className={styles.inkFill} opacity={r1(Math.min(0.42, v * 0.38))} />,
       );
     }
   }
   const picks = [
-    [9, 6], [10, 7], [21, 5], [22, 5], [25, 12], [26, 13], [15, 14], [10, 5], [26, 12], [21, 6],
+    [6, 4], [6, 5], [13, 3], [14, 3], [16, 8], [16, 7], [9, 9], [7, 4], [17, 8], [13, 4],
   ];
-  const landPath = `M0 ${H} L0 ${coast(0)} ${Array.from({ length: 14 }, (_, i) => `L${i * 20} ${r1(coast(i * 20))}`).join(' ')} L260 ${H} Z`;
+  const landPath = `M0 ${H} L0 ${r1(coast(0))} ${Array.from({ length: 14 }, (_, i) => `L${i * 20} ${r1(coast(i * 20))}`).join(' ')} L260 ${H} Z`;
   return (
     <Frame id="fishing">
       {cells}
       <path d={landPath} className={styles.surface} />
-      <path d={landPath} className={styles.lineStrongStroke} fill="none" />
       <path d="M40 60 C 120 90, 160 70, 200 140 S 300 120, 430 110 S 560 200, 520 260" className={styles.inkStroke} fill="none" strokeDasharray="4 6" opacity="0.7" />
       {picks.map(([c, r], i) => (
-        <rect key={i} x={c * cell + 1} y={r * cell + 1} width={cell - 2} height={cell - 2} rx="4" className={styles.sigStroke} fill="none" strokeWidth="2" />
+        <rect key={`f${i}`} x={c * cell + 3} y={r * cell + 3} width={cell - 6} height={cell - 6} rx="7" className={styles.softFill} />
+      ))}
+      {picks.map(([c, r], i) => (
+        <rect key={i} x={c * cell + 3} y={r * cell + 3} width={cell - 6} height={cell - 6} rx="7" className={styles.sigStroke} fill="none" strokeWidth="2" />
       ))}
       <rect x="430" y="330" width="170" height="40" rx="20" className={styles.surface} />
       <rect x="430" y="330" width="170" height="40" rx="20" className={styles.sigStroke} fill="none" />
@@ -329,10 +332,10 @@ function CloudArt() {
 function MotionArt() {
   const rand = rng(5);
   const arrows: ReactNode[] = [];
-  const bandTop = 110;
-  const bandBottom = 250;
-  for (let y = 40; y < 290; y += 28) {
-    for (let x = 40; x < 610; x += 28) {
+  const bandTop = 94;
+  const bandBottom = 266;
+  for (let y = 44; y < 290; y += 34) {
+    for (let x = 40; x < 610; x += 34) {
       const inBand = y > bandTop && y < bandBottom;
       const ang = inBand ? (rand() - 0.5) * 0.35 : rand() * Math.PI * 2;
       const len = inBand ? 14 + rand() * 6 : 4 + rand() * 5;

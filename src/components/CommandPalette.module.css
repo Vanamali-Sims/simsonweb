@@ -148,6 +148,10 @@
 }
 
 @media (max-width: 760px) {
+  .hint {
+    display: none;
+  }
+
   .backdrop {
     padding-top: 16px;
   }
