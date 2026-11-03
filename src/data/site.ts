@@ -181,11 +181,18 @@ export const roles: Role[] = [
     ],
     stack: ['Next.js', 'React', 'TypeScript', 'Vercel'],
   },
+  {
+    role: 'Brand Specialist & IT Sales',
+    org: 'JB Hi-Fi · Retail Safari (Microsoft + Meta)',
+    when: 'Jul 2025 — now',
+    current: true,
+    points: [
+      'Represent Microsoft and Meta as Product Specialist and Brand Ambassador across three JB Hi-Fi stores, selling tech and smart-home automation to 15–20+ customers a shift.',
+      'IT and networking sales at JB Hi-Fi Doncaster and Brighton: turning technical product questions into plain-language decisions and handling objections in real time.',
+    ],
+    stack: ['Customer-facing', 'Smart home', 'Networking'],
+  },
 ];
-
-/** Non-technical work, kept to one line so it supports rather than crowds. */
-export const alsoRole =
-  'Also: Brand Specialist for Microsoft and Meta at JB Hi-Fi (via Retail Safari), Jul 2025 — now. Turning technical products into plain-language decisions, 15–20+ customers a shift.';
 
 export const stacks = [
   {

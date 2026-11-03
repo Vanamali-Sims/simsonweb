@@ -1,4 +1,4 @@
-import { alsoRole, CV_PATH, roles } from '@/data/site';
+import { CV_PATH, roles } from '@/data/site';
 import styles from './Sections.module.css';
 
 export default function Experience() {
@@ -36,7 +36,6 @@ export default function Experience() {
           </li>
         ))}
       </ol>
-      <p className={styles.also}>{alsoRole}</p>
     </section>
   );
 }
