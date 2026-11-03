@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { lenses, type Lens, type LensId } from '@/data/site';
+import { SET_LENS_EVENT } from './CommandPalette';
 
 type LensState = { lens: Lens; setLens: (id: LensId) => void };
 
@@ -29,6 +30,16 @@ export function LensProvider({ children }: { children: React.ReactNode }) {
     else url.searchParams.set('for', next);
     window.history.replaceState(null, '', url);
   }, []);
+
+  // The command palette can switch lenses too.
+  useEffect(() => {
+    const onSet = (e: Event) => {
+      const next = (e as CustomEvent<string>).detail;
+      if (isLensId(next)) setLens(next);
+    };
+    window.addEventListener(SET_LENS_EVENT, onSet);
+    return () => window.removeEventListener(SET_LENS_EVENT, onSet);
+  }, [setLens]);
 
   const value = useMemo(
     () => ({ lens: lenses.find((l) => l.id === id) ?? lenses[0], setLens }),

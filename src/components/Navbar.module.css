@@ -78,9 +78,45 @@
   }
 }
 
-/* Phones: keep only Contact and CV */
+/* Command palette trigger */
+.command {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 8px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  color: var(--ink-muted);
+  transition: color var(--dur-fast);
+}
+
+.command:hover,
+.command:hover :global(.kbd) {
+  color: var(--signal);
+  border-color: var(--signal);
+}
+
+.commandMobile {
+  display: none;
+}
+
+/* Phones: Contact, Menu and CV */
 @media (max-width: 760px) {
   .link:not(.keep) {
     display: none;
+  }
+
+  .commandDesktop {
+    display: none;
+  }
+
+  .commandMobile {
+    display: inline;
+    padding: 0 6px;
+    color: var(--ink);
+  }
+
+  .cv {
+    margin-left: 0;
   }
 }
