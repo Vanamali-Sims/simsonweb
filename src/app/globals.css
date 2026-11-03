@@ -1,182 +1,237 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*
+ * Signal — design tokens and base styles.
+ * Black, white and one green signal. Green marks only things that are
+ * live or interactive. Animate transform and opacity only.
+ */
 
 :root {
-  --paper: #f2eee5;
-  --ink: #14243d;
-  --ember: #c24a18;
-  /* Solid mix of ember + ink; 6.2:1 on --paper — use for small ember text */
-  --ember-deep: #8e3f23;
-  /* 70% ink / 30% paper; 5.5:1 on --paper */
-  --muted: #57616f;
-  /* Warm paper-tint; ≥7:1 on --ink */
-  --muted-on-ink: #c4bfb4;
-  --hairline: color-mix(in srgb, var(--ink) 18%, transparent);
-  --hairline-on-ink: color-mix(in srgb, var(--paper) 18%, transparent);
+  color-scheme: dark;
 
-  --nav-h: 64px;
-  --ease-struct: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --dur: 180ms;
+  /* Colour */
+  --bg: #0a0a0a;
+  --surface: #131313;
+  --surface-2: #1c1c1c;
+  --line: #262626;
+  --line-strong: #3a3a3a;
+  --ink: #f2f2ee;
+  --ink-muted: #8c8c86;
+  --signal: #3ddc84;
+  --signal-ink: #04150b;
+  --signal-soft: #0e2b1a;
+  --focus: var(--signal);
+  --glow: 0 0 0 1px var(--signal), 0 0 32px rgba(61, 220, 132, 0.22);
 
-  --font-display: var(--font-space-grotesk), "Helvetica Neue", Arial, sans-serif;
-  --font-body: var(--font-dm-sans), "Helvetica Neue", Arial, sans-serif;
+  /* Type (font variables come from next/font in layout.tsx) */
+  --font-display: var(--font-bricolage), 'Arial Narrow', system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, 'SF Mono', Menlo, monospace;
 
-  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Space */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 64px;
+  --space-8: 128px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --max-w: 1376px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-base: 240ms;
+  --dur-slow: 600ms;
+
+  --nav-h: 72px;
 }
 
-@layer base {
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --bg: #f4f4f1;
+    --surface: #ffffff;
+    --surface-2: #ebebe7;
+    --line: #d9d9d3;
+    --line-strong: #b9b9b2;
+    --ink: #0a0a0a;
+    --ink-muted: #5a5a55;
+    --signal: #0e7a3c;
+    --signal-ink: #ffffff;
+    --signal-soft: #dbf2e3;
+    --glow: 0 0 0 1px var(--signal), 0 8px 24px rgba(14, 122, 60, 0.14);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--signal-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: calc(var(--nav-h) + 12px);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    line-height: 1.55;
-    overflow-x: hidden;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
-    margin: 0;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  button {
-    font: inherit;
-    color: inherit;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  /* Dual-tone ring: visible on both --paper and --ink (1.4.11, 2.4.7) */
-  :focus-visible {
-    outline: 3px solid var(--ink);
-    outline-offset: 3px;
-    box-shadow: 0 0 0 6px var(--paper);
-  }
-
-  ::selection {
-    background: var(--ember-deep);
-    color: var(--paper);
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--paper);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--ink);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-@layer utilities {
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
+/* ---------- Utilities ---------- */
 
-  .skip-link {
-    position: absolute;
-    left: 12px;
-    top: 12px;
-    z-index: 100;
-    padding: 0.75rem 1.1rem;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    box-shadow: 6px 6px 0 0 var(--ember);
-    transform: translateY(-180%);
-  }
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
 
-  .skip-link:focus,
-  .skip-link:focus-visible {
-    transform: none;
-  }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
-  .grain {
-    isolation: isolate;
-  }
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 100;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--signal);
+  color: var(--signal-ink);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
 
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain);
-    opacity: 0.08;
-    mix-blend-mode: multiply;
-    pointer-events: none;
-    z-index: 0;
-  }
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: none;
+}
 
-  .grain > * {
-    position: relative;
-    z-index: 1;
-  }
+/* Mono uppercase label with an index, e.g. "01 / EXPERIENCE" */
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
 
-  .hard-shadow {
-    box-shadow: 12px 12px 0 0 var(--ink);
-  }
+/* Faint dot grid used behind hero tiles and image placeholders */
+.dots {
+  background-image: radial-gradient(circle, var(--line) 1px, transparent 1.5px);
+  background-size: 24px 24px;
+}
 
-  .hard-shadow-sm {
-    box-shadow: 6px 6px 0 0 var(--ink);
-  }
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  padding: 3px 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--ink-muted);
 }

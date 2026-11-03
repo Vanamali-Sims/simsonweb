@@ -1,0 +1,387 @@
+/* Shared layout for the home sections below the hero. */
+.section {
+  padding-block: clamp(64px, 10vw, 128px) 0;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3) var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.head > :global(.label) {
+  flex-basis: 100%;
+}
+
+.title {
+  font-size: clamp(44px, 6vw, 72px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+
+.headLink {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--signal);
+  padding: 8px 0;
+}
+
+.note {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+.noteLens {
+  color: var(--signal);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tags li {
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--ink-muted);
+}
+
+.go {
+  font-family: var(--font-mono);
+  color: var(--ink-muted);
+  transition: transform var(--dur-base) var(--ease), color var(--dur-fast);
+}
+
+/* ---------- Experience ---------- */
+.roles {
+  border-top: 1px solid var(--line);
+}
+
+.roleRow {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: var(--space-5);
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--line);
+}
+
+.when {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 32px;
+  color: var(--ink-muted);
+}
+
+.whenNow {
+  color: var(--signal);
+}
+
+.roleTitle {
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.roleOrg {
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.points {
+  margin-block: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 72ch;
+}
+
+.points li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--ink-muted);
+  line-height: 26px;
+}
+
+.points li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--line-strong);
+}
+
+.also {
+  margin-top: var(--space-5);
+  font-size: 14px;
+  color: var(--ink-muted);
+  max-width: 80ch;
+}
+
+/* ---------- Projects ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+  gap: var(--space-4);
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+  transition: transform var(--dur-base) var(--ease), border-color var(--dur-fast), opacity var(--dur-base);
+}
+
+.dim {
+  opacity: 0.55;
+}
+
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cover {
+  aspect-ratio: 16 / 10;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  flex: 1;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardTitle {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.metric {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--signal);
+}
+
+.blurb {
+  color: var(--ink-muted);
+  font-size: 15px;
+  line-height: 23px;
+  flex: 1;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: var(--signal);
+    opacity: 1;
+  }
+
+  .card:hover .go {
+    color: var(--signal);
+    transform: translate(2px, -2px);
+  }
+}
+
+/* ---------- Stack ---------- */
+.stackGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--space-5);
+}
+
+.stackGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--ink-muted);
+  transition: color var(--dur-fast), border-color var(--dur-fast), background-color var(--dur-fast);
+}
+
+.chipOn {
+  border-color: var(--signal);
+  background: var(--signal-soft);
+  color: var(--signal);
+}
+
+@media (hover: hover) {
+  .chip:hover {
+    color: var(--signal);
+    border-color: var(--signal);
+  }
+}
+
+/* ---------- About ---------- */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.aboutCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  font-size: 18px;
+  line-height: 30px;
+  color: var(--ink-muted);
+  max-width: 62ch;
+}
+
+.aboutCopy p:first-child {
+  color: var(--ink);
+}
+
+.photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  filter: grayscale(1) contrast(1.05);
+  transition: filter var(--dur-slow) var(--ease);
+}
+
+@media (hover: hover) {
+  .photo:hover {
+    filter: none;
+  }
+}
+
+/* ---------- Contact ---------- */
+.contact {
+  padding-block: clamp(64px, 10vw, 128px);
+}
+
+.contactInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-top: var(--space-7);
+  border-top: 1px solid var(--line);
+}
+
+.bigTitle {
+  font-size: clamp(56px, 10vw, 128px);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+}
+
+.period {
+  color: var(--signal);
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 56px;
+  padding: 0 24px;
+  border-radius: var(--radius-pill);
+  font-size: 16px;
+  font-weight: 600;
+  transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base), border-color var(--dur-fast), color var(--dur-fast);
+}
+
+.primary {
+  background: var(--signal);
+  color: var(--signal-ink);
+}
+
+.secondary {
+  border: 1px solid var(--line-strong);
+  font-weight: 500;
+}
+
+.textLink {
+  padding: 16px 8px;
+  color: var(--ink-muted);
+  transition: color var(--dur-fast);
+}
+
+.textLink:hover {
+  color: var(--signal);
+}
+
+@media (hover: hover) {
+  .primary:hover {
+    box-shadow: var(--glow);
+  }
+
+  .secondary:hover {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 760px) {
+  .roleRow,
+  .about {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+
+  .when {
+    line-height: 20px;
+  }
+
+  .headLink {
+    margin-left: 0;
+  }
+
+  .primary,
+  .secondary {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
