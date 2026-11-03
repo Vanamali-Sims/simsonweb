@@ -47,8 +47,8 @@ export default function DodgingPortrait() {
         <Image
           src="/portrait.jpg"
           alt="Vanamali Sims"
-          width={400}
-          height={400}
+          width={386}
+          height={386}
           sizes="(max-width: 760px) 100vw, 40vw"
           className={styles.photo}
         />
