@@ -211,7 +211,7 @@ export default function CommandPalette() {
                 className={styles.input}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Jump to, search projects, copy email…"
+                placeholder="Search or jump to…"
                 role="combobox"
                 aria-expanded="true"
                 aria-controls="cmd-list"

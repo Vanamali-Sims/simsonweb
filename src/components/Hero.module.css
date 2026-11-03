@@ -406,6 +406,11 @@
 }
 
 /* ---------- Experience ---------- */
+.experience,
+.edu {
+  justify-content: flex-start;
+}
+
 .experience {
   grid-column: span 3;
 }
