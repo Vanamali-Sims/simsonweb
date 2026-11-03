@@ -436,15 +436,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 55% 32%;
-  filter: grayscale(1) contrast(1.05);
-  transition: filter var(--dur-slow) var(--ease);
-}
-
-@media (hover: hover) {
-  .photoDodge:hover .photo {
-    filter: none;
-  }
+  object-position: 50% 35%;
 }
 
 @media (prefers-reduced-motion: reduce) {
