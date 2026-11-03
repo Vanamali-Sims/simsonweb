@@ -121,13 +121,6 @@
   color: var(--line-strong);
 }
 
-.also {
-  margin-top: var(--space-5);
-  font-size: 14px;
-  color: var(--ink-muted);
-  max-width: 80ch;
-}
-
 /* ---------- Projects ---------- */
 .cards {
   display: grid;
