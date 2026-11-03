@@ -1,0 +1,145 @@
+% Sai Vanamali (Sims) — general CV (data, AI and full-stack roles)
+% Build: pdflatex Vanamali_Sims_Resume.tex
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[left=1.35cm,right=1.35cm,top=0.85cm,bottom=0.75cm]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amssymb}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\linespread{0.98}
+
+% Section headings: bold caps with a rule underneath
+\titleformat{\section}{\normalsize\bfseries\uppercase}{}{0pt}{}[\vspace{-6pt}\rule{\linewidth}{0.6pt}]
+\titlespacing*{\section}{0pt}{4pt}{2pt}
+
+\setlist[itemize]{leftmargin=16pt,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+
+\newcommand{\sep}{\ $\diamond$\ }
+
+% \role{Organisation}{Title, place}{Dates}
+\newcommand{\role}[3]{%
+  \textbf{#1}\\[-1pt]
+  \textit{#2}\hfill\textit{#3}\\[-12pt]}
+
+% \project{Name}{links}{stack}{one-line description}
+\newcommand{\project}[4]{%
+  \textbf{#1} {\footnotesize(#2)} -- {\small #3}\\[-1pt]
+  \textit{\small #4}\\[-12pt]}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries SAI VANAMALI (SIMS)}\\[3pt]
+  +61 489 196 006\sep\href{mailto:simsvanamali@gmail.com}{simsvanamali@gmail.com}\sep Melbourne, VIC\\[1pt]
+  Subclass 485 visa (full working rights)\sep Available immediately\sep
+  \href{https://www.simsdoesdata.me}{Portfolio}\sep
+  \href{https://www.linkedin.com/in/van-sims}{LinkedIn}\sep
+  \href{https://github.com/Vanamali-Sims}{GitHub}
+\end{center}
+
+\vspace{2pt}
+\begin{center}
+\begin{minipage}{0.95\linewidth}
+\centering\small\itshape
+Data and AI engineer who builds end to end: tested pipelines and data models with provenance, ML and LLM features
+measured against honest baselines, and the full-stack products people actually use them through.
+\end{minipage}
+\end{center}
+
+\vspace{-8pt}
+\section{Experience}
+
+\role{SilverOak Apps}{Machine Learning Intern, Melbourne VIC}{March 2025 -- December 2025}
+\begin{itemize}
+  \item Cut question-classification latency 96.7\% (6s to 0.2s) by replacing a per-request LLM call with an embedding-based
+        semantic router.
+  \item Designed a Go price-resolution API over market data, serving sub-50ms in production: a 7-tier fallback, automatic
+        non-USD currency conversion, token auth and unit tests.
+  \item Built a TypeScript ingestion and parsing service on an AWS cron schedule that integrates content from multiple
+        external sources into the product, replacing manual collection.
+\end{itemize}
+
+\role{Freelance Web Developer}{Independent Contract, healthcare client}{December 2025 -- Present}
+\begin{itemize}
+  \item Sole developer and client contact for drrvcancercare.com, the patient-facing site of a surgical oncologist (two
+        hospitals, 200,000+ Instagram audience); Next.js / TypeScript, zero downtime since launch.
+  \item Built structured patient intake (booking by department and time; topic-tagged questions feeding the doctor's video
+        answers) with explicit consent capture for health data; accessibility gated in CI (axe-core 14 to 0).
+\end{itemize}
+
+\role{Zelo Agents}{Co-Founder \& Developer, Melbourne VIC}{July 2025 -- March 2026}
+\begin{itemize}
+  \item Led a paying client end to end: rebuilt a gym's site in Next.js with trial-booking flows and tracked visits to
+        bookings; 500 to 9,000+ monthly visits in 8 months, +35\% trial bookings (client-reported).
+\end{itemize}
+
+\role{JB Hi-Fi}{Brand Specialist (Microsoft \& Meta, via Retail Safari), then IT \& Networking Sales}{July 2025 -- Present}
+\begin{itemize}
+  \item Sales and problem-solving for 15--20+ customers a shift across Melbourne stores, exceeding KPIs; explaining the same
+        technical trade-off differently to a first-time buyer and to an expert.
+\end{itemize}
+
+\section{Projects}
+
+\project{Tab Debt}{\href{https://github.com/Vanamali-Sims/tabDebt}{code}}{TypeScript, React, Vercel AI SDK, Chrome on-device AI, Vitest}
+{Browser extension with an AI agent that reviews your open tabs once a day and proposes a plan you approve.}
+\begin{itemize}
+  \item Rules first, then a bounded tool-using agent that can only propose; a separate executor is the only code that closes
+        tabs. Runs on Chrome's built-in model or the user's own key.
+  \item A 38-case labelled eval, including prompt-injection pages, fails the build on any injection leak, unsafe close or
+        accuracy drop; unit and real-browser end-to-end tests.
+\end{itemize}
+
+\project{Sea Anchor}{\href{https://fishing-grounds-recsys.onrender.com/}{live app}\,$\cdot$\,\href{https://github.com/Vanamali-Sims/fishing-grounds-recsys}{code}}{Python, DuckDB SQL, Parquet, implicit ALS, FastAPI, React}
+{Live map app predicting where each of 190k+ fishing vessels will fish next, avoiding protected areas.}
+\begin{itemize}
+  \item Bronze, Silver and Gold layers over 731 daily files (about 7 GB); 12 validation rules route failing rows to
+        quarantine with a reason code, with row counts reported per layer; 54 unit tests.
+  \item Implicit ALS on a temporal split with a leak check: Precision@10 of 0.081 vs 0.004 for a popularity baseline (20x),
+        served through a 10-endpoint typed FastAPI.
+\end{itemize}
+
+\project{Melbourne Footfall}{\href{https://github.com/Vanamali-Sims/howMelbMoves}{code}\,$\cdot$\,\href{https://public.tableau.com/app/profile/sai.vanamali.simhambhatla4623/viz/MelbourneFootfall/Dashboard3}{Tableau dashboard}}{SQL, dbt, DuckDB, Python, LightGBM, GitHub Actions, Tableau}
+{Forecasts hourly foot traffic for every Melbourne CBD precinct and shows where and when real crowds miss the forecast.}
+\begin{itemize}
+  \item ETL from 7 sources into a documented precinct-hour reporting mart with 47 dbt tests, run daily on GitHub Actions
+        with a source-freshness gate and an issue opened automatically on failure.
+  \item LightGBM beats a seasonal-naive baseline (MASE 0.87 vs 0.98 over 89 rolling-origin folds), feeding Tableau directly.
+\end{itemize}
+
+\project{unattended}{\href{https://github.com/Vanamali-Sims/unattended-}{code}}{TypeScript, Node, simulation testing, Vitest, GitHub Actions}
+{Booking engine for self-service rentals (smart locks, ID checks, card holds) with a harness that simulates a year of customers.}
+\begin{itemize}
+  \item Seven business invariants checked after every simulated event took a year of 10,000 bookings from 4,335 incidents to
+        zero and hands-off bookings from 38\% to 87\%; each fix shipped with a regression test, 20 seeds checked in CI.
+\end{itemize}
+
+\project{MyPowerPlant}{\href{https://mypowerplant.tech}{live}\,$\cdot$\,\href{https://github.com/Vanamali-Sims/myPowerPlant}{code}}{PostgreSQL, FastAPI, React, AWS, Terraform}
+{Team project, Monash Industry Expo finalist: helps Victorian households choose a virtual power plant plan.}
+\begin{itemize}
+  \item Every plan term carries its source and last-verified date, every number shown is labelled with its provenance, and
+        personal-data tables were dropped after a security review.
+\end{itemize}
+
+\section{Skills}
+\vspace{-2pt}
+\begin{tabularx}{\linewidth}{@{}p{3.3cm}X@{}}
+\textbf{Languages}            & Python, SQL, TypeScript, Go, JavaScript \\
+\textbf{Data engineering}     & ETL/ELT, dbt, DuckDB, Parquet, medallion architecture, data-quality tests, Tableau \\
+\textbf{ML \& AI}             & pandas, scikit-learn, LightGBM, implicit ALS, embeddings, LLM agents and evals, OpenCV \\
+\textbf{Web \& cloud}      & React, Next.js, FastAPI, PostgreSQL, AWS (Lambda, S3), Terraform, Docker, GitHub Actions \\
+\end{tabularx}
+
+\vspace{2pt}
+\section{Education}
+\textbf{Master of Data Science}, Monash University, Melbourne \hfill March 2025 -- November 2026\\
+\textbf{Bachelor of Technology, Information Technology}, JNTU Kakinada \hfill 2020 -- 2024
+
+\end{document}
