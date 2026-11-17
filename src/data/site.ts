@@ -10,7 +10,7 @@ export const profile = {
   name: 'Vanamali Sims',
   location: 'Melbourne, Australia',
   education: 'Master of Data Science, Monash University',
-  graduating: 'Graduating Nov 2026',
+  graduating: 'Monash Master of Data Science, completed Nov 2026',
   // Split so the address isn't sitting in the HTML for scrapers.
   emailParts: ['simsvanamali', 'gmail.com'] as const,
 } as const;
@@ -41,17 +41,17 @@ export type Lens = {
 const proof = {
   router: {
     value: '6s → 0.2s',
-    label: 'LLM question routing, 96.7% faster',
+    label: 'AI question classification, 96.7% faster in production',
     source: 'SilverOak',
   },
   recsys: {
     value: '20×',
-    label: 'a popularity baseline, P@10 0.081 vs 0.004',
+    label: 'better than a “most popular” guess at predicting where fishing boats go next',
     source: 'Sea Anchor',
   },
   incidents: {
     value: '4,335 → 0',
-    label: 'incidents across a simulated year of bookings',
+    label: 'failures in a simulated year of bookings, after fixes',
     source: 'unattended',
   },
   traffic: {
@@ -61,27 +61,27 @@ const proof = {
   },
   goApi: {
     value: '<50ms',
-    label: 'Go price-resolution API in production',
+    label: 'response time for a Go pricing API in production',
     source: 'SilverOak',
   },
   mase: {
-    value: '0.87',
-    label: 'MASE vs 0.98 seasonal-naive, 89 rolling folds',
+    value: '11%',
+    label: 'lower forecast error than the standard baseline, across 89 back-tests',
     source: 'Melbourne Footfall',
   },
   parquet: {
-    value: '2 yrs AIS',
-    label: 'streamed into DuckDB over partitioned Parquet',
+    value: '2 years',
+    label: 'of ship-tracking data processed into a fishing-ground recommender',
     source: 'Sea Anchor',
   },
   daily: {
     value: 'Daily',
-    label: 'ingest → dbt → model → export, on GitHub Actions',
+    label: 'automated pipeline: raw city data → clean tables → forecast → dashboard, no manual steps',
     source: 'Melbourne Footfall',
   },
   evals: {
-    value: '38 cases',
-    label: 'labelled agent evals, prompt injection included',
+    value: '38 tests',
+    label: 'checking an AI agent’s decisions, including prompt-injection attacks',
     source: 'Tab Debt',
   },
   handsOff: {
@@ -106,8 +106,8 @@ export const lenses: Lens[] = [
     label: 'Data Eng',
     role: 'Data Engineer',
     pitch:
-      'I build pipelines that rerun from a clean checkout: immutable Parquet, dbt on DuckDB, daily CI, and numbers you can trace.',
-    proof: [proof.parquet, proof.daily, proof.mase],
+      'I build automated data pipelines that turn raw data into clean, trustworthy tables and forecasts, refreshed every day with no one touching them (Python, SQL, dbt, DuckDB, GitHub Actions).',
+    proof: [proof.daily, proof.mase, proof.parquet],
     stackFocus: ['Python', 'SQL', 'dbt', 'DuckDB', 'Parquet', 'GitHub Actions', 'Terraform', 'AWS'],
   },
   {
@@ -115,7 +115,7 @@ export const lenses: Lens[] = [
     label: 'Data Science',
     role: 'Data Scientist',
     pitch:
-      'I model with a real holdout: baseline first, temporal splits, leak checks, and a write-up of what didn’t work.',
+      'I build models that are tested honestly: compared against a simple baseline, checked on data they have never seen, and written up including what didn’t work.',
     proof: [proof.recsys, proof.mase, proof.router],
     stackFocus: ['Python', 'SQL', 'Pandas', 'scikit-learn', 'LightGBM', 'Implicit ALS', 'DuckDB'],
   },
@@ -124,7 +124,7 @@ export const lenses: Lens[] = [
     label: 'AI Eng',
     role: 'AI Engineer',
     pitch:
-      'I ship LLM features that are fast, bounded and tested: embedding routers, tool-using agents with evals, and guardrails against prompt injection.',
+      'I build AI features that are fast, reliable and safe: one I shipped in production runs 30× faster, and I test my agents against misuse such as prompt injection.',
     proof: [proof.router, proof.evals, proof.goApi],
     stackFocus: ['Python', 'TypeScript', 'LLM agents', 'Embeddings', 'Evals', 'OpenCV', 'FastAPI'],
   },
@@ -133,7 +133,7 @@ export const lenses: Lens[] = [
     label: 'Full-stack',
     role: 'Full-stack Developer',
     pitch:
-      'I ship whole products: TypeScript front ends, Go and FastAPI back ends, and the infra and tests that keep them up.',
+      'I build complete web products, from the screens people use to the back end, hosting and tests that keep them running (TypeScript, React, Go, FastAPI).',
     proof: [proof.traffic, proof.incidents, proof.handsOff],
     stackFocus: ['TypeScript', 'React', 'Next.js', 'Go', 'FastAPI', 'PostgreSQL', 'Docker', 'AWS'],
   },
@@ -146,6 +146,8 @@ export type Role = {
   current?: boolean;
   points: string[];
   stack: string[];
+  /** One plain-English result for the hero timeline */
+  highlight?: string;
 };
 
 export const roles: Role[] = [
@@ -159,6 +161,7 @@ export const roles: Role[] = [
       'Replaced manual feed collection with a TypeScript RSS ingest service on an AWS cron schedule, plus a scraping module into the same pipeline.',
     ],
     stack: ['Python', 'Embeddings', 'Go', 'TypeScript', 'AWS'],
+    highlight: 'Made an AI feature 30× faster in production',
   },
   {
     role: 'Co-Founder & Developer',
@@ -169,6 +172,7 @@ export const roles: Role[] = [
       'Monthly visits grew from 500 at launch to 9,000+ over eight months; the client reported a 35% increase in trial bookings.',
     ],
     stack: ['Next.js', 'TypeScript', 'Tailwind'],
+    highlight: 'Grew a client site from 500 to 9,000+ monthly visits',
   },
   {
     role: 'Freelance Web Developer',
@@ -180,6 +184,7 @@ export const roles: Role[] = [
       'Next.js 15 and React 19, schema.org structured data for search, validated enquiry forms, branch-based Vercel releases.',
     ],
     stack: ['Next.js', 'React', 'TypeScript', 'Vercel'],
+    highlight: 'Sole developer, zero downtime since launch',
   },
   {
     role: 'Brand Specialist & IT Sales',
@@ -227,7 +232,7 @@ export const stacks = [
 ];
 
 export const about = [
-  'I’m finishing a Master of Data Science at Monash, and I like living at the join between analysis and product: models with an honest holdout, and interfaces people actually use.',
+  'I’ve just completed a Master of Data Science at Monash, and I like living at the join between analysis and product: models with an honest holdout, and interfaces people actually use.',
   'Most of what I build starts with a question someone can act on: which fishing grounds a vessel will try next, how Melbourne’s streets are really recovering, which of your 60 tabs you’re done with. Then I build whatever it takes to answer it properly, from the ingest job to the UI.',
   'Every project page here says what didn’t work, too. That part is usually the most interesting.',
 ];
