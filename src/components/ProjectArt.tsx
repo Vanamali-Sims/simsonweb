@@ -177,7 +177,7 @@ function FishingArt() {
       ))}
       <rect x="430" y="330" width="170" height="40" rx="20" className={styles.surface} />
       <rect x="430" y="330" width="170" height="40" rx="20" className={styles.sigStroke} fill="none" />
-      <text x="515" y="355" textAnchor="middle" className={styles.monoSig}>P@10 0.081 · 20×</text>
+      <text x="515" y="355" textAnchor="middle" className={styles.monoSig}>20× a popularity guess</text>
     </Frame>
   );
 }
@@ -230,7 +230,7 @@ function FootfallArt() {
       <text x="40" y="364" className={styles.monoSmall}>— actual</text>
       <text x="130" y="364" className={styles.monoSig}>— LightGBM</text>
       <text x="240" y="364" className={styles.monoSmall}>- - same hour yesterday</text>
-      <text x="600" y="364" textAnchor="end" className={styles.monoSig}>MASE 0.87 vs 0.98</text>
+      <text x="600" y="364" textAnchor="end" className={styles.monoSig}>11% lower error</text>
     </Frame>
   );
 }
