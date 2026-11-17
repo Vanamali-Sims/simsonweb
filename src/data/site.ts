@@ -74,9 +74,14 @@ const proof = {
     label: 'of ship-tracking data processed into a fishing-ground recommender',
     source: 'Sea Anchor',
   },
+  medallion: {
+    value: '7 GB',
+    label: 'through a medallion pipeline (bronze → silver → gold): 12 quality checks quarantine bad rows',
+    source: 'Sea Anchor',
+  },
   daily: {
     value: 'Daily',
-    label: 'automated pipeline: raw city data → clean tables → forecast → dashboard, no manual steps',
+    label: 'automated pipeline from 7 data sources to a dashboard, checked by 47 dbt tests',
     source: 'Melbourne Footfall',
   },
   evals: {
@@ -106,9 +111,9 @@ export const lenses: Lens[] = [
     label: 'Data Eng',
     role: 'Data Engineer',
     pitch:
-      'I build automated data pipelines that turn raw data into clean, trustworthy tables and forecasts, refreshed every day with no one touching them (Python, SQL, dbt, DuckDB, GitHub Actions).',
-    proof: [proof.daily, proof.mase, proof.parquet],
-    stackFocus: ['Python', 'SQL', 'dbt', 'DuckDB', 'Parquet', 'GitHub Actions', 'Terraform', 'AWS'],
+      'I build medallion data pipelines (raw bronze → cleaned silver → business-ready gold) with quality checks at every layer, refreshed every day with no one touching them (Python, SQL, dbt, DuckDB, GitHub Actions).',
+    proof: [proof.medallion, proof.daily, proof.mase],
+    stackFocus: ['Python', 'SQL', 'dbt', 'DuckDB', 'Parquet', 'Medallion architecture', 'Data-quality tests', 'GitHub Actions', 'Terraform', 'AWS'],
   },
   {
     id: 'data-sci',
@@ -214,6 +219,8 @@ export const stacks = [
       'DuckDB',
       'dbt',
       'Parquet',
+      'Medallion architecture',
+      'Data-quality tests',
       'OpenCV',
     ],
   },

@@ -44,11 +44,11 @@ export const projects: Project[] = [
     slug: 'fishing-grounds',
     title: 'Sea Anchor',
     blurb:
-      'Predicts where fishing boats will head next from two years of ship-tracking (AIS) data: a recommender built on implicit ALS.',
-    tags: ['Implicit ALS', 'DuckDB', 'Parquet', 'FastAPI', 'React', 'deck.gl'],
+      'Predicts where fishing boats will head next: 7 GB of ship-tracking (AIS) data through a bronze → silver → gold medallion pipeline, then an implicit-ALS recommender.',
+    tags: ['Medallion', 'DuckDB', 'Parquet', 'Implicit ALS', 'FastAPI', 'React', 'deck.gl'],
     repo: 'https://github.com/Vanamali-Sims/fishing-grounds-recsys',
     live: 'https://fishing-grounds-recsys.onrender.com/',
-    lenses: ['data-sci', 'data-eng'],
+    lenses: ['data-eng', 'data-sci'],
     metric: '20× better than a popularity guess',
   },
   {
