@@ -99,7 +99,7 @@ export default function Hero() {
       {/* Contact — the one green block */}
       <div className={`${styles.tile} ${styles.contact}`}>
         <div className={styles.tileHead}>
-          <span className={styles.contactLabel}>03 / Contact</span>
+          <span className={styles.contactLabel}>Contact</span>
           <a href="#contact" className={styles.contactJump} aria-label="Jump to contact section">
             ↓
           </a>
@@ -123,6 +123,9 @@ export default function Hero() {
       {/* Proof numbers for the active lens */}
       <div className={`${styles.tile} ${styles.proof}`} data-spot>
         <span className="label">Proof · {lens.label}</span>
+        <p className={styles.proofIntro}>
+          Your time is valuable, so let me tell you why I’m worth it.
+        </p>
         <ul className={styles.proofList}>
           {lens.proof.map((p) => (
             <li key={p.value + p.source}>
@@ -138,7 +141,7 @@ export default function Hero() {
       {/* Top projects for the lens */}
       <div className={`${styles.tile} ${styles.projects}`} data-spot>
         <div className={styles.tileHead}>
-          <span className="label">02 / Projects</span>
+          <span className="label">Projects</span>
           <a href="#projects" className={styles.more}>
             all {`→`}
           </a>
@@ -164,7 +167,7 @@ export default function Hero() {
       {/* Experience */}
       <a href="#experience" className={`${styles.tile} ${styles.experience}`} data-spot>
         <div className={styles.tileHead}>
-          <span className="label">01 / Experience</span>
+          <span className="label">Experience</span>
           <span className={styles.go} aria-hidden="true">
             ↓
           </span>
@@ -177,6 +180,7 @@ export default function Hero() {
                 {r.org} · {r.when.split(' — ')[0].slice(-4)}
                 {r.current ? ' → now' : ''}
               </span>
+              {r.highlight ? <span className={styles.roleHighlight}>{r.highlight}</span> : null}
             </li>
           ))}
         </ol>
@@ -187,7 +191,7 @@ export default function Hero() {
         <span className="label">Education</span>
         <div>
           <p className={styles.eduTitle}>Master of Data Science</p>
-          <p className={styles.eduMeta}>Monash University · 2025 — 2026</p>
+          <p className={styles.eduMeta}>Monash University · Completed Nov 2026</p>
         </div>
       </div>
     </section>

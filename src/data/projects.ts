@@ -28,7 +28,7 @@ export const projects: Project[] = [
     tags: ['TypeScript', 'React', 'Vercel AI SDK', 'Chrome on-device AI', 'Vitest', 'WXT'],
     repo: 'https://github.com/Vanamali-Sims/tabDebt',
     lenses: ['ai-eng', 'full-stack'],
-    metric: '38-case agent eval, injection included',
+    metric: '38 tests, incl. prompt-injection attacks',
   },
   {
     slug: 'unattended',
@@ -38,18 +38,18 @@ export const projects: Project[] = [
     tags: ['TypeScript', 'Node', 'Simulation', 'Vitest', 'GitHub Actions'],
     repo: 'https://github.com/Vanamali-Sims/unattended-',
     lenses: ['full-stack', 'data-eng'],
-    metric: '4,335 → 0 incidents',
+    metric: '4,335 → 0 failures (simulated year)',
   },
   {
     slug: 'fishing-grounds',
     title: 'Sea Anchor',
     blurb:
-      'Implicit ALS on two years of AIS tracks: vessels × ocean cells, fishing hours as confidence, not ratings.',
-    tags: ['Implicit ALS', 'DuckDB', 'Parquet', 'FastAPI', 'React', 'deck.gl'],
+      'Predicts where fishing boats will head next: 7 GB of ship-tracking (AIS) data through a bronze → silver → gold medallion pipeline, then an implicit-ALS recommender.',
+    tags: ['Medallion', 'DuckDB', 'Parquet', 'Implicit ALS', 'FastAPI', 'React', 'deck.gl'],
     repo: 'https://github.com/Vanamali-Sims/fishing-grounds-recsys',
     live: 'https://fishing-grounds-recsys.onrender.com/',
-    lenses: ['data-sci', 'data-eng'],
-    metric: '~20× a popularity baseline',
+    lenses: ['data-eng', 'data-sci'],
+    metric: '20× better than a popularity guess',
   },
   {
     slug: 'melbourne-footfall',
@@ -61,7 +61,7 @@ export const projects: Project[] = [
     live: 'https://public.tableau.com/app/profile/sai.vanamali.simhambhatla4623/viz/MelbourneFootfall/Dashboard3',
     liveLabel: 'Open dashboard',
     lenses: ['data-eng', 'data-sci'],
-    metric: 'MASE 0.87 vs 0.98 baseline',
+    metric: '11% lower error than baseline',
   },
   {
     slug: 'my-power-plant',
